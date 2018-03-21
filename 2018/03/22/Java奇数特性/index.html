@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/03/22/Java奇数特性/">
+    
+    
+    <title>Java奇数特性 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="在某些时候，出于某些目的可能会要求进行一些奇数性的判断，如果你是newer，很有可能因为经验的不足造成一些在后期让人难以发现的的bug。 如何进行奇数判断有可能你会这么写 123public static boolean isOdd(int i) &amp;#123;	return i % 2 == 1;&amp;#125; 也有可能你会这么写 123public static boolean isOdd(int">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java奇数特性">
+<meta property="og:url" content="http://www.smxknife.com/2018/03/22/Java奇数特性/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="在某些时候，出于某些目的可能会要求进行一些奇数性的判断，如果你是newer，很有可能因为经验的不足造成一些在后期让人难以发现的的bug。 如何进行奇数判断有可能你会这么写 123public static boolean isOdd(int i) &amp;#123;	return i % 2 == 1;&amp;#125; 也有可能你会这么写 123public static boolean isOdd(int">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-21T20:24:05.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java奇数特性">
+<meta name="twitter:description" content="在某些时候，出于某些目的可能会要求进行一些奇数性的判断，如果你是newer，很有可能因为经验的不足造成一些在后期让人难以发现的的bug。 如何进行奇数判断有可能你会这么写 123public static boolean isOdd(int i) &amp;#123;	return i % 2 == 1;&amp;#125; 也有可能你会这么写 123public static boolean isOdd(int">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java奇数特性</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Java奇数特性</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-21T20:23:30.000Z" itemprop="datePublished" class="page-time">
+  2018-03-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何进行奇数判断"><span class="post-toc-number">1.</span> <span class="post-toc-text">如何进行奇数判断</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#位运算判断法"><span class="post-toc-number">2.</span> <span class="post-toc-text">位运算判断法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#位运算判断法解析"><span class="post-toc-number">3.</span> <span class="post-toc-text">位运算判断法解析</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Java奇数特性"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Java奇数特性</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-22 04:23:30" datetime="2018-03-21T20:23:30.000Z"  itemprop="datePublished">2018-03-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在某些时候，出于某些目的可能会要求进行一些奇数性的判断，如果你是<code>newer</code>，很有可能因为经验的不足造成一些在后期让人难以发现的的bug。</p>
+<h3 id="如何进行奇数判断"><a href="#如何进行奇数判断" class="headerlink" title="如何进行奇数判断"></a>如何进行奇数判断</h3><p>有可能你会这么写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOdd</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> i % <span class="number">2</span> == <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也有可能你会这么写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOdd</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> i % <span class="number">2</span> != <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你选择了第一种的写法，那么恭喜你，你中标了，在未来的某些时候bug会找到你，而用第二种的就没有问题。</p>
+<p>现在还没发现问题的人，那么你可能是忽略了负数的情况，-1 % 2 等于 -1而不是1</p>
+<p>运行下面代码就能发现问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OddDemo2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = -<span class="number">10</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">			mod2(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mod2</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">		System.out.println(i + <span class="string">" % 2 = "</span> + (i % <span class="number">2</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果输出：</span></span><br><span class="line">-<span class="number">10</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line">-<span class="number">9</span> % <span class="number">2</span> = -<span class="number">1</span></span><br><span class="line">-<span class="number">8</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line">-<span class="number">7</span> % <span class="number">2</span> = -<span class="number">1</span></span><br><span class="line">-<span class="number">6</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line">-<span class="number">5</span> % <span class="number">2</span> = -<span class="number">1</span></span><br><span class="line">-<span class="number">4</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line">-<span class="number">3</span> % <span class="number">2</span> = -<span class="number">1</span></span><br><span class="line">-<span class="number">2</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line">-<span class="number">1</span> % <span class="number">2</span> = -<span class="number">1</span></span><br><span class="line"><span class="number">0</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line"><span class="number">1</span> % <span class="number">2</span> = <span class="number">1</span></span><br><span class="line"><span class="number">2</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line"><span class="number">3</span> % <span class="number">2</span> = <span class="number">1</span></span><br><span class="line"><span class="number">4</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line"><span class="number">5</span> % <span class="number">2</span> = <span class="number">1</span></span><br><span class="line"><span class="number">6</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line"><span class="number">7</span> % <span class="number">2</span> = <span class="number">1</span></span><br><span class="line"><span class="number">8</span> % <span class="number">2</span> = <span class="number">0</span></span><br><span class="line"><span class="number">9</span> % <span class="number">2</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="位运算判断法"><a href="#位运算判断法" class="headerlink" title="位运算判断法"></a>位运算判断法</h3><p>到目前为止，已经可以解决奇数性的问题，这完全是个经验问题，那么下面再介绍一种性能更高一点的，更加高大上的一种判断方法：<strong>位运算法</strong></p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOdd2</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (i &amp; <span class="number">2</span>) == <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是否看起来很简单，但是对于不熟悉位运算的人来说看着<strong><em>你很牛掰</em></strong>😂</p>
+<h3 id="位运算判断法解析"><a href="#位运算判断法解析" class="headerlink" title="位运算判断法解析"></a>位运算判断法解析</h3><p><em>“&amp;”对于java开发者来说，你可以不熟悉，但是你不可以做到不知道，这是什么，运算规则是什么</em></p>
+<p><code>&amp;</code> 按位与，将数字转化为二进制之后，只有两个操作数对应位同为1时，结果为1，其余全为0</p>
+<p>这里就需要引入<strong>原码</strong>，<strong>反码</strong>，<strong>补码</strong>三个概念，简单介绍：</p>
+<ul>
+<li>正数的原码、反码、补码是一样的</li>
+<li>负数的反码等于原码的符号位不变，其余位按位取反，补码等于反码加一</li>
+</ul>
+<p>对于位运算不熟悉的<strong>猿友</strong>来说，需要稍微注意的一点是，计算机中都是采用补码来进行计算</p>
+<p>开始解析，以3和-3为例</p>
+<p>[1]<sub>原</sub> = [1]<sub>反</sub> = [1]<sub>补</sub> = 00000000 00000000 00000000 00000001</p>
+<p>[3]<sub>原</sub> = [3]<sub>反</sub> = [3]<sub>补</sub> = 00000000 00000000 00000000 00000011</p>
+<p>[-3]<sub>原</sub> = 10000000 00000000 00000000 00000011<br>[-3]<sub>反</sub> = 11111111 11111111 11111111 11111100<br>[-3]<sub>补</sub> = 11111111 11111111 11111111 11111101</p>
+<p><code>1 &amp; 3</code> 结果为 00000000 00000000 00000000 00000001，很明显为1</p>
+<p><code>1 &amp; -3</code> 结果计算稍微复杂一点，上面说了用补码进行运算，所以补码运算结果为00000000 00000000 00000000 00000001 结果依然为1</p>
+<p>很明显通过这种方式就屏蔽了正负数的原因造成的bug，还获得了更高的性能。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-21T20:24:05.401Z" itemprop="dateUpdated">2018-03-22 04:24:05</time>
+</span><br>
+
+
+        
+        <a href="/2018/03/22/Java奇数特性/" target="_blank" rel="external">http://www.smxknife.com/2018/03/22/Java奇数特性/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/22/Java序列化/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Java序列化</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/22/SpringBoot之配置文件优先级/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SpringBoot之配置文件优先级</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '回来了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '正常了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

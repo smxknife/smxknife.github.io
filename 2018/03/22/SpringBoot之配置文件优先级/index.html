@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/03/22/SpringBoot之配置文件优先级/">
+    
+    
+    <title>SpringBoot之配置文件优先级 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="springboot">
+    <meta name="description" content="简介application.properties和application.yml 这是常用的配置文件命名，大家应该都很熟悉。但是它们的优先级到底哪个更高呢？下面就开始做试验。都以server.port来测试 properties vs yml- resources     - application.properties # 8081     - application.yml        #">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot之配置文件优先级">
+<meta property="og:url" content="http://www.smxknife.com/2018/03/22/SpringBoot之配置文件优先级/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="简介application.properties和application.yml 这是常用的配置文件命名，大家应该都很熟悉。但是它们的优先级到底哪个更高呢？下面就开始做试验。都以server.port来测试 properties vs yml- resources     - application.properties # 8081     - application.yml        #">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-21T20:22:51.166Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringBoot之配置文件优先级">
+<meta name="twitter:description" content="简介application.properties和application.yml 这是常用的配置文件命名，大家应该都很熟悉。但是它们的优先级到底哪个更高呢？下面就开始做试验。都以server.port来测试 properties vs yml- resources     - application.properties # 8081     - application.yml        #">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SpringBoot之配置文件优先级</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">SpringBoot之配置文件优先级</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-21T20:22:30.000Z" itemprop="datePublished" class="page-time">
+  2018-03-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/springboot/">springboot</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#properties-vs-yml"><span class="post-toc-number">2.</span> <span class="post-toc-text">properties vs yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#classpath-vs-classpath-config"><span class="post-toc-number">3.</span> <span class="post-toc-text">classpath: vs classpath:/config</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#classpath-config-yml-vs-classpath-properties"><span class="post-toc-number">4.</span> <span class="post-toc-text">classpath:/config/yml vs classpath:properties</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#properties-vs-profile-properties"><span class="post-toc-number">5.</span> <span class="post-toc-text">properties vs -profile.properties</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#properties-vs-profile-yml"><span class="post-toc-number">6.</span> <span class="post-toc-text">properties vs -profile.yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#classpath-config-properties-vs-classpath-application-default-yml"><span class="post-toc-number">7.</span> <span class="post-toc-text">classpath:/config/properties vs classpath:application-default.yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#classpath-config-application-default-yml-vs-classpath-application-default-yml"><span class="post-toc-number">8.</span> <span class="post-toc-text">classpath:/config/application-default.yml vs classpath:/application-default.yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">9.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-SpringBoot之配置文件优先级"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SpringBoot之配置文件优先级</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-22 04:22:30" datetime="2018-03-21T20:22:30.000Z"  itemprop="datePublished">2018-03-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/springboot/">springboot</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><code>application.properties</code>和<code>application.yml</code> 这是常用的配置文件命名，大家应该都很熟悉。但是它们的优先级到底哪个更高呢？下面就开始做试验。都以server.port来测试</p>
+<h3 id="properties-vs-yml"><a href="#properties-vs-yml" class="headerlink" title="properties vs yml"></a>properties vs yml</h3><pre><code>- resources
+    - application.properties # 8081
+    - application.yml        # 8082
+</code></pre><p>通过简单的启动试验发现 properties &gt; yml</p>
+<h3 id="classpath-vs-classpath-config"><a href="#classpath-vs-classpath-config" class="headerlink" title="classpath: vs classpath:/config"></a>classpath: vs classpath:/config</h3><pre><code>- resources
+    - application.properties         # 8081
+    - /config/application.properties # 8082
+</code></pre><p>启动发现 classpath:/config &gt; classpath</p>
+<h3 id="classpath-config-yml-vs-classpath-properties"><a href="#classpath-config-yml-vs-classpath-properties" class="headerlink" title="classpath:/config/yml vs classpath:properties"></a>classpath:/config/yml vs classpath:properties</h3><p>通过上面发现properties的优先级大于yml，config的优先级大于classpath，那么config下面的yml与classpath下面的properties对比如何呢？</p>
+<pre><code>- resources
+    - application.properties  # 8081
+    - /config/application.yml # 8082
+</code></pre><p>启动发现 classpath:/config/yml &gt; classpath:properties<br>通过这个试验可以发现，位置的优先级大于命名的优先级</p>
+<h3 id="properties-vs-profile-properties"><a href="#properties-vs-profile-properties" class="headerlink" title="properties vs -profile.properties"></a>properties vs -profile.properties</h3><p><code>application.properties</code> 与 <code>application-{profile}.properties</code> 默认的profile为default，那么久先对比<code>application.properties</code> 与 <code>applicaation-default.properties</code> 的优先级</p>
+<pre><code>- resources
+    - application.properties         # 8081
+    - application-default.properties # 8082
+</code></pre><p>启动发现，application-default.properties &gt; application.properties</p>
+<h3 id="properties-vs-profile-yml"><a href="#properties-vs-profile-yml" class="headerlink" title="properties vs -profile.yml"></a>properties vs -profile.yml</h3><p>与上面的试验类似，将application-default.properties替换为application-default.yml</p>
+<pre><code>- resources
+    - application.properties  # 8081    
+    - application-default.yml # 8082
+</code></pre><p>启动发现，application-default.yml &gt; application.properties<br>所以，加上-default的profile属性时，yml将会大于不加profile的properties，当然如果同时加上profile的属性，那么properties依然会大于yml</p>
+<h3 id="classpath-config-properties-vs-classpath-application-default-yml"><a href="#classpath-config-properties-vs-classpath-application-default-yml" class="headerlink" title="classpath:/config/properties vs classpath:application-default.yml"></a>classpath:/config/properties vs classpath:application-default.yml</h3><p>通过前面的实验发现config的优先级还是蛮高的，但是与default相比谁高呢？</p>
+<pre><code>- resources
+    - application-default.yml         # 8081
+    - /config/application.properties  # 8082
+</code></pre><p>启动发现，application-default.yml &gt; /config/application.properties。default的优先级是大于config目录的</p>
+<h3 id="classpath-config-application-default-yml-vs-classpath-application-default-yml"><a href="#classpath-config-application-default-yml-vs-classpath-application-default-yml" class="headerlink" title="classpath:/config/application-default.yml vs classpath:/application-default.yml"></a>classpath:/config/application-default.yml vs classpath:/application-default.yml</h3><pre><code>- resources
+    - application-default.yml         # 8081
+    - /config/application-default.yml # 8082
+</code></pre><p>启动发现，同样是default的条件下，config/application-default.yml &gt; application-default.yml</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>config/application-default.properties &gt; config/application-default.yml &gt; application-default.properties &gt; application-default.yml &gt; config/application.properties &gt; config/application.yml &gt; application.properties &gt; application.yml</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-21T20:22:51.166Z" itemprop="dateUpdated">2018-03-22 04:22:51</time>
+</span><br>
+
+
+        
+        <a href="/2018/03/22/SpringBoot之配置文件优先级/" target="_blank" rel="external">http://www.smxknife.com/2018/03/22/SpringBoot之配置文件优先级/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/22/Java奇数特性/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Java奇数特性</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/22/SpringBoot之SpringApplication/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SpringBoot之SpringApplication</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '回来了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '正常了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

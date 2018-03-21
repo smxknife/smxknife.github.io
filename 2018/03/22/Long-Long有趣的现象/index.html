@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/03/22/Long-Long有趣的现象/">
+    
+    
+    <title>Long==Long有趣的现象 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="1. 描述首先，这里应该声明一下，Long等对象类型判断是否相等，采用Long == Long这种形式是错误的。 可以采用以下方式： 12345678Long left = 100L;Long right = 100L;// 方法1：System.out.println(left.doubleValue() == right.doubleValue());// 方法2：System.out.pri">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Long==Long有趣的现象">
+<meta property="og:url" content="http://www.smxknife.com/2018/03/22/Long-Long有趣的现象/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="1. 描述首先，这里应该声明一下，Long等对象类型判断是否相等，采用Long == Long这种形式是错误的。 可以采用以下方式： 12345678Long left = 100L;Long right = 100L;// 方法1：System.out.println(left.doubleValue() == right.doubleValue());// 方法2：System.out.pri">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-21T20:18:56.933Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Long==Long有趣的现象">
+<meta name="twitter:description" content="1. 描述首先，这里应该声明一下，Long等对象类型判断是否相等，采用Long == Long这种形式是错误的。 可以采用以下方式： 12345678Long left = 100L;Long right = 100L;// 方法1：System.out.println(left.doubleValue() == right.doubleValue());// 方法2：System.out.pri">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Long==Long有趣的现象</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Long==Long有趣的现象</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-21T20:18:25.000Z" itemprop="datePublished" class="page-time">
+  2018-03-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-描述"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1-实验1"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.1 实验1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-实验2"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">1.2 实验2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-实验3"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">1.3 实验3</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Long-Long有趣的现象"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Long==Long有趣的现象</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-22 04:18:25" datetime="2018-03-21T20:18:25.000Z"  itemprop="datePublished">2018-03-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="1-描述"><a href="#1-描述" class="headerlink" title="1. 描述"></a>1. 描述</h3><p>首先，这里应该声明一下，Long等对象类型判断是否相等，采用Long == Long这种形式是错误的。</p>
+<p>可以采用以下方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Long left = <span class="number">100L</span>;</span><br><span class="line">Long right = <span class="number">100L</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1：</span></span><br><span class="line">System.out.println(left.doubleValue() == right.doubleValue());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2：</span></span><br><span class="line">System.out.println(left.compareTo(right));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>输出结果：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-实验1"><a href="#1-1-实验1" class="headerlink" title="1.1 实验1"></a>1.1 实验1</h4><p>如果你亲自操刀，动手做了以下实验，也许你会突然得到一个让你困惑的结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Long left = <span class="number">100L</span>;</span><br><span class="line">Long right = <span class="number">100L</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(left == right);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>输出结果：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure>
+<p>没错，采用 <strong>==</strong> 竟然也能得出true，也许这时候你可能会误以为jvm在自动拆箱（我以前也是这样以为，有点小白！！！）。</p>
+<h4 id="1-2-实验2"><a href="#1-2-实验2" class="headerlink" title="1.2 实验2"></a>1.2 实验2</h4><p>那么请你再做下面这个实验：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Long left = <span class="number">1000L</span>;</span><br><span class="line">Long right = <span class="number">1000L</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1：</span></span><br><span class="line">System.out.println(left.doubleValue() == right.doubleValue());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法2：</span></span><br><span class="line">System.out.println(left.compareTo(right));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误的方法：</span></span><br><span class="line">System.out.println(left == right);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>输出结果</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">0</span><br><span class="line">false</span><br></pre></td></tr></table></figure>
+<p>等会，什么情况，怎么又为false？</p>
+<h4 id="1-3-实验3"><a href="#1-3-实验3" class="headerlink" title="1.3 实验3"></a>1.3 实验3</h4><p>不急，再做一个实验。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = -<span class="number">200</span>; i &lt; <span class="number">200</span>; i++) &#123;</span><br><span class="line">            Long left = Long.valueOf(i);</span><br><span class="line">            Long right = Long.valueOf(i);</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"Long left = "</span> + i + <span class="string">", Long right = "</span> + i</span><br><span class="line">                    + <span class="string">", left == right :"</span> + (left == right));</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>输出结果</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br></pre></td><td class="code"><pre><span class="line">Long left = -200, Long right = -200, left == right :false</span><br><span class="line">Long left = -199, Long right = -199, left == right :false</span><br><span class="line">Long left = -198, Long right = -198, left == right :false</span><br><span class="line">Long left = -197, Long right = -197, left == right :false</span><br><span class="line">Long left = -196, Long right = -196, left == right :false</span><br><span class="line">Long left = -195, Long right = -195, left == right :false</span><br><span class="line">Long left = -194, Long right = -194, left == right :false</span><br><span class="line">Long left = -193, Long right = -193, left == right :false</span><br><span class="line">Long left = -192, Long right = -192, left == right :false</span><br><span class="line">Long left = -191, Long right = -191, left == right :false</span><br><span class="line">Long left = -190, Long right = -190, left == right :false</span><br><span class="line">Long left = -189, Long right = -189, left == right :false</span><br><span class="line">Long left = -188, Long right = -188, left == right :false</span><br><span class="line">Long left = -187, Long right = -187, left == right :false</span><br><span class="line">Long left = -186, Long right = -186, left == right :false</span><br><span class="line">Long left = -185, Long right = -185, left == right :false</span><br><span class="line">Long left = -184, Long right = -184, left == right :false</span><br><span class="line">Long left = -183, Long right = -183, left == right :false</span><br><span class="line">Long left = -182, Long right = -182, left == right :false</span><br><span class="line">Long left = -181, Long right = -181, left == right :false</span><br><span class="line">Long left = -180, Long right = -180, left == right :false</span><br><span class="line">Long left = -179, Long right = -179, left == right :false</span><br><span class="line">Long left = -178, Long right = -178, left == right :false</span><br><span class="line">Long left = -177, Long right = -177, left == right :false</span><br><span class="line">Long left = -176, Long right = -176, left == right :false</span><br><span class="line">Long left = -175, Long right = -175, left == right :false</span><br><span class="line">Long left = -174, Long right = -174, left == right :false</span><br><span class="line">Long left = -173, Long right = -173, left == right :false</span><br><span class="line">Long left = -172, Long right = -172, left == right :false</span><br><span class="line">Long left = -171, Long right = -171, left == right :false</span><br><span class="line">Long left = -170, Long right = -170, left == right :false</span><br><span class="line">Long left = -169, Long right = -169, left == right :false</span><br><span class="line">Long left = -168, Long right = -168, left == right :false</span><br><span class="line">Long left = -167, Long right = -167, left == right :false</span><br><span class="line">Long left = -166, Long right = -166, left == right :false</span><br><span class="line">Long left = -165, Long right = -165, left == right :false</span><br><span class="line">Long left = -164, Long right = -164, left == right :false</span><br><span class="line">Long left = -163, Long right = -163, left == right :false</span><br><span class="line">Long left = -162, Long right = -162, left == right :false</span><br><span class="line">Long left = -161, Long right = -161, left == right :false</span><br><span class="line">Long left = -160, Long right = -160, left == right :false</span><br><span class="line">Long left = -159, Long right = -159, left == right :false</span><br><span class="line">Long left = -158, Long right = -158, left == right :false</span><br><span class="line">Long left = -157, Long right = -157, left == right :false</span><br><span class="line">Long left = -156, Long right = -156, left == right :false</span><br><span class="line">Long left = -155, Long right = -155, left == right :false</span><br><span class="line">Long left = -154, Long right = -154, left == right :false</span><br><span class="line">Long left = -153, Long right = -153, left == right :false</span><br><span class="line">Long left = -152, Long right = -152, left == right :false</span><br><span class="line">Long left = -151, Long right = -151, left == right :false</span><br><span class="line">Long left = -150, Long right = -150, left == right :false</span><br><span class="line">Long left = -149, Long right = -149, left == right :false</span><br><span class="line">Long left = -148, Long right = -148, left == right :false</span><br><span class="line">Long left = -147, Long right = -147, left == right :false</span><br><span class="line">Long left = -146, Long right = -146, left == right :false</span><br><span class="line">Long left = -145, Long right = -145, left == right :false</span><br><span class="line">Long left = -144, Long right = -144, left == right :false</span><br><span class="line">Long left = -143, Long right = -143, left == right :false</span><br><span class="line">Long left = -142, Long right = -142, left == right :false</span><br><span class="line">Long left = -141, Long right = -141, left == right :false</span><br><span class="line">Long left = -140, Long right = -140, left == right :false</span><br><span class="line">Long left = -139, Long right = -139, left == right :false</span><br><span class="line">Long left = -138, Long right = -138, left == right :false</span><br><span class="line">Long left = -137, Long right = -137, left == right :false</span><br><span class="line">Long left = -136, Long right = -136, left == right :false</span><br><span class="line">Long left = -135, Long right = -135, left == right :false</span><br><span class="line">Long left = -134, Long right = -134, left == right :false</span><br><span class="line">Long left = -133, Long right = -133, left == right :false</span><br><span class="line">Long left = -132, Long right = -132, left == right :false</span><br><span class="line">Long left = -131, Long right = -131, left == right :false</span><br><span class="line">Long left = -130, Long right = -130, left == right :false</span><br><span class="line">Long left = -129, Long right = -129, left == right :false</span><br><span class="line">Long left = -128, Long right = -128, left == right :true</span><br><span class="line">Long left = -127, Long right = -127, left == right :true</span><br><span class="line">Long left = -126, Long right = -126, left == right :true</span><br><span class="line">Long left = -125, Long right = -125, left == right :true</span><br><span class="line">Long left = -124, Long right = -124, left == right :true</span><br><span class="line">Long left = -123, Long right = -123, left == right :true</span><br><span class="line">Long left = -122, Long right = -122, left == right :true</span><br><span class="line">Long left = -121, Long right = -121, left == right :true</span><br><span class="line">Long left = -120, Long right = -120, left == right :true</span><br><span class="line">Long left = -119, Long right = -119, left == right :true</span><br><span class="line">Long left = -118, Long right = -118, left == right :true</span><br><span class="line">Long left = -117, Long right = -117, left == right :true</span><br><span class="line">Long left = -116, Long right = -116, left == right :true</span><br><span class="line">Long left = -115, Long right = -115, left == right :true</span><br><span class="line">Long left = -114, Long right = -114, left == right :true</span><br><span class="line">Long left = -113, Long right = -113, left == right :true</span><br><span class="line">Long left = -112, Long right = -112, left == right :true</span><br><span class="line">Long left = -111, Long right = -111, left == right :true</span><br><span class="line">Long left = -110, Long right = -110, left == right :true</span><br><span class="line">Long left = -109, Long right = -109, left == right :true</span><br><span class="line">Long left = -108, Long right = -108, left == right :true</span><br><span class="line">Long left = -107, Long right = -107, left == right :true</span><br><span class="line">Long left = -106, Long right = -106, left == right :true</span><br><span class="line">Long left = -105, Long right = -105, left == right :true</span><br><span class="line">Long left = -104, Long right = -104, left == right :true</span><br><span class="line">Long left = -103, Long right = -103, left == right :true</span><br><span class="line">Long left = -102, Long right = -102, left == right :true</span><br><span class="line">Long left = -101, Long right = -101, left == right :true</span><br><span class="line">Long left = -100, Long right = -100, left == right :true</span><br><span class="line">Long left = -99, Long right = -99, left == right :true</span><br><span class="line">Long left = -98, Long right = -98, left == right :true</span><br><span class="line">Long left = -97, Long right = -97, left == right :true</span><br><span class="line">Long left = -96, Long right = -96, left == right :true</span><br><span class="line">Long left = -95, Long right = -95, left == right :true</span><br><span class="line">Long left = -94, Long right = -94, left == right :true</span><br><span class="line">Long left = -93, Long right = -93, left == right :true</span><br><span class="line">Long left = -92, Long right = -92, left == right :true</span><br><span class="line">Long left = -91, Long right = -91, left == right :true</span><br><span class="line">Long left = -90, Long right = -90, left == right :true</span><br><span class="line">Long left = -89, Long right = -89, left == right :true</span><br><span class="line">Long left = -88, Long right = -88, left == right :true</span><br><span class="line">Long left = -87, Long right = -87, left == right :true</span><br><span class="line">Long left = -86, Long right = -86, left == right :true</span><br><span class="line">Long left = -85, Long right = -85, left == right :true</span><br><span class="line">Long left = -84, Long right = -84, left == right :true</span><br><span class="line">Long left = -83, Long right = -83, left == right :true</span><br><span class="line">Long left = -82, Long right = -82, left == right :true</span><br><span class="line">Long left = -81, Long right = -81, left == right :true</span><br><span class="line">Long left = -80, Long right = -80, left == right :true</span><br><span class="line">Long left = -79, Long right = -79, left == right :true</span><br><span class="line">Long left = -78, Long right = -78, left == right :true</span><br><span class="line">Long left = -77, Long right = -77, left == right :true</span><br><span class="line">Long left = -76, Long right = -76, left == right :true</span><br><span class="line">Long left = -75, Long right = -75, left == right :true</span><br><span class="line">Long left = -74, Long right = -74, left == right :true</span><br><span class="line">Long left = -73, Long right = -73, left == right :true</span><br><span class="line">Long left = -72, Long right = -72, left == right :true</span><br><span class="line">Long left = -71, Long right = -71, left == right :true</span><br><span class="line">Long left = -70, Long right = -70, left == right :true</span><br><span class="line">Long left = -69, Long right = -69, left == right :true</span><br><span class="line">Long left = -68, Long right = -68, left == right :true</span><br><span class="line">Long left = -67, Long right = -67, left == right :true</span><br><span class="line">Long left = -66, Long right = -66, left == right :true</span><br><span class="line">Long left = -65, Long right = -65, left == right :true</span><br><span class="line">Long left = -64, Long right = -64, left == right :true</span><br><span class="line">Long left = -63, Long right = -63, left == right :true</span><br><span class="line">Long left = -62, Long right = -62, left == right :true</span><br><span class="line">Long left = -61, Long right = -61, left == right :true</span><br><span class="line">Long left = -60, Long right = -60, left == right :true</span><br><span class="line">Long left = -59, Long right = -59, left == right :true</span><br><span class="line">Long left = -58, Long right = -58, left == right :true</span><br><span class="line">Long left = -57, Long right = -57, left == right :true</span><br><span class="line">Long left = -56, Long right = -56, left == right :true</span><br><span class="line">Long left = -55, Long right = -55, left == right :true</span><br><span class="line">Long left = -54, Long right = -54, left == right :true</span><br><span class="line">Long left = -53, Long right = -53, left == right :true</span><br><span class="line">Long left = -52, Long right = -52, left == right :true</span><br><span class="line">Long left = -51, Long right = -51, left == right :true</span><br><span class="line">Long left = -50, Long right = -50, left == right :true</span><br><span class="line">Long left = -49, Long right = -49, left == right :true</span><br><span class="line">Long left = -48, Long right = -48, left == right :true</span><br><span class="line">Long left = -47, Long right = -47, left == right :true</span><br><span class="line">Long left = -46, Long right = -46, left == right :true</span><br><span class="line">Long left = -45, Long right = -45, left == right :true</span><br><span class="line">Long left = -44, Long right = -44, left == right :true</span><br><span class="line">Long left = -43, Long right = -43, left == right :true</span><br><span class="line">Long left = -42, Long right = -42, left == right :true</span><br><span class="line">Long left = -41, Long right = -41, left == right :true</span><br><span class="line">Long left = -40, Long right = -40, left == right :true</span><br><span class="line">Long left = -39, Long right = -39, left == right :true</span><br><span class="line">Long left = -38, Long right = -38, left == right :true</span><br><span class="line">Long left = -37, Long right = -37, left == right :true</span><br><span class="line">Long left = -36, Long right = -36, left == right :true</span><br><span class="line">Long left = -35, Long right = -35, left == right :true</span><br><span class="line">Long left = -34, Long right = -34, left == right :true</span><br><span class="line">Long left = -33, Long right = -33, left == right :true</span><br><span class="line">Long left = -32, Long right = -32, left == right :true</span><br><span class="line">Long left = -31, Long right = -31, left == right :true</span><br><span class="line">Long left = -30, Long right = -30, left == right :true</span><br><span class="line">Long left = -29, Long right = -29, left == right :true</span><br><span class="line">Long left = -28, Long right = -28, left == right :true</span><br><span class="line">Long left = -27, Long right = -27, left == right :true</span><br><span class="line">Long left = -26, Long right = -26, left == right :true</span><br><span class="line">Long left = -25, Long right = -25, left == right :true</span><br><span class="line">Long left = -24, Long right = -24, left == right :true</span><br><span class="line">Long left = -23, Long right = -23, left == right :true</span><br><span class="line">Long left = -22, Long right = -22, left == right :true</span><br><span class="line">Long left = -21, Long right = -21, left == right :true</span><br><span class="line">Long left = -20, Long right = -20, left == right :true</span><br><span class="line">Long left = -19, Long right = -19, left == right :true</span><br><span class="line">Long left = -18, Long right = -18, left == right :true</span><br><span class="line">Long left = -17, Long right = -17, left == right :true</span><br><span class="line">Long left = -16, Long right = -16, left == right :true</span><br><span class="line">Long left = -15, Long right = -15, left == right :true</span><br><span class="line">Long left = -14, Long right = -14, left == right :true</span><br><span class="line">Long left = -13, Long right = -13, left == right :true</span><br><span class="line">Long left = -12, Long right = -12, left == right :true</span><br><span class="line">Long left = -11, Long right = -11, left == right :true</span><br><span class="line">Long left = -10, Long right = -10, left == right :true</span><br><span class="line">Long left = -9, Long right = -9, left == right :true</span><br><span class="line">Long left = -8, Long right = -8, left == right :true</span><br><span class="line">Long left = -7, Long right = -7, left == right :true</span><br><span class="line">Long left = -6, Long right = -6, left == right :true</span><br><span class="line">Long left = -5, Long right = -5, left == right :true</span><br><span class="line">Long left = -4, Long right = -4, left == right :true</span><br><span class="line">Long left = -3, Long right = -3, left == right :true</span><br><span class="line">Long left = -2, Long right = -2, left == right :true</span><br><span class="line">Long left = -1, Long right = -1, left == right :true</span><br><span class="line">Long left = 0, Long right = 0, left == right :true</span><br><span class="line">Long left = 1, Long right = 1, left == right :true</span><br><span class="line">Long left = 2, Long right = 2, left == right :true</span><br><span class="line">Long left = 3, Long right = 3, left == right :true</span><br><span class="line">Long left = 4, Long right = 4, left == right :true</span><br><span class="line">Long left = 5, Long right = 5, left == right :true</span><br><span class="line">Long left = 6, Long right = 6, left == right :true</span><br><span class="line">Long left = 7, Long right = 7, left == right :true</span><br><span class="line">Long left = 8, Long right = 8, left == right :true</span><br><span class="line">Long left = 9, Long right = 9, left == right :true</span><br><span class="line">Long left = 10, Long right = 10, left == right :true</span><br><span class="line">Long left = 11, Long right = 11, left == right :true</span><br><span class="line">Long left = 12, Long right = 12, left == right :true</span><br><span class="line">Long left = 13, Long right = 13, left == right :true</span><br><span class="line">Long left = 14, Long right = 14, left == right :true</span><br><span class="line">Long left = 15, Long right = 15, left == right :true</span><br><span class="line">Long left = 16, Long right = 16, left == right :true</span><br><span class="line">Long left = 17, Long right = 17, left == right :true</span><br><span class="line">Long left = 18, Long right = 18, left == right :true</span><br><span class="line">Long left = 19, Long right = 19, left == right :true</span><br><span class="line">Long left = 20, Long right = 20, left == right :true</span><br><span class="line">Long left = 21, Long right = 21, left == right :true</span><br><span class="line">Long left = 22, Long right = 22, left == right :true</span><br><span class="line">Long left = 23, Long right = 23, left == right :true</span><br><span class="line">Long left = 24, Long right = 24, left == right :true</span><br><span class="line">Long left = 25, Long right = 25, left == right :true</span><br><span class="line">Long left = 26, Long right = 26, left == right :true</span><br><span class="line">Long left = 27, Long right = 27, left == right :true</span><br><span class="line">Long left = 28, Long right = 28, left == right :true</span><br><span class="line">Long left = 29, Long right = 29, left == right :true</span><br><span class="line">Long left = 30, Long right = 30, left == right :true</span><br><span class="line">Long left = 31, Long right = 31, left == right :true</span><br><span class="line">Long left = 32, Long right = 32, left == right :true</span><br><span class="line">Long left = 33, Long right = 33, left == right :true</span><br><span class="line">Long left = 34, Long right = 34, left == right :true</span><br><span class="line">Long left = 35, Long right = 35, left == right :true</span><br><span class="line">Long left = 36, Long right = 36, left == right :true</span><br><span class="line">Long left = 37, Long right = 37, left == right :true</span><br><span class="line">Long left = 38, Long right = 38, left == right :true</span><br><span class="line">Long left = 39, Long right = 39, left == right :true</span><br><span class="line">Long left = 40, Long right = 40, left == right :true</span><br><span class="line">Long left = 41, Long right = 41, left == right :true</span><br><span class="line">Long left = 42, Long right = 42, left == right :true</span><br><span class="line">Long left = 43, Long right = 43, left == right :true</span><br><span class="line">Long left = 44, Long right = 44, left == right :true</span><br><span class="line">Long left = 45, Long right = 45, left == right :true</span><br><span class="line">Long left = 46, Long right = 46, left == right :true</span><br><span class="line">Long left = 47, Long right = 47, left == right :true</span><br><span class="line">Long left = 48, Long right = 48, left == right :true</span><br><span class="line">Long left = 49, Long right = 49, left == right :true</span><br><span class="line">Long left = 50, Long right = 50, left == right :true</span><br><span class="line">Long left = 51, Long right = 51, left == right :true</span><br><span class="line">Long left = 52, Long right = 52, left == right :true</span><br><span class="line">Long left = 53, Long right = 53, left == right :true</span><br><span class="line">Long left = 54, Long right = 54, left == right :true</span><br><span class="line">Long left = 55, Long right = 55, left == right :true</span><br><span class="line">Long left = 56, Long right = 56, left == right :true</span><br><span class="line">Long left = 57, Long right = 57, left == right :true</span><br><span class="line">Long left = 58, Long right = 58, left == right :true</span><br><span class="line">Long left = 59, Long right = 59, left == right :true</span><br><span class="line">Long left = 60, Long right = 60, left == right :true</span><br><span class="line">Long left = 61, Long right = 61, left == right :true</span><br><span class="line">Long left = 62, Long right = 62, left == right :true</span><br><span class="line">Long left = 63, Long right = 63, left == right :true</span><br><span class="line">Long left = 64, Long right = 64, left == right :true</span><br><span class="line">Long left = 65, Long right = 65, left == right :true</span><br><span class="line">Long left = 66, Long right = 66, left == right :true</span><br><span class="line">Long left = 67, Long right = 67, left == right :true</span><br><span class="line">Long left = 68, Long right = 68, left == right :true</span><br><span class="line">Long left = 69, Long right = 69, left == right :true</span><br><span class="line">Long left = 70, Long right = 70, left == right :true</span><br><span class="line">Long left = 71, Long right = 71, left == right :true</span><br><span class="line">Long left = 72, Long right = 72, left == right :true</span><br><span class="line">Long left = 73, Long right = 73, left == right :true</span><br><span class="line">Long left = 74, Long right = 74, left == right :true</span><br><span class="line">Long left = 75, Long right = 75, left == right :true</span><br><span class="line">Long left = 76, Long right = 76, left == right :true</span><br><span class="line">Long left = 77, Long right = 77, left == right :true</span><br><span class="line">Long left = 78, Long right = 78, left == right :true</span><br><span class="line">Long left = 79, Long right = 79, left == right :true</span><br><span class="line">Long left = 80, Long right = 80, left == right :true</span><br><span class="line">Long left = 81, Long right = 81, left == right :true</span><br><span class="line">Long left = 82, Long right = 82, left == right :true</span><br><span class="line">Long left = 83, Long right = 83, left == right :true</span><br><span class="line">Long left = 84, Long right = 84, left == right :true</span><br><span class="line">Long left = 85, Long right = 85, left == right :true</span><br><span class="line">Long left = 86, Long right = 86, left == right :true</span><br><span class="line">Long left = 87, Long right = 87, left == right :true</span><br><span class="line">Long left = 88, Long right = 88, left == right :true</span><br><span class="line">Long left = 89, Long right = 89, left == right :true</span><br><span class="line">Long left = 90, Long right = 90, left == right :true</span><br><span class="line">Long left = 91, Long right = 91, left == right :true</span><br><span class="line">Long left = 92, Long right = 92, left == right :true</span><br><span class="line">Long left = 93, Long right = 93, left == right :true</span><br><span class="line">Long left = 94, Long right = 94, left == right :true</span><br><span class="line">Long left = 95, Long right = 95, left == right :true</span><br><span class="line">Long left = 96, Long right = 96, left == right :true</span><br><span class="line">Long left = 97, Long right = 97, left == right :true</span><br><span class="line">Long left = 98, Long right = 98, left == right :true</span><br><span class="line">Long left = 99, Long right = 99, left == right :true</span><br><span class="line">Long left = 100, Long right = 100, left == right :true</span><br><span class="line">Long left = 101, Long right = 101, left == right :true</span><br><span class="line">Long left = 102, Long right = 102, left == right :true</span><br><span class="line">Long left = 103, Long right = 103, left == right :true</span><br><span class="line">Long left = 104, Long right = 104, left == right :true</span><br><span class="line">Long left = 105, Long right = 105, left == right :true</span><br><span class="line">Long left = 106, Long right = 106, left == right :true</span><br><span class="line">Long left = 107, Long right = 107, left == right :true</span><br><span class="line">Long left = 108, Long right = 108, left == right :true</span><br><span class="line">Long left = 109, Long right = 109, left == right :true</span><br><span class="line">Long left = 110, Long right = 110, left == right :true</span><br><span class="line">Long left = 111, Long right = 111, left == right :true</span><br><span class="line">Long left = 112, Long right = 112, left == right :true</span><br><span class="line">Long left = 113, Long right = 113, left == right :true</span><br><span class="line">Long left = 114, Long right = 114, left == right :true</span><br><span class="line">Long left = 115, Long right = 115, left == right :true</span><br><span class="line">Long left = 116, Long right = 116, left == right :true</span><br><span class="line">Long left = 117, Long right = 117, left == right :true</span><br><span class="line">Long left = 118, Long right = 118, left == right :true</span><br><span class="line">Long left = 119, Long right = 119, left == right :true</span><br><span class="line">Long left = 120, Long right = 120, left == right :true</span><br><span class="line">Long left = 121, Long right = 121, left == right :true</span><br><span class="line">Long left = 122, Long right = 122, left == right :true</span><br><span class="line">Long left = 123, Long right = 123, left == right :true</span><br><span class="line">Long left = 124, Long right = 124, left == right :true</span><br><span class="line">Long left = 125, Long right = 125, left == right :true</span><br><span class="line">Long left = 126, Long right = 126, left == right :true</span><br><span class="line">Long left = 127, Long right = 127, left == right :true</span><br><span class="line">Long left = 128, Long right = 128, left == right :false</span><br><span class="line">Long left = 129, Long right = 129, left == right :false</span><br><span class="line">Long left = 130, Long right = 130, left == right :false</span><br><span class="line">Long left = 131, Long right = 131, left == right :false</span><br><span class="line">Long left = 132, Long right = 132, left == right :false</span><br><span class="line">Long left = 133, Long right = 133, left == right :false</span><br><span class="line">Long left = 134, Long right = 134, left == right :false</span><br><span class="line">Long left = 135, Long right = 135, left == right :false</span><br><span class="line">Long left = 136, Long right = 136, left == right :false</span><br><span class="line">Long left = 137, Long right = 137, left == right :false</span><br><span class="line">Long left = 138, Long right = 138, left == right :false</span><br><span class="line">Long left = 139, Long right = 139, left == right :false</span><br><span class="line">Long left = 140, Long right = 140, left == right :false</span><br><span class="line">Long left = 141, Long right = 141, left == right :false</span><br><span class="line">Long left = 142, Long right = 142, left == right :false</span><br><span class="line">Long left = 143, Long right = 143, left == right :false</span><br><span class="line">Long left = 144, Long right = 144, left == right :false</span><br><span class="line">Long left = 145, Long right = 145, left == right :false</span><br><span class="line">Long left = 146, Long right = 146, left == right :false</span><br><span class="line">Long left = 147, Long right = 147, left == right :false</span><br><span class="line">Long left = 148, Long right = 148, left == right :false</span><br><span class="line">Long left = 149, Long right = 149, left == right :false</span><br><span class="line">Long left = 150, Long right = 150, left == right :false</span><br><span class="line">Long left = 151, Long right = 151, left == right :false</span><br><span class="line">Long left = 152, Long right = 152, left == right :false</span><br><span class="line">Long left = 153, Long right = 153, left == right :false</span><br><span class="line">Long left = 154, Long right = 154, left == right :false</span><br><span class="line">Long left = 155, Long right = 155, left == right :false</span><br><span class="line">Long left = 156, Long right = 156, left == right :false</span><br><span class="line">Long left = 157, Long right = 157, left == right :false</span><br><span class="line">Long left = 158, Long right = 158, left == right :false</span><br><span class="line">Long left = 159, Long right = 159, left == right :false</span><br><span class="line">Long left = 160, Long right = 160, left == right :false</span><br><span class="line">Long left = 161, Long right = 161, left == right :false</span><br><span class="line">Long left = 162, Long right = 162, left == right :false</span><br><span class="line">Long left = 163, Long right = 163, left == right :false</span><br><span class="line">Long left = 164, Long right = 164, left == right :false</span><br><span class="line">Long left = 165, Long right = 165, left == right :false</span><br><span class="line">Long left = 166, Long right = 166, left == right :false</span><br><span class="line">Long left = 167, Long right = 167, left == right :false</span><br><span class="line">Long left = 168, Long right = 168, left == right :false</span><br><span class="line">Long left = 169, Long right = 169, left == right :false</span><br><span class="line">Long left = 170, Long right = 170, left == right :false</span><br><span class="line">Long left = 171, Long right = 171, left == right :false</span><br><span class="line">Long left = 172, Long right = 172, left == right :false</span><br><span class="line">Long left = 173, Long right = 173, left == right :false</span><br><span class="line">Long left = 174, Long right = 174, left == right :false</span><br><span class="line">Long left = 175, Long right = 175, left == right :false</span><br><span class="line">Long left = 176, Long right = 176, left == right :false</span><br><span class="line">Long left = 177, Long right = 177, left == right :false</span><br><span class="line">Long left = 178, Long right = 178, left == right :false</span><br><span class="line">Long left = 179, Long right = 179, left == right :false</span><br><span class="line">Long left = 180, Long right = 180, left == right :false</span><br><span class="line">Long left = 181, Long right = 181, left == right :false</span><br><span class="line">Long left = 182, Long right = 182, left == right :false</span><br><span class="line">Long left = 183, Long right = 183, left == right :false</span><br><span class="line">Long left = 184, Long right = 184, left == right :false</span><br><span class="line">Long left = 185, Long right = 185, left == right :false</span><br><span class="line">Long left = 186, Long right = 186, left == right :false</span><br><span class="line">Long left = 187, Long right = 187, left == right :false</span><br><span class="line">Long left = 188, Long right = 188, left == right :false</span><br><span class="line">Long left = 189, Long right = 189, left == right :false</span><br><span class="line">Long left = 190, Long right = 190, left == right :false</span><br><span class="line">Long left = 191, Long right = 191, left == right :false</span><br><span class="line">Long left = 192, Long right = 192, left == right :false</span><br><span class="line">Long left = 193, Long right = 193, left == right :false</span><br><span class="line">Long left = 194, Long right = 194, left == right :false</span><br><span class="line">Long left = 195, Long right = 195, left == right :false</span><br><span class="line">Long left = 196, Long right = 196, left == right :false</span><br><span class="line">Long left = 197, Long right = 197, left == right :false</span><br><span class="line">Long left = 198, Long right = 198, left == right :false</span><br><span class="line">Long left = 199, Long right = 199, left == right :false</span><br></pre></td></tr></table></figure>
+<p>通过这个超长的输出结果，你会发现，存在一个区间<code>[-128, 127]</code>，在这个区间里通过 <code>==</code> 这种方式返回的是<code>true</code> ，其他返回的都是<code>false</code>。</p>
+<h3 id="2-总结"><a href="#2-总结" class="headerlink" title="2. 总结"></a>2. 总结</h3><p>其实，通过源码分析：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Long <span class="title">valueOf</span><span class="params">(<span class="keyword">long</span> l)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> offset = <span class="number">128</span>;</span><br><span class="line">        <span class="keyword">if</span> (l &gt;= -<span class="number">128</span> &amp;&amp; l &lt;= <span class="number">127</span>) &#123; <span class="comment">// will cache</span></span><br><span class="line">            <span class="keyword">return</span> LongCache.cache[(<span class="keyword">int</span>)l + offset];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Long(l);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在128~127这些数的对象在内存中被缓存起来，在内存中提供重用，这些数获取的时候就会自动获取缓存中的数，而不是new出来的对象。<br>所以，这与自动打包拆包无关。</p>
+<p>再所以…，判读Long对象是否相等的时候建议不要采用 <code>==</code> 的形式，程序中无法绝对的判断参数值是否会在这个区间内，如果不在，那就出现让你摸不着头脑的问题。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-21T20:18:56.933Z" itemprop="dateUpdated">2018-03-22 04:18:56</time>
+</span><br>
+
+
+        
+        <a href="/2018/03/22/Long-Long有趣的现象/" target="_blank" rel="external">http://www.smxknife.com/2018/03/22/Long-Long有趣的现象/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/22/Spring之scope解惑/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Spring之scope解惑</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/22/Spring-Transaction使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring_Transaction使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '回来了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '正常了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

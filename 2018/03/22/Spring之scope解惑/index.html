@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/03/22/Spring之scope解惑/">
+    
+    
+    <title>Spring之scope解惑 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="spring">
+    <meta name="description" content="Spring的作用域scope在2.0之前只有两种singleton和prototype（网上说的，没去验证，那时候还没仔细研究过…），后面增加了session、request、global session三种专门用于web应用程序上下文的Bean Singleton这是spring的bean的默认的作用域-单例。但是此单例又与设计模式中的单例模式不一样，设计模式的单例在设计模式的文章中再介绍。">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring之scope解惑">
+<meta property="og:url" content="http://www.smxknife.com/2018/03/22/Spring之scope解惑/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="Spring的作用域scope在2.0之前只有两种singleton和prototype（网上说的，没去验证，那时候还没仔细研究过…），后面增加了session、request、global session三种专门用于web应用程序上下文的Bean Singleton这是spring的bean的默认的作用域-单例。但是此单例又与设计模式中的单例模式不一样，设计模式的单例在设计模式的文章中再介绍。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-21T20:20:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring之scope解惑">
+<meta name="twitter:description" content="Spring的作用域scope在2.0之前只有两种singleton和prototype（网上说的，没去验证，那时候还没仔细研究过…），后面增加了session、request、global session三种专门用于web应用程序上下文的Bean Singleton这是spring的bean的默认的作用域-单例。但是此单例又与设计模式中的单例模式不一样，设计模式的单例在设计模式的文章中再介绍。">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Spring之scope解惑</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Spring之scope解惑</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-21T20:19:47.000Z" itemprop="datePublished" class="page-time">
+  2018-03-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/spring/">spring</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring的作用域scope"><span class="post-toc-number">1.</span> <span class="post-toc-text">Spring的作用域scope</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Singleton"><span class="post-toc-number">2.</span> <span class="post-toc-text">Singleton</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Prototype"><span class="post-toc-number">3.</span> <span class="post-toc-text">Prototype</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法1：从ApplicationContext里面获取"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">方法1：从ApplicationContext里面获取</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法2：方法1的变种，采用工厂模式来生成Service"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">方法2：方法1的变种，采用工厂模式来生成Service</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法3：使用代理"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">方法3：使用代理</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#request"><span class="post-toc-number">4.</span> <span class="post-toc-text">request</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#session"><span class="post-toc-number">5.</span> <span class="post-toc-text">session</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#global-session"><span class="post-toc-number">6.</span> <span class="post-toc-text">global-session</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Spring之scope解惑"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Spring之scope解惑</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-22 04:19:47" datetime="2018-03-21T20:19:47.000Z"  itemprop="datePublished">2018-03-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/spring/">spring</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Spring的作用域scope"><a href="#Spring的作用域scope" class="headerlink" title="Spring的作用域scope"></a>Spring的作用域scope</h3><p>在2.0之前只有两种singleton和prototype（网上说的，没去验证，那时候还没仔细研究过…），后面增加了session、request、global session三种专门用于web应用程序上下文的Bean</p>
+<h3 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h3><p>这是spring的bean的默认的作用域-单例。但是此单例又与设计模式中的单例模式不一样，设计模式的单例在设计模式的文章中再介绍。</p>
+<p>singleton不要简单的理解为全局只有一个，真正的意义是在一个上下文（ApplicationContext）中只有一个。如果在一个项目中有多个ApplicationContext，那么获取的Bean对象就不只一个了</p>
+<p>在同一个容器或上下文中，所有对单例bean的请求，只要id与该bean定义相匹配，都会返回同一个实例。简单说就是bean定义为singleton时，ioc容器只会创建该bean的唯一实例，然后存储在单例缓存（singleton cache）中。</p>
+<p>singleton的bean是无状态的，只有一份，所以无论哪个线程获取的都是同一个同样的实例，具有线程无关性。Spring使用ThreadLocal解决线程安全问题，这就要求在使用singleton的bean时不能存在属性的改变，如果存在属性改变，就需要慎重使用，采用同步来处理多线程问题，或者考虑使用prototype作用域。</p>
+<p>基于上面，我们常用的Controller、Service、Repository、Configuration这些bean基本上都是项目启动就已经初始化完毕，每个bean的属性都已经确定，在运行过程中也不会更改，这样就很适合单例模式。这里再说一下实体类（用@Entity注解修饰的）这个可不是一个bean，试想一下，每次使用实体的时候是不是都是<code>DomainA a = new DomainA();</code>，应该没有人这么用<figure class="highlight plain"><figcaption><span>private DomainA domianA;```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">使用scope的方法如下：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">@Scope(&quot;singleton&quot;)</span><br><span class="line">@Component</span><br><span class="line">public class MainService &#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Prototype"><a href="#Prototype" class="headerlink" title="Prototype"></a>Prototype</h3><p>相对应singleton，prototype就属于多例模式，每次请求都会创建一个新的实例，相当于new操作。</p>
+<p>对于prototype类型的bean，spring只负责创建初始化，不会对整个生命周期负责，随后的所有操作都交给客户端来处理</p>
+<p>现在问一个问题，如何声明一个prototype的bean并使用呢？（先不要急着往下看，想一下，就以在ScopeTestController里面注入prototype的PrototypeService来说明）</p>
+<pre><code>~
+~
+~
+~
+思考中...
+~
+~
+~
+~
+</code></pre><p>可能很多人（包括我）开始会以为像以下这种写法就可以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PrototypeService</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrototypeServiceImpl</span> <span class="keyword">implements</span> <span class="title">PrototypeService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScopeTestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	PrototypeService prototypeService;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPrototype</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(prototypeService);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动项目，两次次请求，查看控制台输出</p>
+<pre><code>com.ukirin.idle.web.service.impl.PrototypeServiceImpl@74738f89
+com.ukirin.idle.web.service.impl.PrototypeServiceImpl@74738f89
+</code></pre><p>？一样？什么情况？<br>其实仔细想一下也就明白了错在哪，Controller是一个单例，在启动时就已经把Service注入了，所以不可能改变，当然现在你可以这么改，将Controller同样改为prototype的。那么恭喜你回答正确，但是，这不是我们的目的，我们的目的是要看在单例中如何使用。</p>
+<h4 id="方法1：从ApplicationContext里面获取"><a href="#方法1：从ApplicationContext里面获取" class="headerlink" title="方法1：从ApplicationContext里面获取"></a>方法1：从ApplicationContext里面获取</h4><p>将Controller里面的代码做以下改动</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScopeTestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	@Autowired</span></span><br><span class="line"><span class="comment">//	PrototypeService prototypeService;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	WebApplicationContext applicationContext;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPrototype</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">//		System.out.println(prototypeService);</span></span><br><span class="line">		System.out.println(applicationContext.getBean(PrototypeService.class));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样每次都从上下文中请求一个实例，容器对每个请求都实例化一个新的Service，没有问题</p>
+<h4 id="方法2：方法1的变种，采用工厂模式来生成Service"><a href="#方法2：方法1的变种，采用工厂模式来生成Service" class="headerlink" title="方法2：方法1的变种，采用工厂模式来生成Service"></a>方法2：方法1的变种，采用工厂模式来生成Service</h4><p>代码就不写了…</p>
+<h4 id="方法3：使用代理"><a href="#方法3：使用代理" class="headerlink" title="方法3：使用代理"></a>方法3：使用代理</h4><p>很简单，在@Scope里面加上代理模式即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Scope</span>(value = <span class="string">"prototype"</span>, proxyMode = ScopedProxyMode.INTERFACES)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrototypeServiceImpl</span> <span class="keyword">implements</span> <span class="title">PrototypeService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScopeTestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	PrototypeService prototypeService;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	@Autowired</span></span><br><span class="line"><span class="comment">//	WebApplicationContext applicationContext;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPrototype</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(prototypeService);</span><br><span class="line"><span class="comment">//		System.out.println(applicationContext.getBean(PrototypeService.class));</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，就可以每次获取不同的Service了，这个的原理就是，在初始化Controller的时候并不是讲一个Service的实体注入，而是注入一个代理，当真正调用Service的时候，代理会对其进行依赖解析，并调用真正的实体bean</p>
+<p>额外需要注意的一点是，如果注入的不是接口的实现，而是一个类，那么需要将<code>proxyMode = ScopedProxyMode.INTERFACES</code>改为<code>proxyMode = ScopedProxyMode.TARGET_CLASS</code></p>
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p>该作用域将 bean 的定义限制为 HTTP 请求。只在 web-aware Spring ApplicationContext 的上下文中有效</p>
+<p>上述的实验结果是每次请求都会输出不一样的结果，在这里可能会与prototype产生困惑，做以下的实验可以解决你的困惑</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PrototypeService</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Scope</span>(value = <span class="string">"request"</span>, proxyMode = ScopedProxyMode.INTERFACES)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrototypeServiceImpl</span> <span class="keyword">implements</span> <span class="title">PrototypeService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MiddleService</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MiddleServiceImpl</span> <span class="keyword">implements</span> <span class="title">MiddleService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	PrototypeService prototypeService;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"middle     : "</span> + prototypeService);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScopeTestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	MiddleService middleService;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	PrototypeService prototypeService;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	@Autowired</span></span><br><span class="line"><span class="comment">//	WebApplicationContext applicationContext;</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testPrototype</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"controller : "</span> + prototypeService);</span><br><span class="line"><span class="comment">//		System.out.println(applicationContext.getBean(PrototypeService.class));</span></span><br><span class="line"></span><br><span class="line">		middleService.test();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<pre><code>controller : com.ukirin.idle.web.service.impl.PrototypeServiceImpl@6b90371c
+middle     : com.ukirin.idle.web.service.impl.PrototypeServiceImpl@6b90371c
+</code></pre><p>然后将作用域改为prototype再测试一下<br>输出结果为：</p>
+<pre><code>controller : com.ukirin.idle.web.service.impl.PrototypeServiceImpl@49b2c498
+middle     : com.ukirin.idle.web.service.impl.PrototypeServiceImpl@ccb8c47
+</code></pre><p>结果显而易见</p>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>该作用域将 bean 的定义限制为 HTTP 会话。 只在web-aware Spring ApplicationContext的上下文中有效。</p>
+<p>上述的实验结果是一个会话内输出结果是一样的</p>
+<h3 id="global-session"><a href="#global-session" class="headerlink" title="global-session"></a>global-session</h3><p>该作用域将 bean 的定义限制为全局 HTTP 会话。只在 web-aware Spring ApplicationContext 的上下文中有效。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-21T20:20:13.000Z" itemprop="dateUpdated">2018-03-22 04:20:13</time>
+</span><br>
+
+
+        
+        <a href="/2018/03/22/Spring之scope解惑/" target="_blank" rel="external">http://www.smxknife.com/2018/03/22/Spring之scope解惑/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/22/SpringBoot之Banner/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SpringBoot之Banner</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/22/Long-Long有趣的现象/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Long==Long有趣的现象</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '回来了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '正常了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/03/22/SpringBoot之SpringApplication/">
+    
+    
+    <title>SpringBoot之SpringApplication | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="springboot">
+    <meta name="description" content="简介可以用于从java主方法中引导和启动Spring应用程序的类，在默认情况下，通过以下步骤来启动应用：  创建一个ApplicationContext实例 注册CommandLinePropertySource用来暴露命令行参数作为spring的属性 refresh applicationContext，加载所有的singleton bean 触发任何CommandLineRunner bean">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot之SpringApplication">
+<meta property="og:url" content="http://www.smxknife.com/2018/03/22/SpringBoot之SpringApplication/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="简介可以用于从java主方法中引导和启动Spring应用程序的类，在默认情况下，通过以下步骤来启动应用：  创建一个ApplicationContext实例 注册CommandLinePropertySource用来暴露命令行参数作为spring的属性 refresh applicationContext，加载所有的singleton bean 触发任何CommandLineRunner bean">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-21T20:22:08.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringBoot之SpringApplication">
+<meta name="twitter:description" content="简介可以用于从java主方法中引导和启动Spring应用程序的类，在默认情况下，通过以下步骤来启动应用：  创建一个ApplicationContext实例 注册CommandLinePropertySource用来暴露命令行参数作为spring的属性 refresh applicationContext，加载所有的singleton bean 触发任何CommandLineRunner bean">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SpringBoot之SpringApplication</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">SpringBoot之SpringApplication</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-21T20:21:47.000Z" itemprop="datePublished" class="page-time">
+  2018-03-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/springboot/">springboot</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义SpringApplication"><span class="post-toc-number">2.</span> <span class="post-toc-text">自定义SpringApplication</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用Fluent-Builder-API进行构建"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用Fluent Builder API进行构建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事件和监听器"><span class="post-toc-number">4.</span> <span class="post-toc-text">事件和监听器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SpringBoot启动过程中的事件及监听器"><span class="post-toc-number">5.</span> <span class="post-toc-text">SpringBoot启动过程中的事件及监听器</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-SpringBoot之SpringApplication"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SpringBoot之SpringApplication</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-22 04:21:47" datetime="2018-03-21T20:21:47.000Z"  itemprop="datePublished">2018-03-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/springboot/">springboot</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>可以用于从java主方法中引导和启动Spring应用程序的类，在默认情况下，通过以下步骤来启动应用：</p>
+<ul>
+<li>创建一个ApplicationContext实例</li>
+<li>注册CommandLinePropertySource用来暴露命令行参数作为spring的属性</li>
+<li>refresh applicationContext，加载所有的singleton bean</li>
+<li>触发任何CommandLineRunner bean</li>
+</ul>
+<h3 id="自定义SpringApplication"><a href="#自定义SpringApplication" class="headerlink" title="自定义SpringApplication"></a>自定义SpringApplication</h3><p>默认的启动方式，代码如下，不做深入介绍</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SpringApplication.run(AppBoot1.class, args);</span><br></pre></td></tr></table></figure>
+<p>当然也可以做一些定制，如在Banner里面介绍的自定义banner，还有添加Listener等诸多设置，格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SpringApplication app = <span class="keyword">new</span> SpringApplication(MySpringConfiguration.class);</span><br><span class="line">	app.setBannerMode(Banner.Mode.OFF);</span><br><span class="line">	app.run(args);</span><br></pre></td></tr></table></figure>
+<h3 id="使用Fluent-Builder-API进行构建"><a href="#使用Fluent-Builder-API进行构建" class="headerlink" title="使用Fluent Builder API进行构建"></a>使用Fluent Builder API进行构建</h3><p>先上代码，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SpringApplicationBuilder()</span><br><span class="line">                .sources(ParentConfig.class)</span><br><span class="line">                .child(Child1Config.class)</span><br><span class="line">                .sibling(Child2Config.class)</span><br><span class="line">                .banner(<span class="keyword">new</span> AppBanner())</span><br><span class="line">                .logStartupInfo(<span class="keyword">false</span>)</span><br><span class="line">                .run(args);</span><br><span class="line">                </span><br><span class="line"><span class="comment">// ParentConfig.class</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//@Configuration</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:/parent.properties"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Child1Config.class</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:/child1.properties"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Child1Config</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Child2Config.class</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:/child2.properties"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Child2Config</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用SpringApplicationBuilder在构建分层的ApplicationContext应用的时候非常便利，但是官网给的代码示例很简单，对于一些初次介入的人可能理解上不是那么透彻。就上面的代码做一些简单的介绍</p>
+<ul>
+<li>.sources(ParentConfig.class)该方法是用来配置父配置，或主配置的。但是有坑!!!!请看上面的ParentConfig的代码，注解我使用的是@SpringBootApplication，如果你使用的是springboot的1.x的版本，那么你会很顺利，如果你正在研究springboot 2.x的版本，你会发现无论如何也无法启动成功（我被坑的好惨）…。聪明的人也许看到我的注释，没错换成@Configuration之后就可以正常工作。<strong><em>但是很抱歉，这是为什么暂时还没找到原因，在github上请教暂时也没得到正确的结果，后面继续研究，如果有人发现了其中的原因，请通知我一下</em></strong></li>
+<li>.child(Child1Config.class)那么通过名字就可以看到是子环境了，Child1Config就是child1的配置文件。也许你的应用里有多个child，那么你可能会想用多个child().child()，那么这样你的第二个child不是parent的child，而是第一个child的child，parent的孙子。想要实现多个同级的孩子，可以使用代码中的.sibling(Child2Config.class)方法。这里同样存在一个springboot的版本改动问题，那就是如果你要在配置文件里面为child1配置一个context path，那么在版本1里面的方法是<code>server.contextPath=child1</code>，但是如果使用版本2的朋友就需要做一点小改动了，改为<code>server.servlet.contextPath=child1</code></li>
+</ul>
+<p>可以参照github上的代码进行详细的理解<a href="https://github.com/smxknife/smxknife/tree/master/spring-boot/spring-boot-v2/spring-boot-v2-web/src/main/java/com/smxknife/springboot/v2/ex02" target="_blank" rel="noopener">github</a></p>
+<h3 id="事件和监听器"><a href="#事件和监听器" class="headerlink" title="事件和监听器"></a>事件和监听器</h3><p>spring里面的监听器有三种实现方式：</p>
+<blockquote>
+<ul>
+<li>@EventListener注解方式</li>
+<li>实现ApplicationListener接口</li>
+<li>实现SmartApplicationListener接口</li>
+</ul>
+</blockquote>
+<p>上面三种方式代码分别为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationRegisterListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@EventListener</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(UserRegisterEvent event)</span> </span>&#123;</span><br><span class="line">        User user = event.getUser();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"AnnotationRegisterListener "</span> + user.getName() + <span class="string">", "</span> + user.getPassword());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegisterListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">UserRegisterEvent</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(UserRegisterEvent event)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        User user = event.getUser();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"RegisterListener "</span> + user.getName() + <span class="string">", "</span> + user.getPassword());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRegisterListener</span> <span class="keyword">implements</span> <span class="title">SmartApplicationListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该方法返回true&amp;supportsSourceType同样返回true时，才会调用该监听内的onApplicationEvent方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> eventType</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supportsEventType</span><span class="params">(Class&lt;? extends ApplicationEvent&gt; eventType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> UserRegisterEvent.class.isAssignableFrom(eventType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该方法返回true&amp;supportsEventType同样返回true时，才会调用该监听内的onApplicationEvent方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sourceType</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supportsSourceType</span><span class="params">(@Nullable Class&lt;?&gt; sourceType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> UserService.class.isAssignableFrom(sourceType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ApplicationEvent event)</span> </span>&#123;</span><br><span class="line">        UserRegisterEvent userRegisterEvent = (UserRegisterEvent) event;</span><br><span class="line">        User user = userRegisterEvent.getUser();</span><br><span class="line">        System.out.println(<span class="string">"UserRegisterListener "</span> + user.getName() + <span class="string">", "</span> + user.getPassword());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 同步情况下监听执行的顺序</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>前两种实现方式比较简单，稍微介绍一下第三种，这种实现方式必须在supportsEventType和supportsSourceType同时返回true的情况下才会执行事件，具体如何返回true和false就看你自己的业务实现。在这里我使用了jdk的isAssignableFrom方法来判断父子关系的。<br>上面两种方式事件的执行顺序是无序的，第三种提供了一种指定属性的方法getOrder()</p>
+<p>具体的isAssignableFrom是如何使用的，请看如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bird</span> <span class="keyword">extends</span> <span class="title">Animal</span> <span class="keyword">implements</span> <span class="title">Fly</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dove</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Penguin</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Fly</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo03</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		assignOut(Animal.class, Animal.class);</span><br><span class="line">		assignOut(Animal.class, Bird.class);</span><br><span class="line">		assignOut(Bird.class, Animal.class);</span><br><span class="line">		assignOut(Animal.class, Dove.class);</span><br><span class="line">		assignOut(Penguin.class, Dove.class);</span><br><span class="line">		assignOut(Fly.class, Bird.class);</span><br><span class="line">		assignOut(Fly.class, Dove.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">assignOut</span><span class="params">(Class cls1, Class cls2)</span> </span>&#123;</span><br><span class="line">		System.out.println(cls1.getSimpleName() + <span class="string">" isAssignableFrom "</span> + cls2.getSimpleName() + <span class="string">" : "</span> + cls1.isAssignableFrom(cls2));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">Animal isAssignableFrom Animal : <span class="keyword">true</span></span><br><span class="line">Animal isAssignableFrom Bird : <span class="keyword">true</span></span><br><span class="line">Bird isAssignableFrom Animal : <span class="keyword">false</span></span><br><span class="line">Animal isAssignableFrom Dove : <span class="keyword">true</span></span><br><span class="line">Penguin isAssignableFrom Dove : <span class="keyword">false</span></span><br><span class="line">Fly isAssignableFrom Bird : <span class="keyword">true</span></span><br><span class="line">Fly isAssignableFrom Dove : <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="SpringBoot启动过程中的事件及监听器"><a href="#SpringBoot启动过程中的事件及监听器" class="headerlink" title="SpringBoot启动过程中的事件及监听器"></a>SpringBoot启动过程中的事件及监听器</h3><blockquote>
+<ul>
+<li>ApplicationStartingEvent 应用开始启动时执行，在初始化listeners and initializers之前执行</li>
+<li>ApplicationEnvironmentPreparedEvent 环境准备好开始执行，上下文创建之前执行</li>
+<li>ApplicationPreparedEvent 应用准备好开始执行，即所有bean都已经加载完毕之后，在refresh方法执行之前执行</li>
+<li>ApplicationStartedEvent 应用启动后开始执行，即上下文被refreshed之后，任何的application和command-line runners调用前执行</li>
+<li>ApplicationReadyEvent 应用启动完毕开始执行，任何的application和command-line runners调用后执行，从此后可以服务request了</li>
+<li>ApplicationFailedEvent 启动时遇到异常执行</li>
+</ul>
+</blockquote>
+<p>Listener的写法很简单，只以ApplicationStartingEvent为例，其他类似</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApplicationStartedListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">ApplicationStartedEvent</span>&gt; </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ApplicationStartedEvent applicationStartedEvent)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"MyApplicationStartedListener..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在main方法注入</span><br><span class="line">SpringApplicationBuilder builder = <span class="keyword">new</span> SpringApplicationBuilder();</span><br><span class="line">        builder.listeners(<span class="keyword">new</span> MyApplicationStartingListener());</span><br><span class="line">        builder.listeners(<span class="keyword">new</span> MyApplicationEnvironmentPreparedListener());</span><br><span class="line">        builder.listeners(<span class="keyword">new</span> MyApplicationPreparedListener());</span><br><span class="line">        builder.listeners(<span class="keyword">new</span> MyApplicationStartedListener());</span><br><span class="line"><span class="comment">//        builder.listeners(new MyApplicationReadyListener());</span></span><br><span class="line">        builder.sources(AppBoot.class);</span><br><span class="line">        builder.run(args);</span><br><span class="line">或者可以在META-INF/spring.factories中配置</span><br><span class="line">org.springframework.context.ApplicationListener=com.smxknife.springboot.v2.ex03.listener.MyApplicationReadyListener</span><br></pre></td></tr></table></figure>
+<p>看一下输出结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2018</span>-<span class="number">03</span>-<span class="number">03</span> <span class="number">01</span>:<span class="number">24</span>:<span class="number">06.387</span>  INFO <span class="number">5399</span> --- [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged</span><br><span class="line"><span class="number">2018</span>-<span class="number">03</span>-<span class="number">03</span> <span class="number">01</span>:<span class="number">28</span>:<span class="number">58.909</span>  INFO <span class="number">5399</span> --- [      Thread-<span class="number">28</span>] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@<span class="number">58</span>c49e73: startup date [Sat Mar <span class="number">03</span> <span class="number">01</span>:<span class="number">24</span>:<span class="number">05</span> CST <span class="number">2018</span>]; root of context hierarchy</span><br><span class="line"><span class="number">2018</span>-<span class="number">03</span>-<span class="number">03</span> <span class="number">01</span>:<span class="number">28</span>:<span class="number">58.913</span>  INFO <span class="number">5399</span> --- [      Thread-<span class="number">28</span>] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown</span><br><span class="line">MyApplicationStartingListener...</span><br><span class="line">MyApplicationEnvironmentPreparedListener...</span><br><span class="line"></span><br><span class="line">  .   ____          _            __ _ _</span><br><span class="line"> /\\ / ___<span class="string">'_ __ _ _(_)_ __  __ _ \ \ \ \</span></span><br><span class="line"><span class="string">( ( )\___ | '</span>_ | <span class="string">'_| | '</span>_ \/ _` | \ \ \ \</span><br><span class="line"> \\/  ___)| |_)| | | | | || (_| |  ) ) ) )</span><br><span class="line">  <span class="string">'  |____| .__|_| |_|_| |_\__, | / / / /</span></span><br><span class="line"><span class="string"> =========|_|==============|___/=/_/_/_/</span></span><br><span class="line"><span class="string"> :: Spring Boot ::            (v2.0.0.RC2)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2018-03-03 01:28:59.534  INFO 5399 --- [  restartedMain] com.smxknife.springboot.v2.ex03.AppBoot  : Starting AppBoot on ShaoYundeMacBook-Pro.local with PID 5399 (/Users/ShaoYun/local/workstation/programs/smxknife/spring-boot/spring-boot-v2/spring-boot-v2-web/target/classes started by ShaoYun in /Users/ShaoYun/local/workstation/programs/smxknife/spring-boot)</span></span><br><span class="line"><span class="string">2018-03-03 01:28:59.536  INFO 5399 --- [  restartedMain] com.smxknife.springboot.v2.ex03.AppBoot  : No active profile set, falling back to default profiles: default</span></span><br><span class="line"><span class="string">MyApplicationPreparedListener...</span></span><br><span class="line"><span class="string">2018-03-03 01:28:59.539  INFO 5399 --- [  restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@45b78eb1: startup date [Sat Mar 03 01:28:59 CST 2018]; root of context hierarchy</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.304  INFO 5399 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 10101 (http)</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.305  INFO 5399 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.305  INFO 5399 --- [  restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.28</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.316  INFO 5399 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.317  INFO 5399 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 778 ms</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.338  INFO 5399 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.338  INFO 5399 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: '</span>characterEncodingFilter<span class="string">' to: [/*]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.338  INFO 5399 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: '</span>hiddenHttpMethodFilter<span class="string">' to: [/*]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.338  INFO 5399 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: '</span>httpPutFormContentFilter<span class="string">' to: [/*]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.338  INFO 5399 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: '</span>requestContextFilter<span class="string">' to: [/*]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.492  INFO 5399 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@45b78eb1: startup date [Sat Mar 03 01:28:59 CST 2018]; root of context hierarchy</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.529  INFO 5399 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "&#123;[/register]&#125;" onto public java.lang.String com.smxknife.springboot.v2.ex03.web.controller.UserController.register(com.smxknife.springboot.v2.ex03.domain.User)</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.533  INFO 5399 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "&#123;[/error]&#125;" onto public org.springframework.http.ResponseEntity&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt; org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.534  INFO 5399 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "&#123;[/error],produces=[text/html]&#125;" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.555  INFO 5399 --- [  restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.555  INFO 5399 --- [  restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.591  INFO 5399 --- [  restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.648  INFO 5399 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.720  INFO 5399 --- [  restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.738  INFO 5399 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 10101 (http) with context path '</span><span class="string">'</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.739  INFO 5399 --- [  restartedMain] com.smxknife.springboot.v2.ex03.AppBoot  : Started AppBoot in 1.585 seconds (JVM running for 3711.163)</span></span><br><span class="line"><span class="string">MyApplicationStartedListener...</span></span><br><span class="line"><span class="string">MyApplicationReadyListener...</span></span><br><span class="line"><span class="string">2018-03-03 01:29:00.741  INFO 5399 --- [  restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged</span></span><br></pre></td></tr></table></figure>
+<p>Listener的相关代码可以参照 <a href="https://github.com/smxknife/smxknife/tree/master/spring-boot/spring-boot-v2/spring-boot-v2-web/src/main/java/com/smxknife/springboot/v2/ex03" target="_blank" rel="noopener">github</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-21T20:22:08.573Z" itemprop="dateUpdated">2018-03-22 04:22:08</time>
+</span><br>
+
+
+        
+        <a href="/2018/03/22/SpringBoot之SpringApplication/" target="_blank" rel="external">http://www.smxknife.com/2018/03/22/SpringBoot之SpringApplication/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/springboot/">springboot</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/22/SpringBoot之配置文件优先级/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SpringBoot之配置文件优先级</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/22/SpringBoot之Banner/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SpringBoot之Banner</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '回来了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '正常了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
