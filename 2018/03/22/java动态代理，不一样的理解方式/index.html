@@ -41,7 +41,7 @@
 <meta name="twitter:description" content="简介我所理解的动态代理，最后的运行方式其实是一个静态代理加上一些反射机制，请注意，我说的是最后的运行方式 静态代理抛开动态代理先不说，先看一下什么是静态代理，明白了静态代理，那么动态代理最后是如何运行的读完本篇文章基本上也就明白了 123456789101112131415161718192021222324252627282930313233public interface Service &amp;#">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -365,7 +365,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
 
 </script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -385,7 +385,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
 </li>
 </template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
@@ -401,10 +401,10 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '回来了！';
+            document.title = 'smxknife's blog';
             clearTimeout(titleTime);
         } else {
-            document.title = '正常了!';
+            document.title = 'smxknife's blog';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

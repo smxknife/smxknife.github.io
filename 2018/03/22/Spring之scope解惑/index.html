@@ -41,7 +41,7 @@
 <meta name="twitter:description" content="Spring的作用域scope在2.0之前只有两种singleton和prototype（网上说的，没去验证，那时候还没仔细研究过…），后面增加了session、request、global session三种专门用于web应用程序上下文的Bean Singleton这是spring的bean的默认的作用域-单例。但是此单例又与设计模式中的单例模式不一样，设计模式的单例在设计模式的文章中再介绍。">
     
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -393,7 +393,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
 
 </script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -413,7 +413,7 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
 </li>
 </template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
@@ -429,10 +429,10 @@ lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '回来了！';
+            document.title = 'smxknife's blog';
             clearTimeout(titleTime);
         } else {
-            document.title = '正常了!';
+            document.title = 'smxknife's blog';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);
