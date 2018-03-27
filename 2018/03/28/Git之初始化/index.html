@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/03/28/Git之初始化/">
+    
+    
+    <title>Git之初始化 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name &amp;quot;smxknife&amp;quot;$ git config --global user.email smx">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git之初始化">
+<meta property="og:url" content="http://www.smxknife.com/2018/03/28/Git之初始化/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name &amp;quot;smxknife&amp;quot;$ git config --global user.email smx">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-27T16:04:14.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git之初始化">
+<meta name="twitter:description" content="版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name &amp;quot;smxknife&amp;quot;$ git config --global user.email smx">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Git之初始化</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Git之初始化</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-27T16:02:28.000Z" itemprop="datePublished" class="page-time">
+  2018-03-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git指南/">git指南</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#版本"><span class="post-toc-number">1.</span> <span class="post-toc-text">版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置变量"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置变量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户名和邮件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">用户名和邮件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#别名设置"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">别名设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命令行颜色设置"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">命令行颜色设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化"><span class="post-toc-number">3.</span> <span class="post-toc-text">初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提交内容"><span class="post-toc-number">4.</span> <span class="post-toc-text">提交内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git"><span class="post-toc-number">5.</span> <span class="post-toc-text">.git</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Git之初始化"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Git之初始化</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-28 00:02:28" datetime="2018-03-27T16:02:28.000Z"  itemprop="datePublished">2018-03-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git指南/">git指南</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p><code>git --version</code>用来查询当前机器上的git的版本号</p>
+<h3 id="配置变量"><a href="#配置变量" class="headerlink" title="配置变量"></a>配置变量</h3><p>git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录</p>
+<h4 id="用户名和邮件"><a href="#用户名和邮件" class="headerlink" title="用户名和邮件"></a>用户名和邮件</h4><p><code>$ git config --global user.name &quot;smxknife&quot;</code><br><code>$ git config --global user.email smxknife@qq.com</code></p>
+<p>上面两条命令分别用来配置当前用户的姓名和邮件地址，这将会在版本库提交时用到</p>
+<h4 id="别名设置"><a href="#别名设置" class="headerlink" title="别名设置"></a>别名设置</h4><p>别名是为了命令操作更爽，试想一下，输入<code>git ci</code>爽还是输入<code>git commit</code>爽，（注：如果使用的是系统管理员，那么设置的别名可以被所有人员使用）</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo git config --system alias.st status</span><br><span class="line">$ sudo git config --system alias.ci commit</span><br><span class="line">$ sudo git config --system alias.co checkout</span><br><span class="line">$ sudo git config --system alias.br branch</span><br></pre></td></tr></table></figure>
+<p>也可以通过以下方式，只设置当前用户的全局方式</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global alias.st status</span><br><span class="line">$ git config --global alias.ci commit</span><br><span class="line">$ git config --global alias.co checkout</span><br><span class="line">$ git config --global alias.br branch</span><br></pre></td></tr></table></figure>
+<h4 id="命令行颜色设置"><a href="#命令行颜色设置" class="headerlink" title="命令行颜色设置"></a>命令行颜色设置</h4><p><code>$ git config --global color.ui true</code></p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>git初始化命令非常简单<code>git init</code></p>
+<ul>
+<li><code>$ cd /git/test</code></li>
+<li><code>$ git init demo</code></li>
+</ul>
+<p>这样初始化已经做好了，在demo下会有一个.git文件，这个隐藏的.git就是Git的仓库，而<code>/git/test/demo</code>被称为工作区</p>
+<h3 id="提交内容"><a href="#提交内容" class="headerlink" title="提交内容"></a>提交内容</h3><p>新建一个测试文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /git/test/demo/</span><br><span class="line">$ <span class="built_in">echo</span> "Hello Git." &gt; hellogit</span><br></pre></td></tr></table></figure>
+<p>将hellogit添加到仓库</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add hellogit # 此时并没有提交，这与svn是一样的，需要执行下一步commit才算提交</span><br><span class="line">$ git commit -m "init hellogit file"</span><br></pre></td></tr></table></figure>
+<p>执行完毕之后会得到以下输出</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[master (root-commit) ac01ff3] init hellogit file</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">1</span> insertion(+)</span><br><span class="line"> create <span class="built_in">mode</span> <span class="number">100644</span> hellogit</span><br></pre></td></tr></table></figure>
+<p>从结果上看提交到master分支上，第一个提交为root-commit，提交ID为ac01ff3，<br>第二行此次修改了一个文件，包含了一行插入<br>第三行此次提交创建了新文件 hellogit</p>
+<h3 id="git"><a href="#git" class="headerlink" title=".git"></a>.git</h3><p>git提供了一个非常方便的命令用来进行搜索</p>
+<p><code>$ git grep &quot;文件内容搜索&quot;</code> 如</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git grep "Hello"</span><br><span class="line"><span class="function">hellogit:<span class="title">Hello</span> <span class="title">Git</span>.</span></span><br></pre></td></tr></table></figure>
+<p>.git/index文件记录工作区文件的状态（实际上是暂存区的状态）</p>
+<p>git命令是在工作区工作的，如果在工作区的子目录下，git会一直递归查找.git目录，如果所有的目录中递归无法找到，将会报错。那么如何定位.git的工作区的根目录呢？</p>
+<p><code>$ git rev-parse --git-dir</code></p>
+<p>显示工作区根目录</p>
+<p><code>$ git rev-parse --show-toplevel</code></p>
+<p>相对工作区根目录的相对目录</p>
+<p><code>$ git rev-parse --show-prefix</code></p>
+<p>显示档期目录后退到工作区根目录的深度</p>
+<p><code>$ git rev-parse --show-cdup</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-27T16:04:14.699Z" itemprop="dateUpdated">2018-03-28 00:04:14</time>
+</span><br>
+
+
+        
+        <a href="/2018/03/28/Git之初始化/" target="_blank" rel="external">http://www.smxknife.com/2018/03/28/Git之初始化/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/22/Java拆箱-装箱原理/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java拆箱/装箱原理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
