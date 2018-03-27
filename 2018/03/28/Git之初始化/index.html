@@ -27,18 +27,18 @@
     
     
     <meta name="keywords" content="git">
-    <meta name="description" content="版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name &amp;quot;smxknife&amp;quot;$ git config --global user.email smx">
+    <meta name="description" content="前言本文是对《Git权威指南》的简单记录，如果看过原著可以绕过 PS：包括后面的Git之系列的文章都可以绕道而行 版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git之初始化">
 <meta property="og:url" content="http://www.smxknife.com/2018/03/28/Git之初始化/index.html">
 <meta property="og:site_name" content="smxknife&#39;s Blog">
-<meta property="og:description" content="版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name &amp;quot;smxknife&amp;quot;$ git config --global user.email smx">
+<meta property="og:description" content="前言本文是对《Git权威指南》的简单记录，如果看过原著可以绕过 PS：包括后面的Git之系列的文章都可以绕道而行 版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-27T16:04:14.699Z">
+<meta property="og:updated_time" content="2018-03-27T16:33:31.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git之初始化">
-<meta name="twitter:description" content="版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name &amp;quot;smxknife&amp;quot;$ git config --global user.email smx">
+<meta name="twitter:description" content="前言本文是对《Git权威指南》的简单记录，如果看过原著可以绕过 PS：包括后面的Git之系列的文章都可以绕道而行 版本git --version用来查询当前机器上的git的版本号 配置变量git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录 用户名和邮件$ git config --global user.name">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/style.css?v=1.7.2">
@@ -167,7 +167,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#版本"><span class="post-toc-number">1.</span> <span class="post-toc-text">版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置变量"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置变量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户名和邮件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">用户名和邮件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#别名设置"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">别名设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命令行颜色设置"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">命令行颜色设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化"><span class="post-toc-number">3.</span> <span class="post-toc-text">初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提交内容"><span class="post-toc-number">4.</span> <span class="post-toc-text">提交内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git"><span class="post-toc-number">5.</span> <span class="post-toc-text">.git</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#版本"><span class="post-toc-number">2.</span> <span class="post-toc-text">版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置变量"><span class="post-toc-number">3.</span> <span class="post-toc-text">配置变量</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户名和邮件"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">用户名和邮件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#别名设置"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">别名设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命令行颜色设置"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">命令行颜色设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始化"><span class="post-toc-number">4.</span> <span class="post-toc-text">初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提交内容"><span class="post-toc-number">5.</span> <span class="post-toc-text">提交内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git"><span class="post-toc-number">6.</span> <span class="post-toc-text">.git</span></a></li></ol>
         </nav>
     </aside>
 
@@ -193,7 +193,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p><code>git --version</code>用来查询当前机器上的git的版本号</p>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本文是对《Git权威指南》的简单记录，如果看过原著可以绕过</p>
+<pre><code>PS：包括后面的Git之系列的文章都可以绕道而行
+</code></pre><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p><code>git --version</code>用来查询当前机器上的git的版本号</p>
 <h3 id="配置变量"><a href="#配置变量" class="headerlink" title="配置变量"></a>配置变量</h3><p>git的配置变量是一次性工作，这些设置会在全局文件（用户目录下的.gitconfig）或系统文件（如/etc/gitconfig）中记录</p>
 <h4 id="用户名和邮件"><a href="#用户名和邮件" class="headerlink" title="用户名和邮件"></a>用户名和邮件</h4><p><code>$ git config --global user.name &quot;smxknife&quot;</code><br><code>$ git config --global user.email smxknife@qq.com</code></p>
 <p>上面两条命令分别用来配置当前用户的姓名和邮件地址，这将会在版本库提交时用到</p>
@@ -235,7 +237,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-27T16:04:14.699Z" itemprop="dateUpdated">2018-03-28 00:04:14</time>
+    最后更新时间：<time datetime="2018-03-27T16:33:31.605Z" itemprop="dateUpdated">2018-03-28 00:33:31</time>
 </span><br>
 
 
