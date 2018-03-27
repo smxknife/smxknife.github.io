@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/03/28/Git之暂存区/">
+    
+    
+    <title>Git之暂存区 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="前篇之前提交过demo，如何查看日志呢 12345678910$ cd /git/test/demo$ git log --statcommit ac01ff39a78fa388e1e628754fd55a76feb358d2 (HEAD -&amp;gt; master)Author: smxknife &amp;lt;2323937771@qq.com&amp;gt;Date:   Tue Mar 27 23:38:">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git之暂存区">
+<meta property="og:url" content="http://www.smxknife.com/2018/03/28/Git之暂存区/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="前篇之前提交过demo，如何查看日志呢 12345678910$ cd /git/test/demo$ git log --statcommit ac01ff39a78fa388e1e628754fd55a76feb358d2 (HEAD -&amp;gt; master)Author: smxknife &amp;lt;2323937771@qq.com&amp;gt;Date:   Tue Mar 27 23:38:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2018/03/28/5aba834db6137.jpg">
+<meta property="og:updated_time" content="2018-03-27T18:10:11.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git之暂存区">
+<meta name="twitter:description" content="前篇之前提交过demo，如何查看日志呢 12345678910$ cd /git/test/demo$ git log --statcommit ac01ff39a78fa388e1e628754fd55a76feb358d2 (HEAD -&amp;gt; master)Author: smxknife &amp;lt;2323937771@qq.com&amp;gt;Date:   Tue Mar 27 23:38:">
+<meta name="twitter:image" content="https://i.loli.net/2018/03/28/5aba834db6137.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Git之暂存区</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Git之暂存区</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-27T18:09:36.000Z" itemprop="datePublished" class="page-time">
+  2018-03-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git权威指南/">git权威指南</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前篇"><span class="post-toc-number">1.</span> <span class="post-toc-text">前篇</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#diff"><span class="post-toc-number">2.</span> <span class="post-toc-text">diff</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#暂存区（stage）"><span class="post-toc-number">3.</span> <span class="post-toc-text">暂存区（stage）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一些命令"><span class="post-toc-number">4.</span> <span class="post-toc-text">一些命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看HEAD指向的目录树"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">查看HEAD指向的目录树</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#清理工作区"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">清理工作区</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看暂存区的目录树"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">查看暂存区的目录树</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#不要使用git-commit-a"><span class="post-toc-number">5.</span> <span class="post-toc-text">不要使用git commit -a</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Git之暂存区"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Git之暂存区</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-28 02:09:36" datetime="2018-03-27T18:09:36.000Z"  itemprop="datePublished">2018-03-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git权威指南/">git权威指南</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前篇"><a href="#前篇" class="headerlink" title="前篇"></a>前篇</h3><p>之前提交过demo，如何查看日志呢</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /git/test/demo</span><br><span class="line">$ git log --stat</span><br><span class="line">commit ac01ff39a78fa388e1e628754fd55a76feb358d2 (HEAD -&gt; master)</span><br><span class="line"><span class="function">Author: <span class="title">smxknife</span> &lt;2323937771@<span class="title">qq.com</span>&gt;</span></span><br><span class="line"><span class="function"><span class="title">Date</span>:   <span class="title">Tue</span> <span class="title">Mar</span> 27 23:38:05 2018 +0800</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    <span class="title">init</span> <span class="title">hellogit</span> <span class="title">file</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"> <span class="title">hellogit</span> | 1 +</span></span><br><span class="line"><span class="function"> 1 <span class="title">file</span> <span class="title">changed</span>, 1 <span class="title">insertion</span>(+)</span></span><br></pre></td></tr></table></figure>
+<p>可以看到修改记录</p>
+<h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><p>现在对文件进行修改</p>
+<p><code>$ echo &quot;new change&quot; &gt;&gt; hellogit</code></p>
+<p>使用diff命令进行比较</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">diff --git a/hellogit b/hellogit</span><br><span class="line">index d974466..c49fee4 <span class="number">100644</span></span><br><span class="line">--- a/hellogit</span><br><span class="line">+++ b/hellogit</span><br><span class="line">@@ -<span class="number">1</span> +<span class="number">1</span>,<span class="number">2</span> @@</span><br><span class="line"> Hello Git.</span><br><span class="line">+new change</span><br></pre></td></tr></table></figure>
+<p>从上面来看确实修改了，也存在差异，那么久提交吧</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m "modify hellofile, add new change"</span><br><span class="line">On branch master</span><br><span class="line">Changes <span class="keyword">not</span> staged <span class="keyword">for</span> commit:</span><br><span class="line"><span class="function">	modified:   <span class="title">hellogit</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">no</span> <span class="title">changes</span> <span class="title">added</span> <span class="title">to</span> <span class="title">commit</span></span></span><br></pre></td></tr></table></figure>
+<p>从输出结果上看好像有点问题，貌似没提交成功，通过日志来看</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git log --pretty=oneline</span><br><span class="line">ac01ff39a78fa388e1e628754fd55a76feb358d2 (HEAD -&gt; master) init hellogit file</span><br></pre></td></tr></table></figure>
+<p>日志里也只有一行输出，查看文件状态</p>
+<p><code>$ git status</code>或者<code>$ git status -s</code>（简略输出信息）<br>输出如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status -s</span><br><span class="line"> M hellogit</span><br></pre></td></tr></table></figure>
+<p>无论怎么看都是提交失败，什么原因？？？？这就涉及到了暂存区的概念</p>
+<h3 id="暂存区（stage）"><a href="#暂存区（stage）" class="headerlink" title="暂存区（stage）"></a>暂存区（stage）</h3><p>git规定修改文件之后要先执行add操作，虽然感觉很别扭，但是无奈只能这么做</p>
+<p><code>$ git add hellogit</code></p>
+<p>再用git diff会发现没有任何输出，再执行git status -s</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git status -s</span><br><span class="line">M  hellogit</span><br></pre></td></tr></table></figure>
+<p>乍一看没什么变化，但是请与上面对比来看，是不是M的位置发生了变化，在add操作之前M的位置在第二列，add之后M的位置为第一列</p>
+<p>第一列M代表的含义是：仓库中的文件与暂存区中的文件相比有改动<br>第二列M代表的含义是：工作区中的当前文件与暂存区的文件相比有改动</p>
+<p>那么执行add之前，M位于第二列，说明比较的是工作区与暂存区，而add之后比较的是仓库与暂存区</p>
+<p>从这可以看出add的目的就是将工作区的文件提交到暂存区</p>
+<p>那么再修改一下文件内容</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> "third change." &gt;&gt; hellogit </span><br><span class="line"></span><br><span class="line">$ git status -s</span><br><span class="line">MM hellogit</span><br><span class="line"></span><br><span class="line">$ git diff</span><br><span class="line">diff --git a/hellogit b/hellogit</span><br><span class="line">index c49fee4..<span class="number">990080</span>f <span class="number">100644</span></span><br><span class="line">--- a/hellogit</span><br><span class="line">+++ b/hellogit</span><br><span class="line">@@ -<span class="number">1</span>,<span class="number">2</span> +<span class="number">1</span>,<span class="number">3</span> @@</span><br><span class="line"> Hello Git.</span><br><span class="line"> new change</span><br><span class="line">+third change.</span><br></pre></td></tr></table></figure>
+<p>从上面的结果来看，hellogit的status存在两个M，说明工作区相比暂存区有更改，暂存区相比仓库有更改。而此时git diff命令有输出结果了，说明git diff 默认是工作区与暂存区进行比较</p>
+<p>从这个结果来看，文件在Git中会存在三种状态，仓库中的状态、暂存区中的状态、工作区中的当前状态</p>
+<p>将工作区和HEAD（当前工作分支）相比</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git diff HEAD</span><br><span class="line">diff --git a/hellogit b/hellogit</span><br><span class="line">index d974466..<span class="number">990080</span>f <span class="number">100644</span></span><br><span class="line">--- a/hellogit</span><br><span class="line">+++ b/hellogit</span><br><span class="line">@@ -<span class="number">1</span> +<span class="number">1</span>,<span class="number">3</span> @@</span><br><span class="line"> Hello Git.</span><br><span class="line">+new change</span><br><span class="line">+third change.</span><br></pre></td></tr></table></figure>
+<p>将暂存区和仓库相比 （–cached或–staged）</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ git diff --cached</span><br><span class="line">diff --git a/hellogit b/hellogit</span><br><span class="line">index d974466..c49fee4 <span class="number">100644</span></span><br><span class="line">--- a/hellogit</span><br><span class="line">+++ b/hellogit</span><br><span class="line">@@ -<span class="number">1</span> +<span class="number">1</span>,<span class="number">2</span> @@</span><br><span class="line"> Hello Git.</span><br><span class="line">+new change</span><br><span class="line"></span><br><span class="line">$ git diff --staged</span><br><span class="line">diff --git a/hellogit b/hellogit</span><br><span class="line">index d974466..c49fee4 <span class="number">100644</span></span><br><span class="line">--- a/hellogit</span><br><span class="line">+++ b/hellogit</span><br><span class="line">@@ -<span class="number">1</span> +<span class="number">1</span>,<span class="number">2</span> @@</span><br><span class="line"> Hello Git.</span><br><span class="line">+new change</span><br></pre></td></tr></table></figure>
+<p>好了，现在进行commit操作，那么将会提交的是哪个版本呢？</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m "which version checked <span class="keyword">in</span>?"</span><br><span class="line">[master <span class="number">0789463</span>] which version checked <span class="keyword">in</span>?</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">1</span> insertion(+)</span><br></pre></td></tr></table></figure>
+<p>通过上面来看只有一行插入，所以两个变化只提交了一个</p>
+<p>再通过一系列命令来查看</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ git status -s</span><br><span class="line"> M hellogit</span><br><span class="line"></span><br><span class="line">$ git diff</span><br><span class="line">diff --git a/hellogit b/hellogit</span><br><span class="line">index c49fee4..<span class="number">990080</span>f <span class="number">100644</span></span><br><span class="line">--- a/hellogit</span><br><span class="line">+++ b/hellogit</span><br><span class="line">@@ -<span class="number">1</span>,<span class="number">2</span> +<span class="number">1</span>,<span class="number">3</span> @@</span><br><span class="line"> Hello Git.</span><br><span class="line"> new change</span><br><span class="line">+third change.</span><br><span class="line"></span><br><span class="line">$ git diff HEAD</span><br><span class="line">diff --git a/hellogit b/hellogit</span><br><span class="line">index c49fee4..<span class="number">990080</span>f <span class="number">100644</span></span><br><span class="line">--- a/hellogit</span><br><span class="line">+++ b/hellogit</span><br><span class="line">@@ -<span class="number">1</span>,<span class="number">2</span> +<span class="number">1</span>,<span class="number">3</span> @@</span><br><span class="line"> Hello Git.</span><br><span class="line"> new change</span><br><span class="line">+third change.</span><br><span class="line"></span><br><span class="line">$ git diff --staged</span><br><span class="line"># 没有任何输出</span><br></pre></td></tr></table></figure>
+<p>通过上面一系列的输出来看，这次commit只提交了暂存区的文件修改，工作区的依然没有变化，所以，本地工作区每次修改文件后都需要先add到暂存区，然后再commit到仓库中。那么将所有的更改先提交到仓库吧</p>
+<p>前面提到过.git/index文件，其实这个index就是暂存区文件，当执行git status扫描工作区改动的时候，先根据.git/index文件记录的时间戳、长度等信息判断工作区文件是否改变，如果工作区文件时间戳改变了，说明文件内容可能被改变了，需要打开文件读取内容，与原始文件进行比较，判断文件是否被改变。如果没有变化就将新的时间戳记录到.git/index文件中。通过时间戳和文件长度比较比文件内容比较快的多，这正是git高效的原因之一</p>
+<p>通过下面的一张图来形象的理解一下工作区、暂存区、仓库（版本库）的原理<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/03/28/5aba834db6137.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>index其实就是一个索引目录树，记录了文件名和文件状态信息（时间戳和长度），真正的文件内容是存储在.git/objects目录中</p>
+<p><code>$ git reset HEAD</code>重写暂存区的目录树，此时会被master分支指向的目录树替换，但是不影响工作区</p>
+<p><code>$ git rm --staged &lt;fileName&gt;</code>会直接从暂存区删除文件，工作区不受影响</p>
+<p><code>$ git checkout</code>或<code>$ git checkout -- &lt;fileName&gt;</code> 这是两个非常危险的操作，前者会将暂存区所有的文件替换工作区的文件，后者是替换指定的文件。这两个操作都会导致工作区修改的且未添加的修改丢失，慎重！！！</p>
+<p><code>$ git checkout HEAD</code>或<code>$ git checkout -- &lt;fileName&gt;</code>这个与上面的类似，但是更加危险，会用仓库里面文件替换暂存区和工作区两个地方</p>
+<h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><h4 id="查看HEAD指向的目录树"><a href="#查看HEAD指向的目录树" class="headerlink" title="查看HEAD指向的目录树"></a>查看HEAD指向的目录树</h4><p><code>git ls-tree -l HEAD</code></p>
+<h4 id="清理工作区"><a href="#清理工作区" class="headerlink" title="清理工作区"></a>清理工作区</h4><p>突然发现工作区太乱了，没有有用的东西需要清理</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clean -fd # 清楚工作区中没有加入仓库的文件和目录</span><br><span class="line">$ git checkout . # 使用暂存区进行刷新</span><br></pre></td></tr></table></figure>
+<h4 id="查看暂存区的目录树"><a href="#查看暂存区的目录树" class="headerlink" title="查看暂存区的目录树"></a>查看暂存区的目录树</h4><p><code>git ls-files -s</code></p>
+<h3 id="不要使用git-commit-a"><a href="#不要使用git-commit-a" class="headerlink" title="不要使用git commit -a"></a>不要使用git commit -a</h3><p>Git提供了一个简化命令，git commit -a 减少了add的步骤，可以直接将修改的文件进行commit，但是未被版本库跟踪的文件时不能提交的。</p>
+<p>这样做确实简化了操作步骤，但是就会丢掉Git暂存区的最大好处：对提交的内容进行控制的能力</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-27T18:10:11.359Z" itemprop="dateUpdated">2018-03-28 02:10:11</time>
+</span><br>
+
+
+        
+        <a href="/2018/03/28/Git之暂存区/" target="_blank" rel="external">http://www.smxknife.com/2018/03/28/Git之暂存区/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/28/Git之初始化/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git之初始化</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
