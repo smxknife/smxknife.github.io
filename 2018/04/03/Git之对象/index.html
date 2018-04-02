@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/04/03/Git之对象/">
+    
+    
+    <title>Git之对象 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="提交ID在介绍暂存区的时候，使用过git log --pretty=oneline命令，会得到以下输出 1234$ git log --pretty=oneline5782fe225003c2bc481d554ddeeab8fecd0dd19d (HEAD -&amp;gt; master) third change0789463b17be77ffe8da6fbc7e4b7777d065008c whic">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git之对象">
+<meta property="og:url" content="http://www.smxknife.com/2018/04/03/Git之对象/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="提交ID在介绍暂存区的时候，使用过git log --pretty=oneline命令，会得到以下输出 1234$ git log --pretty=oneline5782fe225003c2bc481d554ddeeab8fecd0dd19d (HEAD -&amp;gt; master) third change0789463b17be77ffe8da6fbc7e4b7777d065008c whic">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-02T16:06:05.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git之对象">
+<meta name="twitter:description" content="提交ID在介绍暂存区的时候，使用过git log --pretty=oneline命令，会得到以下输出 1234$ git log --pretty=oneline5782fe225003c2bc481d554ddeeab8fecd0dd19d (HEAD -&amp;gt; master) third change0789463b17be77ffe8da6fbc7e4b7777d065008c whic">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Git之对象</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Git之对象</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-02T16:04:55.000Z" itemprop="datePublished" class="page-time">
+  2018-04-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git指南/">git指南</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提交ID"><span class="post-toc-number">1.</span> <span class="post-toc-text">提交ID</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#cat-file-研究提交ID的重量级武器"><span class="post-toc-number">2.</span> <span class="post-toc-text">cat-file 研究提交ID的重量级武器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-objects目录"><span class="post-toc-number">3.</span> <span class="post-toc-text">.git/objects目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HEAD和master有什么区别和联系"><span class="post-toc-number">4.</span> <span class="post-toc-text">HEAD和master有什么区别和联系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么采用40位SHA1"><span class="post-toc-number">5.</span> <span class="post-toc-text">为什么采用40位SHA1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#rev-parse"><span class="post-toc-number">6.</span> <span class="post-toc-text">rev-parse</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Git之对象"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Git之对象</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-03 00:04:55" datetime="2018-04-02T16:04:55.000Z"  itemprop="datePublished">2018-04-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git指南/">git指南</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="提交ID"><a href="#提交ID" class="headerlink" title="提交ID"></a>提交ID</h3><p>在介绍暂存区的时候，使用过<code>git log --pretty=oneline</code>命令，会得到以下输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=oneline</span><br><span class="line">5782fe225003c2bc481d554ddeeab8fecd0dd19d (HEAD -&gt; master) third change</span><br><span class="line">0789463b17be77ffe8da6fbc7e4b7777d065008c <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line">ac01ff39a78fa388e1e628754fd55a76feb358d2 init hellogit file</span><br></pre></td></tr></table></figure>
+<p>上面三行输出前面的三个40位十六进制的魔幻数，这就是提交ID，这些个数其实就是SHA1哈希值</p>
+<p>上面这条命令仅仅是简要输出日志，使用下面的命令可以详细查看<code>git log --pretty=raw</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --pretty=raw</span><br><span class="line">commit 5782fe225003c2bc481d554ddeeab8fecd0dd19d</span><br><span class="line">tree 9c0665f333400ef615ea572bd006dca8408c0579</span><br><span class="line">parent 0789463b17be77ffe8da6fbc7e4b7777d065008c</span><br><span class="line">author smxknife &lt;2323937771@qq.com&gt; 1522171984 +0800</span><br><span class="line">committer smxknife &lt;2323937771@qq.com&gt; 1522171984 +0800</span><br><span class="line"></span><br><span class="line">    third change</span><br><span class="line"></span><br><span class="line">commit 0789463b17be77ffe8da6fbc7e4b7777d065008c</span><br><span class="line">tree 2ac6d09bdc7a46221bb25f1d2c6446924a0bd96a</span><br><span class="line">parent ac01ff39a78fa388e1e628754fd55a76feb358d2</span><br><span class="line">author smxknife &lt;2323937771@qq.com&gt; 1522171550 +0800</span><br><span class="line">committer smxknife &lt;2323937771@qq.com&gt; 1522171550 +0800</span><br><span class="line"></span><br><span class="line">    <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line"></span><br><span class="line">commit ac01ff39a78fa388e1e628754fd55a76feb358d2</span><br><span class="line">tree ced33498fd91fb4cfc1c05d101a9571d0fda4f50</span><br><span class="line">author smxknife &lt;2323937771@qq.com&gt; 1522165085 +0800</span><br><span class="line">committer smxknife &lt;2323937771@qq.com&gt; 1522165085 +0800</span><br><span class="line"></span><br><span class="line">    init hellogit file</span><br></pre></td></tr></table></figure>
+<p>同样显示了三次提交日志，但是每次日志丰富了很多</p>
+<ul>
+<li>commit 本次提交的ID</li>
+<li>tree 本次提交对应的目录树</li>
+<li>parent 上一次提交ID，可以看一下第一个parent与第二个commit是一样的</li>
+</ul>
+<h3 id="cat-file-研究提交ID的重量级武器"><a href="#cat-file-研究提交ID的重量级武器" class="headerlink" title="cat-file 研究提交ID的重量级武器"></a>cat-file 研究提交ID的重量级武器</h3><p>每次的提交id虽然很长，但是呢在使用的时候不需要40位全部使用，只要保证不重复，写个四五六七位都可以，现在就用cat-file来研究一下这些ID到底有什么用，代表什么意思</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -t 5782fe</span><br><span class="line">commit</span><br><span class="line"></span><br><span class="line">$ git cat-file -t 9c0665</span><br><span class="line">tree</span><br><span class="line"></span><br><span class="line">$ git cat-file -t 078946</span><br><span class="line">commit</span><br></pre></td></tr></table></figure>
+<p>从输出结果上看，根据这些id输出都是日志前面的类型，所以，-t的用处是显示ID对应的类型，下面再用-p(用来查看ID的内容)参数来进行查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p 5782fe</span><br><span class="line">tree 9c0665f333400ef615ea572bd006dca8408c0579</span><br><span class="line">parent 0789463b17be77ffe8da6fbc7e4b7777d065008c</span><br><span class="line">author smxknife &lt;2323937771@qq.com&gt; 1522171984 +0800</span><br><span class="line">committer smxknife &lt;2323937771@qq.com&gt; 1522171984 +0800</span><br><span class="line"></span><br><span class="line">third change</span><br></pre></td></tr></table></figure>
+<p>commit的ID里面存储的是上面的内容，再看一下tree的ID里面存的是什么内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p 9c0665</span><br><span class="line">100644 blob 990080f5544293a6409c0d32f06b6d98b506b0bd	hellogit</span><br></pre></td></tr></table></figure>
+<p>这里出现新的类型：blob，看一下后面的Id的类型是否是blob</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -t 9900</span><br><span class="line">blob</span><br></pre></td></tr></table></figure>
+<p>再看一下blob的内容吧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git cat-file -p 9900</span><br><span class="line">Hello Git.</span><br><span class="line">new change</span><br><span class="line">third change.</span><br></pre></td></tr></table></figure>
+<p>熟悉亲切，这正是我们亲手写入hellogit文件中的内容，所以git上真正的文件内容是存在blob对象里。</p>
+<p>那这些对象到底是存在哪里呢？</p>
+<h3 id="git-objects目录"><a href="#git-objects目录" class="headerlink" title=".git/objects目录"></a>.git/objects目录</h3><p>见名知意，objects目录正是git存放对象的目录，进去看看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> .git/objects</span><br><span class="line">$ ls -al</span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x  13 ShaoYun  staff  416  3 28 01:33 .</span><br><span class="line">drwxr-xr-x  13 ShaoYun  staff  416  4  2 21:27 ..</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 28 01:25 07</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 28 01:25 2a</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 28 01:33 57</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 28 01:32 99</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 28 01:33 9c</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 27 23:38 ac</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 28 00:41 c4</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 27 23:38 ce</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 27 23:35 d9</span><br><span class="line">drwxr-xr-x   2 ShaoYun  staff   64  3 27 23:28 info</span><br><span class="line">drwxr-xr-x   2 ShaoYun  staff   64  3 27 23:28 pack</span><br></pre></td></tr></table></figure>
+<p>???这都是些什么，看不懂，不要紧，往上翻，找到blob对应的ID是<code>990080f5544293a6409c0d32f06b6d98b506b0bd</code>，前两位是99，目录列表中正好有99目录，进入…</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> 99</span><br><span class="line">$ ll</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x   3 ShaoYun  staff   96  3 28 01:32 .</span><br><span class="line">drwxr-xr-x  13 ShaoYun  staff  416  3 28 01:33 ..</span><br><span class="line">-r--r--r--   1 ShaoYun  staff   46  3 28 01:32 0080f5544293a6409c0d32f06b6d98b506b0bd</span><br></pre></td></tr></table></figure>
+<p>又出现了一串数字！！！仔细看，加上前面的99，是不是与blob对应的ID相等。觉得不靠谱，再查一个，第一个commit对应的ID，肯定一样</p>
+<p>所以，git对象的真正存储方式我们已经找到了，每个提交ID其实就是git对象对应的存储目录和文件名，前2位是目录，后38位是文件名，对应的内容都是存在这个38位的文件里</p>
+<h3 id="HEAD和master有什么区别和联系"><a href="#HEAD和master有什么区别和联系" class="headerlink" title="HEAD和master有什么区别和联系"></a>HEAD和master有什么区别和联系</h3><p>这里需要先了解一下分支命令，输入<code>git branch</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br><span class="line">* master</span><br></pre></td></tr></table></figure>
+<p>显示分支，这里只有一个分支master，前面的*代表当前工作的分支，由此说明master是一个分支</p>
+<p>现在输入以下三个命令，看输出结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> -l HEAD</span><br><span class="line">commit 5782fe225003c2bc481d554ddeeab8fecd0dd19d (HEAD -&gt; master)</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Wed Mar 28 01:33:04 2018 +0800</span><br><span class="line"></span><br><span class="line">    third change</span><br><span class="line"></span><br><span class="line">commit 0789463b17be77ffe8da6fbc7e4b7777d065008c</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Wed Mar 28 01:25:50 2018 +0800</span><br><span class="line"></span><br><span class="line">    <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line"></span><br><span class="line">commit ac01ff39a78fa388e1e628754fd55a76feb358d2</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Tue Mar 27 23:38:05 2018 +0800</span><br><span class="line"></span><br><span class="line">    init hellogit file</span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">log</span> -l master</span><br><span class="line">commit 5782fe225003c2bc481d554ddeeab8fecd0dd19d (HEAD -&gt; master)</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Wed Mar 28 01:33:04 2018 +0800</span><br><span class="line"></span><br><span class="line">    third change</span><br><span class="line"></span><br><span class="line">commit 0789463b17be77ffe8da6fbc7e4b7777d065008c</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Wed Mar 28 01:25:50 2018 +0800</span><br><span class="line"></span><br><span class="line">    <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line"></span><br><span class="line">commit ac01ff39a78fa388e1e628754fd55a76feb358d2</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Tue Mar 27 23:38:05 2018 +0800</span><br><span class="line"></span><br><span class="line">    init hellogit file</span><br><span class="line"></span><br><span class="line">$ git <span class="built_in">log</span> -l .git/refs/heads/master </span><br><span class="line">commit 5782fe225003c2bc481d554ddeeab8fecd0dd19d (HEAD -&gt; master)</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Wed Mar 28 01:33:04 2018 +0800</span><br><span class="line"></span><br><span class="line">    third change</span><br><span class="line"></span><br><span class="line">commit 0789463b17be77ffe8da6fbc7e4b7777d065008c</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Wed Mar 28 01:25:50 2018 +0800</span><br><span class="line"></span><br><span class="line">    <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line"></span><br><span class="line">commit ac01ff39a78fa388e1e628754fd55a76feb358d2</span><br><span class="line">Author: smxknife &lt;2323937771@qq.com&gt;</span><br><span class="line">Date:   Tue Mar 27 23:38:05 2018 +0800</span><br><span class="line"></span><br><span class="line">    init hellogit file</span><br></pre></td></tr></table></figure>
+<p>这三个命令的输出结果完全一致。<br>首先解释一下，git分支有以下两种表示方法</p>
+<blockquote>
+<ul>
+<li>正规的长格式表示法：refs/heads/master</li>
+<li>简单表示法（我自己起的名）：master</li>
+</ul>
+</blockquote>
+<p>那么上面三个命令的后两个一样就完全可以理解，一个东西，内容肯定是一样的</p>
+<p>现在看HEAD和master</p>
+<p>进入.git目录查看内容，目录下有个HEAD文件，查看一下文件内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat HEAD </span><br><span class="line">ref: refs/heads/master</span><br></pre></td></tr></table></figure>
+<p>了然，HEAD其实就是指向了一个引用，而这个引用地址为master的地址，所以，三者输出完全一样，没毛病</p>
+<p>再看一下master里面的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/heads/master</span><br><span class="line">5782fe225003c2bc481d554ddeeab8fecd0dd19d</span><br></pre></td></tr></table></figure>
+<p>熟悉的ID，与上面的日志对比一下看到，就是最新一次的commit ID，有了这个id，我们就可以追踪整个提交历史了</p>
+<p>目录.git/refs是用来保存引用的命名空间，其中refs/heads目录下的为分支目录</p>
+<h3 id="为什么采用40位SHA1"><a href="#为什么采用40位SHA1" class="headerlink" title="为什么采用40位SHA1"></a>为什么采用40位SHA1</h3><p>40位的ID是很长，为什么不采用svn那种递增式增长序列呢？</p>
+<p>这就涉及到git的设计思想了，git是一种分布式管理方式，这就需要一个全球唯一的ID才能做到不重复，而SHA1做到了基本上全球唯一，很难出现重复的情况，这样可以避免版本冲突的问题</p>
+<h3 id="rev-parse"><a href="#rev-parse" class="headerlink" title="rev-parse"></a>rev-parse</h3><p><code>git rev-parse master</code> 这是git的一个底层命令，可以用来查看引用对应的提交ID，而不需要像我们之前一样要访问到分支文件下的文件查看</p>
+<p><code>git rev-parse HEAD</code><br>使用HEAD代表版本库最近的一次提交</p>
+<p><code>git rev-parse HEAD^</code>加一个“\^”号，代表最新一次提交的父提交，后面可以加多个\^，如果想要找到10次提交之前的，总不能加10个\^吧，是的，这很不优雅，可以在\^后面跟数字，表示第几个父提交<code>git rev-parse HEAD^2</code>表示第二个父提交</p>
+<p>还有另一种写法<code>~&lt;n&gt;</code>，如 <code>5782~5</code>，相当于<code>5782^^^^^</code></p>
+<p>提交所对应的树对象可以用以下语法访问</p>
+<p><code>5782^{tree}</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-02T16:06:05.512Z" itemprop="dateUpdated">2018-04-03 00:06:05</time>
+</span><br>
+
+
+        
+        <a href="/2018/04/03/Git之对象/" target="_blank" rel="external">http://www.smxknife.com/2018/04/03/Git之对象/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/28/Git之暂存区/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git之暂存区</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
