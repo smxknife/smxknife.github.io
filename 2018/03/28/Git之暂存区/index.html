@@ -36,7 +36,7 @@
 <meta property="og:description" content="前篇之前提交过demo，如何查看日志呢 12345678910$ cd /git/test/demo$ git log --statcommit ac01ff39a78fa388e1e628754fd55a76feb358d2 (HEAD -&amp;gt; master)Author: smxknife &amp;lt;2323937771@qq.com&amp;gt;Date:   Tue Mar 27 23:38:">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2018/03/28/5aba834db6137.jpg">
-<meta property="og:updated_time" content="2018-04-02T13:32:42.551Z">
+<meta property="og:updated_time" content="2018-04-02T13:43:46.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git之暂存区">
 <meta name="twitter:description" content="前篇之前提交过demo，如何查看日志呢 12345678910$ cd /git/test/demo$ git log --statcommit ac01ff39a78fa388e1e628754fd55a76feb358d2 (HEAD -&amp;gt; master)Author: smxknife &amp;lt;2323937771@qq.com&amp;gt;Date:   Tue Mar 27 23:38:">
@@ -247,7 +247,7 @@
 <p><code>$ git checkout HEAD</code>或<code>$ git checkout HEAD &lt;fileName&gt;</code>这个与上面的类似，但是更加危险，会用仓库里面文件替换暂存区和工作区两个地方</p>
 <h3 id="一些命令"><a href="#一些命令" class="headerlink" title="一些命令"></a>一些命令</h3><h4 id="查看HEAD指向的目录树"><a href="#查看HEAD指向的目录树" class="headerlink" title="查看HEAD指向的目录树"></a>查看HEAD指向的目录树</h4><p><code>git ls-tree -l HEAD</code></p>
 <h4 id="清理工作区"><a href="#清理工作区" class="headerlink" title="清理工作区"></a>清理工作区</h4><p>突然发现工作区太乱了，没有有用的东西需要清理</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clean -fd # 清楚工作区中没有加入仓库的文件和目录</span><br><span class="line">$ git checkout . # 使用暂存区进行刷新</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clean -fd # 清除工作区中没有加入仓库的文件和目录</span><br><span class="line">$ git checkout . # 使用暂存区进行刷新</span><br></pre></td></tr></table></figure>
 <h4 id="查看暂存区的目录树"><a href="#查看暂存区的目录树" class="headerlink" title="查看暂存区的目录树"></a>查看暂存区的目录树</h4><p><code>git ls-files -s</code></p>
 <h3 id="不要使用git-commit-a"><a href="#不要使用git-commit-a" class="headerlink" title="不要使用git commit -a"></a>不要使用git commit -a</h3><p>Git提供了一个简化命令，git commit -a 减少了add的步骤，可以直接将修改的文件进行commit，但是未被版本库跟踪的文件时不能提交的。</p>
 <p>这样做确实简化了操作步骤，但是就会丢掉Git暂存区的最大好处：对提交的内容进行控制的能力</p>
@@ -259,7 +259,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-02T13:32:42.551Z" itemprop="dateUpdated">2018-04-02 21:32:42</time>
+    最后更新时间：<time datetime="2018-04-02T13:43:46.185Z" itemprop="dateUpdated">2018-04-02 21:43:46</time>
 </span><br>
 
 
