@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/04/18/Java基础内部类5-内部类为什么存在/">
+    
+    
+    <title>Java基础内部类5-内部类为什么存在 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="java,内部类">
+    <meta name="description" content="前言内部类如何声明使用已经介绍过了；内部类分类梳理也说了；内部类的一些高级用法也提过了。那么内部类为什么存在呢？ 封装和隐藏在内部类中可以对一系列相关属性进行封装，当把内部的权限修饰为private，那么这样就会使得封装的信息完全与外界隔绝，内部类时不可以被覆盖的，所以可以对业务逻辑进行很好的保护，而不至于担心被重写 多继承解决方案多继承？？java不是只能单继承吗？ 是的没错，java为了摒弃c">
+<meta name="keywords" content="java,内部类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础内部类5-内部类为什么存在">
+<meta property="og:url" content="http://www.smxknife.com/2018/04/18/Java基础内部类5-内部类为什么存在/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="前言内部类如何声明使用已经介绍过了；内部类分类梳理也说了；内部类的一些高级用法也提过了。那么内部类为什么存在呢？ 封装和隐藏在内部类中可以对一系列相关属性进行封装，当把内部的权限修饰为private，那么这样就会使得封装的信息完全与外界隔绝，内部类时不可以被覆盖的，所以可以对业务逻辑进行很好的保护，而不至于担心被重写 多继承解决方案多继承？？java不是只能单继承吗？ 是的没错，java为了摒弃c">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-17T16:20:24.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础内部类5-内部类为什么存在">
+<meta name="twitter:description" content="前言内部类如何声明使用已经介绍过了；内部类分类梳理也说了；内部类的一些高级用法也提过了。那么内部类为什么存在呢？ 封装和隐藏在内部类中可以对一系列相关属性进行封装，当把内部的权限修饰为private，那么这样就会使得封装的信息完全与外界隔绝，内部类时不可以被覆盖的，所以可以对业务逻辑进行很好的保护，而不至于担心被重写 多继承解决方案多继承？？java不是只能单继承吗？ 是的没错，java为了摒弃c">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java基础内部类5-内部类为什么存在</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Java基础内部类5-内部类为什么存在</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-17T16:19:52.000Z" itemprop="datePublished" class="page-time">
+  2018-04-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java内部类/">java内部类</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#封装和隐藏"><span class="post-toc-number">2.</span> <span class="post-toc-text">封装和隐藏</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多继承解决方案"><span class="post-toc-number">3.</span> <span class="post-toc-text">多继承解决方案</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#闭包"><span class="post-toc-number">4.</span> <span class="post-toc-text">闭包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#YY"><span class="post-toc-number">5.</span> <span class="post-toc-text">YY</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Java基础内部类5-内部类为什么存在"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Java基础内部类5-内部类为什么存在</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-18 00:19:52" datetime="2018-04-17T16:19:52.000Z"  itemprop="datePublished">2018-04-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java内部类/">java内部类</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>内部类如何声明使用已经介绍过了；内部类分类梳理也说了；内部类的一些高级用法也提过了。那么内部类为什么存在呢？</p>
+<h3 id="封装和隐藏"><a href="#封装和隐藏" class="headerlink" title="封装和隐藏"></a>封装和隐藏</h3><p>在内部类中可以对一系列相关属性进行封装，当把内部的权限修饰为private，那么这样就会使得封装的信息完全与外界隔绝，内部类时不可以被覆盖的，所以可以对业务逻辑进行很好的保护，而不至于担心被重写</p>
+<h3 id="多继承解决方案"><a href="#多继承解决方案" class="headerlink" title="多继承解决方案"></a>多继承解决方案</h3><p>多继承？？java不是只能单继承吗？</p>
+<p>是的没错，java为了摒弃c++中多继承的痛点，采用了单继承。虽然这样会安全很多，但是无疑会在某些情境下感觉限制。那么内部类就可以解决问题，这使得java的继承变得更加完整</p>
+<pre><code>NOTE: 有以下几点需要注意的地方
+        1）这里的继承是指内部类继承其他类，与前面介绍的其他类继承内部类不一样
+        2）多继承，不是指，内部类可以打破java的单继承定律，一个内部类可以继承多个类，这是错误的理解方式。
+        这里是指可以在外部类中定义多个内部类分别继承不同的类
+</code></pre><p>内部类可以任意的实现一个接口或者继承一个类，与外部类是否实现接口和继承该类没有任何关系，那么在这种情况下，在外部类中就可以任意创建多少个内部类来继承或者实现你想要的接口，而不会对外部类产生任何的影响。继而在外部类中可以通过内部类获取到继承的类或接口中的属性和方法。</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>内部类除了包含自己的信息外，也包含了外部类的信息，对于成员内部类来说，它会自动拥有一个外部类的引用，可以访问外部类所有的非静态的属性和方法，包括private</p>
+<h3 id="YY"><a href="#YY" class="headerlink" title="YY"></a>YY</h3><p>回头看一下，现在你对内部类的认识还是那个无用、少用的内部类吗？如果不是，那么恭喜你，对内部类做了更进一步的认识。如果看完之后，没什么感觉，那么我只能说：“浪费您时间了~”</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-17T16:20:24.058Z" itemprop="dateUpdated">2018-04-18 00:20:24</time>
+</span><br>
+
+
+        
+        <a href="/2018/04/18/Java基础内部类5-内部类为什么存在/" target="_blank" rel="external">http://www.smxknife.com/2018/04/18/Java基础内部类5-内部类为什么存在/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内部类/">内部类</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/18/Java基础内部类4-内部类进阶/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java基础内部类4-内部类进阶</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
