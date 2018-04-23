@@ -26,18 +26,19 @@
     <meta name="theme-color" content="#009587">
     
     
-    <meta name="keywords" content="">
-    <meta name="description" content="程序员成长笔记">
+    <meta name="keywords" content="cassandra">
+    <meta name="description" content="前言在Cassandra的配置文件里面有诸多的address，如listen_address、rpc_address等，那么这些address分别的用处是什么。在这里简单的介绍一下 note：版本3.11.2 在Cassandra的配置文件里面存在以下的address：   listen_address broadcast_address listen_on_broadcast_address r">
+<meta name="keywords" content="cassandra">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cassandra配置的address分类">
 <meta property="og:url" content="http://www.smxknife.com/2018/04/23/Cassandra配置的address分类/index.html">
 <meta property="og:site_name" content="smxknife&#39;s Blog">
-<meta property="og:description" content="程序员成长笔记">
+<meta property="og:description" content="前言在Cassandra的配置文件里面有诸多的address，如listen_address、rpc_address等，那么这些address分别的用处是什么。在这里简单的介绍一下 note：版本3.11.2 在Cassandra的配置文件里面存在以下的address：   listen_address broadcast_address listen_on_broadcast_address r">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-23T07:58:01.534Z">
+<meta property="og:updated_time" content="2018-04-23T08:45:22.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cassandra配置的address分类">
-<meta name="twitter:description" content="程序员成长笔记">
+<meta name="twitter:description" content="前言在Cassandra的配置文件里面有诸多的address，如listen_address、rpc_address等，那么这些address分别的用处是什么。在这里简单的介绍一下 note：版本3.11.2 在Cassandra的配置文件里面存在以下的address：   listen_address broadcast_address listen_on_broadcast_address r">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/style.css?v=1.7.2">
@@ -161,6 +162,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#listen-address"><span class="post-toc-number">2.</span> <span class="post-toc-text">listen_address</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#broadcast-address"><span class="post-toc-number">3.</span> <span class="post-toc-text">broadcast_address</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#listen-on-broadcast-address"><span class="post-toc-number">4.</span> <span class="post-toc-text">listen_on_broadcast_address</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#rpc-address"><span class="post-toc-number">5.</span> <span class="post-toc-text">rpc_address</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#broadcast-rpc-address"><span class="post-toc-number">6.</span> <span class="post-toc-text">broadcast_rpc_address</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#各有什么用处"><span class="post-toc-number">7.</span> <span class="post-toc-text">各有什么用处</span></a></li></ol>
+        </nav>
+    </aside>
+
 
 <article id="post-Cassandra配置的address分类"
   class="post-article article-type-post fade" itemprop="blogPost">
@@ -181,7 +189,38 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在Cassandra的配置文件里面有诸多的address，如listen_address、rpc_address等，那么这些address分别的用处是什么。在这里简单的介绍一下</p>
+<pre><code>note：版本3.11.2
+</code></pre><p>在Cassandra的配置文件里面存在以下的address：</p>
+<blockquote>
+<ul>
+<li>listen_address</li>
+<li>broadcast_address</li>
+<li>listen_on_broadcast_address</li>
+<li>rpc_address</li>
+<li>broadcast_rpc_address</li>
+</ul>
+</blockquote>
+<h3 id="listen-address"><a href="#listen-address" class="headerlink" title="listen_address"></a>listen_address</h3><p>默认是localhost。</p>
+<p>该配置是为了告诉集群中其他节点如何连接到该节点上。一个集群中该节点的address必须唯一，因为该地址就像一个独一无二的身份id，只有知道该连接，Cassandra集群才可以建立连接</p>
+<p>可以设置为空。Cassandra通过InetAddress.getLocalHost()可以从系统获取本地地址。<br>如果Cassandra找不到正确的地址，你可以指定IP地址或者主机名称。<br>如果是单节点集群，你可以使用默认配置(localhost)。<br>永远不要指定0.0.0.0，总是错的。</p>
+<h3 id="broadcast-address"><a href="#broadcast-address" class="headerlink" title="broadcast_address"></a>broadcast_address</h3><p>默认是被注释掉的。默认值1.2.3.4</p>
+<p>广播地址，用来向其他Cassandra节点发送广播</p>
+<p>如果设置为空，将采用与listen_address一样的地址</p>
+<h3 id="listen-on-broadcast-address"><a href="#listen-on-broadcast-address" class="headerlink" title="listen_on_broadcast_address"></a>listen_on_broadcast_address</h3><p>默认是注释掉的。默认值false</p>
+<p>当使用多个物理网络接口时，把该项设置为true，监听除了listen_address之外的broadcast_address，从而运行节点可以在两个接口中通信</p>
+<h3 id="rpc-address"><a href="#rpc-address" class="headerlink" title="rpc_address"></a>rpc_address</h3><p>默认值localhost</p>
+<p>Thrift RPC 服务和本地传输服务都会使用该地址，简单的可以理解为client与Cassandra服务端通信的地址</p>
+<p>如果不设置该项，将会采用listen_address的设置<br>该配置可以设置为0.0.0.0，但是如果这样设置了，你必须设置broadcast_rpc_address为其他地址</p>
+<h3 id="broadcast-rpc-address"><a href="#broadcast-rpc-address" class="headerlink" title="broadcast_rpc_address"></a>broadcast_rpc_address</h3><p>默认注释掉。默认值1.2.3.4</p>
+<p>rpc地址广播到驱动和其他节点上。该节点不能被设置为0.0.0.0。<br>如果该配置设置为空将会默认使用rpc_address的地址。<br>如果rpc_address设置为0.0.0.0，该配置必须设置一个地址。</p>
+<h3 id="各有什么用处"><a href="#各有什么用处" class="headerlink" title="各有什么用处"></a>各有什么用处</h3><p>上面基本上就是对配置文件里面的翻译，但是看完之后，还是不清楚到底是干什么用的。下面就简单的介绍一下</p>
+<ul>
+<li>Cassandra节点之间的通信采用的是listen_address</li>
+<li>Client连接到服务端用的是rpc_address。有两种方式，thrift和NativeTransport（CQL）这两个都是用的rpc_address。接口不一样。如果rpc_address没设置就用listen_address</li>
+</ul>
+<p>上面两个是比较常用的，必须要区分清楚，否则会很混乱。其他的我还没有玩透，所以就不说了，用过的朋友可以讲一下。</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -189,7 +228,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-04-23T07:58:01.534Z" itemprop="dateUpdated">2018-04-23 15:58:01</time>
+    最后更新时间：<time datetime="2018-04-23T08:45:22.251Z" itemprop="dateUpdated">2018-04-23 16:45:22</time>
 </span><br>
 
 
@@ -215,6 +254,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cassandra/">cassandra</a></li></ul>
+
 
             
 
