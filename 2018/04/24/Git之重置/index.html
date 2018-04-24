@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/04/24/Git之重置/">
+    
+    
+    <title>Git之重置 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="前言前面了解过，每次提交都会产生新的id，master引用分支总是会指向最新的提交id，其实，引用也可以指向历史id，将当前版本指向历史id，这就是重置。 引用就像是一个游标，可上可下。git提供了reset命令来指向任意一个id。 resetgit reset命令就是用来重置的命令，利用这个命令可以回退到想要的版本，下面可以试验一下 先创建一个新文件，并提交 12345678$ touch ne">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git之重置">
+<meta property="og:url" content="http://www.smxknife.com/2018/04/24/Git之重置/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="前言前面了解过，每次提交都会产生新的id，master引用分支总是会指向最新的提交id，其实，引用也可以指向历史id，将当前版本指向历史id，这就是重置。 引用就像是一个游标，可上可下。git提供了reset命令来指向任意一个id。 resetgit reset命令就是用来重置的命令，利用这个命令可以回退到想要的版本，下面可以试验一下 先创建一个新文件，并提交 12345678$ touch ne">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-24T03:03:40.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git之重置">
+<meta name="twitter:description" content="前言前面了解过，每次提交都会产生新的id，master引用分支总是会指向最新的提交id，其实，引用也可以指向历史id，将当前版本指向历史id，这就是重置。 引用就像是一个游标，可上可下。git提供了reset命令来指向任意一个id。 resetgit reset命令就是用来重置的命令，利用这个命令可以回退到想要的版本，下面可以试验一下 先创建一个新文件，并提交 12345678$ touch ne">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Git之重置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Git之重置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-24T03:03:02.000Z" itemprop="datePublished" class="page-time">
+  2018-04-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git指南/">git指南</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reset"><span class="post-toc-number">2.</span> <span class="post-toc-text">reset</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reflog"><span class="post-toc-number">3.</span> <span class="post-toc-text">reflog</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深入了解git-reset命令"><span class="post-toc-number">4.</span> <span class="post-toc-text">深入了解git reset命令</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Git之重置"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Git之重置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-24 11:03:02" datetime="2018-04-24T03:03:02.000Z"  itemprop="datePublished">2018-04-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git指南/">git指南</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前面了解过，每次提交都会产生新的id，master引用分支总是会指向最新的提交id，其实，引用也可以指向历史id，将当前版本指向历史id，这就是重置。</p>
+<p>引用就像是一个游标，可上可下。git提供了reset命令来指向任意一个id。</p>
+<h3 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h3><p><code>git reset</code>命令就是用来重置的命令，利用这个命令可以回退到想要的版本，下面可以试验一下</p>
+<p>先创建一个新文件，并提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ touch newfile</span><br><span class="line">$ git add newfile </span><br><span class="line">$ git commit -m <span class="string">"does master follow this new commit?"</span></span><br><span class="line">[master 6a26023] does master follow this new commit?</span><br><span class="line"> 1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line"> create mode 100644 newfile</span><br><span class="line">$ ls</span><br><span class="line">hellogit	newfile</span><br></pre></td></tr></table></figure>
+<p>查看master引用指向的id</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/heads/master </span><br><span class="line">6a2602307968a2fa13efc3974ab4e0f4e7abf49a</span><br></pre></td></tr></table></figure>
+<p>确实指向了新的提交id，查看一下日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline</span><br><span class="line">6a26023 (HEAD -&gt; master) does master follow this new commit?</span><br><span class="line">6cffe14 2018.4.20 change1</span><br><span class="line">5782fe2 third change</span><br><span class="line">0789463 <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line">ac01ff3 init hellogit file</span><br></pre></td></tr></table></figure>
+<p>现在想将版本重置到父提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard HEAD^</span><br><span class="line">HEAD is now at 6cffe14 2018.4.20 change1</span><br></pre></td></tr></table></figure>
+<p>再查看master引用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/heads/master </span><br><span class="line">6cffe145e4f83255fbdef7f68c4b0ed94acea8bc</span><br></pre></td></tr></table></figure>
+<p>确实指向了父提交了，再看下日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline</span><br><span class="line">6cffe14 (HEAD -&gt; master) 2018.4.20 change1</span><br><span class="line">5782fe2 third change</span><br><span class="line">0789463 <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line">ac01ff3 init hellogit file</span><br></pre></td></tr></table></figure>
+<p>head和master引用都指向了父提交，再看一下文件是否存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">hellogit</span><br></pre></td></tr></table></figure>
+<p>文件也删了</p>
+<p>……</p>
+<p>看了上面的日志，是完成了目的，回退到父提交了，但是，是不是有点太干净了，没有任何的回退记录，那如果是错误的回退怎么办，连日志都没了！！！这是一个危险的操作（特别是–hard参数，会破坏工作区未提交的改动），会彻底的丢弃历史，所以是不可能通过提交历史的办法来恢复，所以慎重！！！！</p>
+<h3 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h3><p>git作为一个这么🐂x的版本控制工具，岂会不考虑错误重置的这种情况。reflog就是来挽救错误的reset。</p>
+<p>在<code>.git/logs</code>目录下记录了分支的变更（必须是带有工作区的提供分支日志功能）。这是因为带有工作区的版本库都有以下设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config core.logallrefupdates</span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>查看一下master分支的日志文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ tail -5 .git/logs/refs/heads/master </span><br><span class="line">ac01ff39a78fa388e1e628754fd55a76feb358d2 0789463b17be77ffe8da6fbc7e4b7777d065008c smxknife &lt;2323937771@qq.com&gt; 1522171550 +0800	commit: <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line">0789463b17be77ffe8da6fbc7e4b7777d065008c 5782fe225003c2bc481d554ddeeab8fecd0dd19d smxknife &lt;2323937771@qq.com&gt; 1522171984 +0800	commit: third change</span><br><span class="line">5782fe225003c2bc481d554ddeeab8fecd0dd19d 6cffe145e4f83255fbdef7f68c4b0ed94acea8bc smxknife &lt;2323937771@qq.com&gt; 1524190757 +0800	commit: 2018.4.20 change1</span><br><span class="line">6cffe145e4f83255fbdef7f68c4b0ed94acea8bc 6a2602307968a2fa13efc3974ab4e0f4e7abf49a smxknife &lt;2323937771@qq.com&gt; 1524318936 +0800	commit: does master follow this new commit?</span><br><span class="line">6a2602307968a2fa13efc3974ab4e0f4e7abf49a 6cffe145e4f83255fbdef7f68c4b0ed94acea8bc smxknife &lt;2323937771@qq.com&gt; 1524323213 +0800	reset: moving to HEAD^</span><br></pre></td></tr></table></figure>
+<p>在这里可以找到最后的操作日志，最后一条，reset：moving to HEAD^，提交id由6a26变为6cff</p>
+<p>除了直接查看文件外，还可以通过reflog命令来查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog show master | head -5</span><br><span class="line">6cffe14 master@&#123;0&#125;: reset: moving to HEAD^</span><br><span class="line">6a26023 master@&#123;1&#125;: commit: does master follow this new commit?</span><br><span class="line">6cffe14 master@&#123;2&#125;: commit: 2018.4.20 change1</span><br><span class="line">5782fe2 master@&#123;3&#125;: commit: third change</span><br><span class="line">0789463 master@&#123;4&#125;: commit: <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br></pre></td></tr></table></figure>
+<p>可以看到同样的效果，只是对日志里面的信息进行精简和包装。在reflog命令中提供了一个方便易记的表达式：refname@{n}，上面输出的就是master@{0}。这个表达式的意思是refname之前第n次改变时的id值。那么将master切换之前的值，可以使用下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard master@&#123;1&#125;</span><br><span class="line">HEAD is now at 6a26023 does master follow this new commit?</span><br></pre></td></tr></table></figure>
+<p>查看日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --oneline</span><br><span class="line">6a26023 (HEAD -&gt; master) does master follow this new commit?</span><br><span class="line">6cffe14 2018.4.20 change1</span><br><span class="line">5782fe2 third change</span><br><span class="line">0789463 <span class="built_in">which</span> version checked <span class="keyword">in</span>?</span><br><span class="line">ac01ff3 init hellogit file</span><br></pre></td></tr></table></figure>
+<p>查看引用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat .git/refs/heads/master </span><br><span class="line">6a2602307968a2fa13efc3974ab4e0f4e7abf49a</span><br></pre></td></tr></table></figure>
+<p>查看工作区文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">hellogit	newfile</span><br></pre></td></tr></table></figure>
+<p>用reflog命令查看日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog show master | head -5</span><br><span class="line">6a26023 master@&#123;0&#125;: reset: moving to master@&#123;1&#125;</span><br><span class="line">6cffe14 master@&#123;1&#125;: reset: moving to HEAD^</span><br><span class="line">6a26023 master@&#123;2&#125;: commit: does master follow this new commit?</span><br><span class="line">6cffe14 master@&#123;3&#125;: commit: 2018.4.20 change1</span><br><span class="line">5782fe2 master@&#123;4&#125;: commit: third change</span><br></pre></td></tr></table></figure>
+<h3 id="深入了解git-reset命令"><a href="#深入了解git-reset命令" class="headerlink" title="深入了解git reset命令"></a>深入了解git reset命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"this is new"</span> &gt;&gt; newfile</span><br><span class="line"></span><br><span class="line">$ git status -s</span><br><span class="line"> M newfile</span><br><span class="line"> </span><br><span class="line">$ git diff</span><br><span class="line">diff --git a/newfile b/newfile</span><br><span class="line">index e69de29..fff92cf 100644</span><br><span class="line">--- a/newfile</span><br><span class="line">+++ b/newfile</span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line">+this is new</span><br><span class="line"></span><br><span class="line">$ git add newfile</span><br><span class="line"></span><br><span class="line">$ git status -s</span><br><span class="line">M  newfile</span><br><span class="line"></span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line">$ git reset HEAD</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M	newfile</span><br><span class="line"></span><br><span class="line">$ git status -s</span><br><span class="line"> M newfile</span><br><span class="line"></span><br><span class="line">$ git diff</span><br><span class="line">diff --git a/newfile b/newfile</span><br><span class="line">index e69de29..fff92cf 100644</span><br><span class="line">--- a/newfile</span><br><span class="line">+++ b/newfile</span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line">+this is new</span><br></pre></td></tr></table></figure>
+<p>从上面的操作来看，git reset HEAD 并没有改变工作区。改变的只有暂存区文件。将git add newfile 重置为add之前的状态。如果get reset HEAD^^ 就会发现引用也被改变，暂存区也被改变，只有工作区没有变化</p>
+<p><strong>–hard</strong></p>
+<p>使用hard模式会执行以下三个操作：</p>
+<ul>
+<li>替换引用的指向。引用指向新的提交id</li>
+<li>替换暂存区。替换后，暂存区的内容和引用指向目录树一致</li>
+<li>提供工作区。替换后，工作区的内容变得和暂存区一致（引用、暂存区、工作区状态一致）</li>
+</ul>
+<p><strong>–soft</strong></p>
+<p>soft模式会执行一个操作：</p>
+<ul>
+<li>更改引用的指向，不改变暂存区和工作区</li>
+</ul>
+<p><strong>–mixed</strong></p>
+<p>mixed模式同上面的git reset HEAD~n</p>
+<ul>
+<li>将引用和暂存区回退到执行提交，工作区不变</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-24T03:03:40.413Z" itemprop="dateUpdated">2018-04-24 11:03:40</time>
+</span><br>
+
+
+        
+        <a href="/2018/04/24/Git之重置/" target="_blank" rel="external">http://www.smxknife.com/2018/04/24/Git之重置/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/23/Cassandra配置的address分类/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Cassandra配置的address分类</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
