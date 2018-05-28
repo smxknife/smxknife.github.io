@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/05/28/Java之JMX/">
+    
+    
+    <title>Java之JMX | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="java,jmx">
+    <meta name="description" content="简介JMX（Java Management Extensions）从management来看，这是一个管理的框架。用jmx可以监控和管理应用程序。下面就对jmx进行简单的介绍 整体架构JMX的整体架构分为三层。设备层（Instrumentation Level）、代理层（Agent Level）、分发层（Distributed Level）。额，如果感觉有点懵，没关系，暂时理解自上而下分为三个层次">
+<meta name="keywords" content="java,jmx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java之JMX">
+<meta property="og:url" content="http://www.smxknife.com/2018/05/28/Java之JMX/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="简介JMX（Java Management Extensions）从management来看，这是一个管理的框架。用jmx可以监控和管理应用程序。下面就对jmx进行简单的介绍 整体架构JMX的整体架构分为三层。设备层（Instrumentation Level）、代理层（Agent Level）、分发层（Distributed Level）。额，如果感觉有点懵，没关系，暂时理解自上而下分为三个层次">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2018/05/27/5b0ab8db177a1.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bb7fb79afc.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bb83d651b4.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bb8a66950b.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bba185ad73.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bbd94e4f83.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bbdf8b0a93.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bc34a725e9.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bc60589e92.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/28/5b0bc6d1d980a.jpg">
+<meta property="og:updated_time" content="2018-05-28T09:29:49.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java之JMX">
+<meta name="twitter:description" content="简介JMX（Java Management Extensions）从management来看，这是一个管理的框架。用jmx可以监控和管理应用程序。下面就对jmx进行简单的介绍 整体架构JMX的整体架构分为三层。设备层（Instrumentation Level）、代理层（Agent Level）、分发层（Distributed Level）。额，如果感觉有点懵，没关系，暂时理解自上而下分为三个层次">
+<meta name="twitter:image" content="https://i.loli.net/2018/05/27/5b0ab8db177a1.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java之JMX</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Java之JMX</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-28T09:28:30.000Z" itemprop="datePublished" class="page-time">
+  2018-05-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/jmx/">jmx</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#整体架构"><span class="post-toc-number">2.</span> <span class="post-toc-text">整体架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设备层"><span class="post-toc-number">3.</span> <span class="post-toc-text">设备层</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Standard-MBean"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Standard MBean</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Dynamic-MBean"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Dynamic MBean</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#MXBean"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">MXBean</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代理层"><span class="post-toc-number">4.</span> <span class="post-toc-text">代理层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分发层"><span class="post-toc-number">5.</span> <span class="post-toc-text">分发层</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单的Demo1"><span class="post-toc-number">6.</span> <span class="post-toc-text">简单的Demo1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单Demo2"><span class="post-toc-number">7.</span> <span class="post-toc-text">简单Demo2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通知"><span class="post-toc-number">8.</span> <span class="post-toc-text">通知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义JMX-Client"><span class="post-toc-number">9.</span> <span class="post-toc-text">自定义JMX Client</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Java之JMX"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Java之JMX</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-28 17:28:30" datetime="2018-05-28T09:28:30.000Z"  itemprop="datePublished">2018-05-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/jmx/">jmx</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>JMX（Java Management Extensions）从management来看，这是一个管理的框架。用jmx可以监控和管理应用程序。下面就对jmx进行简单的介绍</p>
+<h3 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h3><p>JMX的整体架构分为三层。设备层（Instrumentation Level）、代理层（Agent Level）、分发层（Distributed Level）。额，如果感觉有点懵，没关系，暂时理解自上而下分为三个层次就可以。</p>
+<p>结构图如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/27/5b0ab8db177a1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="设备层"><a href="#设备层" class="headerlink" title="设备层"></a>设备层</h3><ul>
+<li>什么是”设备层”？定义信息模型</li>
+<li>什么事”设备”？简单来说就是能被java描述出来的一个对象，这些对象成为“管理构件”，简称MBean</li>
+</ul>
+<p>这些MBean就是我们要管理的指标，每个MBean都可以监控一类信息</p>
+<p>MBean又分为以下几种：</p>
+<blockquote>
+<ul>
+<li>Standard MBean</li>
+<li>Dynamic MBean</li>
+<li>Open MBean</li>
+<li>Model MBean</li>
+<li>MXBean</li>
+</ul>
+</blockquote>
+<p>这里以Standard MBean、Dynamic MBean、MXBean为例作为入门介绍</p>
+<h4 id="Standard-MBean"><a href="#Standard-MBean" class="headerlink" title="Standard MBean"></a>Standard MBean</h4><p>这是最简单的MBean，通过方法名来管理接口。Standard MBean的实现依赖于一组特定的命名规范。</p>
+<p>规范如下：</p>
+<blockquote>
+<ul>
+<li>定义一个接口，名称为xxxxMBean的格式，必须以MBean结尾，以User为例，接口名为UserMBean</li>
+<li>定义属性方法，假设User含有id和name属性，那么可以通过定义getId、setId、getName和setName来控制属性是否可读写，如果只定义了set方法，那么该属性可写不可读；如果只定义了get方法，那么该属性可读不可写；同时定义，那么就可读可写</li>
+<li>定义操作，其他非get和set方法，可以算是对该对象的操作</li>
+<li>接口定义完了，具体实现，需要继承上接口，以UserMBean为例，那么该实现也就必须命名为User，然后实现该接口</li>
+<li>补充一点，参数和返回类型只能是简单的引用类型（如String）和基本数据类型，其他类型编译不会出错，但是结果会稍有不同，稍后验证</li>
+</ul>
+</blockquote>
+<h4 id="Dynamic-MBean"><a href="#Dynamic-MBean" class="headerlink" title="Dynamic MBean"></a>Dynamic MBean</h4><p>这种MBean就没有那么多限制，但是有一条硬性规则，必须实现javax.management.DynamicMBean接口。所有的属性都在运行时定义的。比较灵活</p>
+<h4 id="MXBean"><a href="#MXBean" class="headerlink" title="MXBean"></a>MXBean</h4><p>严格上讲，MXBean这不是MBean的一种分类。MXBean是MBean的一种，只是这货有些特殊，较为常用，所以放在一起讲。</p>
+<p>规范如下：</p>
+<blockquote>
+<ul>
+<li>实现xxxMXBean接口，或者不按照MXBean结尾来命名，但是需要加上@MXBean的注解</li>
+<li>支持各种数据类型，包括自定义类型</li>
+<li>其他方法命名规则与MBean类似</li>
+</ul>
+</blockquote>
+<h3 id="代理层"><a href="#代理层" class="headerlink" title="代理层"></a>代理层</h3><p>代理层就是用来管理资源的，管理MBean。代理层的核心模块就是MBean Server和一系列附加的MBean Service。<br>而MBean Server其实就是MBean的容器，可以注册Adapter、Connector、MBean并且直接管理MBean</p>
+<h3 id="分发层"><a href="#分发层" class="headerlink" title="分发层"></a>分发层</h3><p>这一层主要是根据不同的协议定义了对代理层进行各种操作的管理接口</p>
+<h3 id="简单的Demo1"><a href="#简单的Demo1" class="headerlink" title="简单的Demo1"></a>简单的Demo1</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UserMBean.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMBean</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthDate</span><span class="params">(Date date)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">getBirthDate</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTime</span><span class="params">(LocalTime time)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> LocalTime <span class="title">getTime</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printUserInfo</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">currentDate</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">(Test test)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Test <span class="title">getTest</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>新建一个标准MBean的接口，定义好属性和操作</li>
+<li>根据前面介绍的规则UserMBean有Id、Name、BirthDate、Time和Test属性，而且都是可读可写</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">NotificationBroadcasterSupport</span> <span class="keyword">implements</span> <span class="title">UserMBean</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String password;</span><br><span class="line">	<span class="keyword">private</span> Date birthDate;</span><br><span class="line">	<span class="keyword">private</span> LocalTime time;</span><br><span class="line">	<span class="keyword">private</span> Test test;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">long</span> sequenceNumber = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		Notification n = <span class="keyword">new</span> AttributeChangeNotification(<span class="keyword">this</span>,</span><br><span class="line">				sequenceNumber++, System.currentTimeMillis(),</span><br><span class="line">				<span class="string">"name changed"</span>, <span class="string">"name"</span>, <span class="string">"String"</span>, <span class="keyword">this</span>.name,</span><br><span class="line">				name);</span><br><span class="line">		<span class="comment">//发送通知</span></span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		sendNotification(n);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthDate</span><span class="params">(Date date)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthDate = date;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">getBirthDate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.birthDate;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTime</span><span class="params">(LocalTime time)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.time = time;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> LocalTime <span class="title">getTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.time;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printUserInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.printf(<span class="string">"User: &#123; id=%s, name=%s &#125;\r\n"</span>, <span class="keyword">this</span>.id, <span class="keyword">this</span>.name);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Date <span class="title">currentDate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Date();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">(Test test)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.test = test;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Test <span class="title">getTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.test;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> MBeanNotificationInfo[] getNotificationInfo() &#123;</span><br><span class="line">		String[] types = <span class="keyword">new</span> String[] &#123; AttributeChangeNotification.ATTRIBUTE_CHANGE &#125;;</span><br><span class="line">		String name = AttributeChangeNotification.class.getName();</span><br><span class="line">		String description = <span class="string">"An attribute of this MBean has changed"</span>;</span><br><span class="line">		MBeanNotificationInfo info = <span class="keyword">new</span> MBeanNotificationInfo(types, name,</span><br><span class="line">				description);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> MBeanNotificationInfo[] &#123; info &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>先忽略NotificationBroadcasterSupport</li>
+<li>实现了UserMBean接口。而且命名为User，符合规范</li>
+<li>这样一个简单的设备层的对象就已经建好</li>
+<li>Test只是作为一个简单验证</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAgent</span> <span class="keyword">implements</span> <span class="title">NotificationListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> MBeanServer mBeanServer;</span><br><span class="line">	<span class="keyword">private</span> MBeanServer mBeanServer1;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">UserAgent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		mBeanServer = ManagementFactory.getPlatformMBeanServer();</span><br><span class="line">		mBeanServer1 = MBeanServerFactory.createMBeanServer(<span class="string">"Hello"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			ObjectName name = <span class="keyword">new</span> ObjectName(<span class="string">"UserAgent:type=User1"</span>);</span><br><span class="line"></span><br><span class="line">			User user = <span class="keyword">new</span> User();</span><br><span class="line">			user.setName(<span class="string">"test"</span>);</span><br><span class="line">			user.setId(<span class="number">1</span>);</span><br><span class="line">			user.setBirthDate(<span class="keyword">new</span> Date());</span><br><span class="line">			user.setTime(LocalTime.now());</span><br><span class="line">			Test test = <span class="keyword">new</span> Test();</span><br><span class="line">			test.setName(<span class="string">"mytest"</span>);</span><br><span class="line">			test.setAge(<span class="number">11</span>);</span><br><span class="line">			user.setTest(test);</span><br><span class="line">			mBeanServer.registerMBean(user, name);</span><br><span class="line"></span><br><span class="line">			mBeanServer1.registerMBean(user, <span class="keyword">new</span> ObjectName(<span class="string">"Hello:type=user"</span>));</span><br><span class="line"></span><br><span class="line">			Thread.sleep(Long.MAX_VALUE);</span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">catch</span> (MalformedObjectNameException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (NotCompliantMBeanException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InstanceAlreadyExistsException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (MBeanRegistrationException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleNotification</span><span class="params">(Notification notification, Object handback)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>新建了一个代理类，先忽略NotificationListener，这个可以不用实现</li>
+<li>该代理类里面声明了两个MBeanServer，只是实例化的方式不同，方便后面做验证</li>
+<li>ObjectName是为了给代理对象命名</li>
+<li>紧接着就是实例化User并赋值</li>
+<li>通过MBeanServer的registerMBean将user注册到MBeanServer中</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		UserAgent userAgent = <span class="keyword">new</span> UserAgent();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>执行</li>
+</ul>
+</blockquote>
+<p>通过jdk提供的两款工具都可以连接进行查看，分别是jconsole和jvisualvm，这两个都在jdk的bin目录下，很容易找到。下面我以jvisualvm为例来看一下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bb7fb79afc.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>找到自己的项目，双击</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bb83d651b4.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>点击“MBeans”选项卡，在里面可以找到我们刚才创建的UserAgent</p>
+<p>下面就让我们来具体的操作一下里面的属性值</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bb8a66950b.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>从图上可以看出，定义的属性值都显示出来了，但是Test属性的值为Unavailable，没有获取到。然后通过操作又会发现BirthDate和Time都是可以显示，但是却不可更改，其他的属性都是可显示，可修改。</p>
+<pre><code>注：下面的讨论是基于代码中既有set又有get
+</code></pre><p>回头看代码会发现：</p>
+<ul>
+<li>BirthDate和Time都是jdk提供的引用类型，但不是基础数据类型，这种数据是可显示不可修改</li>
+<li>Test是自定义类型，这种类型直接就不显示</li>
+<li>String虽然不是基本数据类型，却既能显示又能修改</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bba185ad73.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>Operations是我们定义的两个操作方法，都可以执行成功</p>
+<p>Notifications先放在一边，后面再讲</p>
+<p>Metadata选项卡就列举出MBean的元信息</p>
+<pre><code>现在是不是发现jmx的一个强悍的地方，在运行时，不通过代码在外部直接修改属性和运行方法
+
+也许你还发现一个问题，那就是在代理中我们注入的两个MBeanServer，为什么只有一个显示？这是因为
+mBeanServer = ManagementFactory.getPlatformMBeanServer();进行特殊的初始化方式，可以直接被工具识别
+而mBeanServer1这种原始的初始化方式，需要我们自定义客户端来访问才可以，所以不用太纠结这个
+</code></pre><h3 id="简单Demo2"><a href="#简单Demo2" class="headerlink" title="简单Demo2"></a>简单Demo2</h3><p>上面的Demo1是对标准MBean的一个演示，为了显示出区别，下面对MXBean进行演示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HelloMXBean</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">(Test test)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Test <span class="title">getTest</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MXBean</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Hello2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">(Test test)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Test <span class="title">getTest</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>根据上面介绍，这两种方式是一样的，我试验过ok，这里就采用第一种继续做实验</li>
+<li>定义了Test和Name两个属性，都是可读可写</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloImpl</span> <span class="keyword">implements</span> <span class="title">HelloMXBean</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> Test test;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">(Test test)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.test = test;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Test <span class="title">getTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.test;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>HelloImpl通过这个名字发现，并没有遵循MBean的规范</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloAgent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> MBeanServer server;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HelloAgent</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		server = ManagementFactory.getPlatformMBeanServer();</span><br><span class="line"></span><br><span class="line">		ObjectName name = <span class="keyword">new</span> ObjectName(<span class="string">"HelloAgent:type=Hello"</span>);</span><br><span class="line"></span><br><span class="line">		Test test = <span class="keyword">new</span> Test();</span><br><span class="line">		test.setName(<span class="string">"mytest"</span>);</span><br><span class="line">		test.setAge(<span class="number">11</span>);</span><br><span class="line">		HelloImpl hello = <span class="keyword">new</span> HelloImpl();</span><br><span class="line">		hello.setTest(test);</span><br><span class="line">		hello.setName(<span class="string">"hello world"</span>);</span><br><span class="line">		server.registerMBean(hello, name);</span><br><span class="line"></span><br><span class="line">		Thread.sleep(Long.MAX_VALUE);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Main方法不变，就是把UserAgent换成HelloAgent即可，执行</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bbd94e4f83.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>从图中可以看出Test属性不再是Unavailable状态，而是有值，双击该值后就可以看到对象具体的数据结构，如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bbdf8b0a93.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><p>刚才跳过了通知的部分，现在回来说一下。</p>
+<p>MBean是能够生成通知Notification的。如通知一个属性值改变了、监测到一个事件或者问题等等，都可以发出一个通知。通知的对象主要是远程的客户端</p>
+<p>通知存在很多类型<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bc34a725e9.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>额，这么多，不会一一说明，就以AttributeChangedNotification为例来演示一下如何使用通知功能</p>
+<ul>
+<li>一个MBean想要能发送通知，首先必须继承NotificationBroadcasterSupport或者实现NotificationEmitter（这里我采用了继承NotificationBroadcasterSupport，因为他实现了NotificationEmitter）</li>
+<li>构建一个Notification<ul>
+<li>在构建Notification时，有些事项需要注意，source就代表了当前对象</li>
+<li>sequenceNumber，这个还是比较重要的，试想一下，如果你收到一堆通知，但是在处理的时候没有先后顺序，是不是就会乱套了。sequenceNumber就是来定义顺序的</li>
+</ul>
+</li>
+<li>调用sendNotification方法，这个是NotificationBroadcasterSupport里面的方法，直接调用即可</li>
+</ul>
+<p>现在运行Demo1，然后修改Name的属性值，看看会有什么结果</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bc60589e92.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>首先需要点一下“subscribe”激活一下Notifications选项卡，注意选项卡的名字会由原来的”Notifications” =&gt; “Notifications[0]”</li>
+<li>在Attributes选项卡里面修改Name的属性值，就会发现”Notifications[0]” =&gt; “Notifications[1]”</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/05/28/5b0bc6d1d980a.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>通知发送成功了</p>
+<h3 id="自定义JMX-Client"><a href="#自定义JMX-Client" class="headerlink" title="自定义JMX Client"></a>自定义JMX Client</h3><p>上面的JMX所有的结果操作都是在jvisualvm上进行的。实际中我们可能需要做业务处理，那当然就需要定义我们自己的客户端处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientBoot</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			UserAgent userAgent = <span class="keyword">new</span> UserAgent();</span><br><span class="line"></span><br><span class="line">			JMXServiceURL url = <span class="keyword">new</span> JMXServiceURL(<span class="string">"service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi"</span>);</span><br><span class="line">			JMXConnector jmxc = JMXConnectorFactory.connect(url, <span class="keyword">null</span>);</span><br><span class="line">			MBeanServerConnection mBeanServerConnection = jmxc.getMBeanServerConnection();</span><br><span class="line"></span><br><span class="line">			<span class="comment">// domains</span></span><br><span class="line">			String[] domains = mBeanServerConnection.getDomains();</span><br><span class="line">			System.out.println(domains);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; domains.length; i++) &#123;</span><br><span class="line">				System.out.println(<span class="string">"domain["</span> + i + <span class="string">"]="</span> + domains[i] );</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// object names</span></span><br><span class="line">			Set&lt;ObjectName&gt; objectNames = mBeanServerConnection.queryNames(<span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">			<span class="keyword">for</span> (ObjectName objName : objectNames) &#123;</span><br><span class="line">				System.out.println(<span class="string">"=========== "</span> + objName + <span class="string">" ============"</span>);</span><br><span class="line">				MBeanInfo mBeanInfo = mBeanServerConnection.getMBeanInfo(objName);</span><br><span class="line">				System.out.println(<span class="string">"[Attributes]"</span>);</span><br><span class="line">				<span class="keyword">for</span> (MBeanAttributeInfo attr : mBeanInfo.getAttributes()) &#123;</span><br><span class="line">					Object value = <span class="keyword">null</span>;</span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						value = attr.isReadable() ? mBeanServerConnection.getAttribute(objName, attr.getName()) : <span class="string">""</span>;</span><br><span class="line">					&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">						value = e.getMessage();</span><br><span class="line">					&#125;</span><br><span class="line">					System.out.println(attr.getName() + <span class="string">":"</span> + value);</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">"[Operations]"</span>);</span><br><span class="line">				<span class="keyword">for</span> (MBeanOperationInfo oper : mBeanInfo.getOperations()) &#123;</span><br><span class="line">					System.out.println(oper.getName() + <span class="string">":"</span> + oper.getDescription());</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">"[Notifications]"</span>);</span><br><span class="line">				<span class="keyword">for</span> (MBeanNotificationInfo notice : mBeanInfo.getNotifications()) &#123;</span><br><span class="line">					System.out.println(notice.getName() + <span class="string">":"</span> + notice.getDescription());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			ObjectName name = <span class="keyword">new</span> ObjectName(<span class="string">"UserAgent:type=User"</span>);</span><br><span class="line">			ClientListener listener = <span class="keyword">new</span> ClientListener();</span><br><span class="line">			mBeanServerConnection.addNotificationListener(name, listener, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">			mBeanServerConnection.setAttribute(name, <span class="keyword">new</span> Attribute(<span class="string">"Id"</span>,<span class="number">1234567</span>));</span><br><span class="line">			mBeanServerConnection.setAttribute(name, <span class="keyword">new</span> Attribute(<span class="string">"Name"</span>, <span class="string">"finish"</span>));</span><br><span class="line"></span><br><span class="line">			Object userId = mBeanServerConnection.getAttribute(name, <span class="string">"Id"</span>);</span><br><span class="line">			Object userName = mBeanServerConnection.getAttribute(name, <span class="string">"Name"</span>);</span><br><span class="line"></span><br><span class="line">			System.out.printf(<span class="string">"userId=%s, userName=%s"</span>, userId, userName);</span><br><span class="line"></span><br><span class="line">			UserMBean userMBean = MBeanServerInvocationHandler.newProxyInstance(mBeanServerConnection, name, UserMBean.class, <span class="keyword">false</span>);</span><br><span class="line">			userMBean.setPassword(<span class="string">"pppppppp"</span>);</span><br><span class="line">			userMBean.printUserInfo();</span><br><span class="line"></span><br><span class="line">			mBeanServerConnection.invoke(name, <span class="string">"printUserInfo"</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientListener</span> <span class="keyword">implements</span> <span class="title">NotificationListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleNotification</span><span class="params">(Notification notification,</span></span></span><br><span class="line"><span class="function"><span class="params">		                               Object handback)</span> </span>&#123;</span><br><span class="line">			echo(<span class="string">"\nReceived notification:"</span>);</span><br><span class="line">			echo(<span class="string">"\tClassName: "</span> + notification.getClass().getName());</span><br><span class="line">			echo(<span class="string">"\tSource: "</span> + notification.getSource());</span><br><span class="line">			echo(<span class="string">"\tType: "</span> + notification.getType());</span><br><span class="line">			echo(<span class="string">"\tMessage: "</span> + notification.getMessage());</span><br><span class="line">			<span class="keyword">if</span> (notification <span class="keyword">instanceof</span> AttributeChangeNotification) &#123;</span><br><span class="line">				AttributeChangeNotification acn =</span><br><span class="line">						(AttributeChangeNotification) notification;</span><br><span class="line">				echo(<span class="string">"\tAttributeName: "</span> + acn.getAttributeName());</span><br><span class="line">				echo(<span class="string">"\tAttributeType: "</span> + acn.getAttributeType());</span><br><span class="line">				echo(<span class="string">"\tNewValue: "</span> + acn.getNewValue());</span><br><span class="line">				echo(<span class="string">"\tOldValue: "</span> + acn.getOldValue());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">echo</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">			System.out.println(s);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-28T09:29:49.718Z" itemprop="dateUpdated">2018-05-28 17:29:49</time>
+</span><br>
+
+
+        
+        <a href="/2018/05/28/Java之JMX/" target="_blank" rel="external">http://www.smxknife.com/2018/05/28/Java之JMX/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jmx/">jmx</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/24/Git之重置/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git之重置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
