@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/08/28/一道面试题考验了你对java的理解程度/">
+    
+    
+    <title>一道面试题考验了你对java的理解程度 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="java">
+    <meta name="description" content="简介最近有点忙，很久没更新文章了，后面会慢慢恢复…回顾正题 最近看到一篇文章，关于一道面试题，先看一下题目，如下： 1234567891011public static void main(String[] args) &amp;#123;		Integer a = 1;		Integer b = 2;		System.out.printf(&quot;a = %s, b = %s\n&quot;, a, b);		swap">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一道面试题考验了你对java的理解程度">
+<meta property="og:url" content="http://www.smxknife.com/2018/08/28/一道面试题考验了你对java的理解程度/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="简介最近有点忙，很久没更新文章了，后面会慢慢恢复…回顾正题 最近看到一篇文章，关于一道面试题，先看一下题目，如下： 1234567891011public static void main(String[] args) &amp;#123;		Integer a = 1;		Integer b = 2;		System.out.printf(&quot;a = %s, b = %s\n&quot;, a, b);		swap">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2018/08/27/5b84082ddedfb.jpg">
+<meta property="og:updated_time" content="2018-08-27T16:03:39.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一道面试题考验了你对java的理解程度">
+<meta name="twitter:description" content="简介最近有点忙，很久没更新文章了，后面会慢慢恢复…回顾正题 最近看到一篇文章，关于一道面试题，先看一下题目，如下： 1234567891011public static void main(String[] args) &amp;#123;		Integer a = 1;		Integer b = 2;		System.out.printf(&quot;a = %s, b = %s\n&quot;, a, b);		swap">
+<meta name="twitter:image" content="https://i.loli.net/2018/08/27/5b84082ddedfb.jpg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">一道面试题考验了你对java的理解程度</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">一道面试题考验了你对java的理解程度</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-27T16:01:50.000Z" itemprop="datePublished" class="page-time">
+  2018-08-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/面试题/">面试题</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#形参和实参"><span class="post-toc-number">2.</span> <span class="post-toc-text">形参和实参</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#值传递和引用传递"><span class="post-toc-number">3.</span> <span class="post-toc-text">值传递和引用传递</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自动装箱"><span class="post-toc-number">4.</span> <span class="post-toc-text">自动装箱</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回归"><span class="post-toc-number">5.</span> <span class="post-toc-text">回归</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-一道面试题考验了你对java的理解程度"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">一道面试题考验了你对java的理解程度</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-28 00:01:50" datetime="2018-08-27T16:01:50.000Z"  itemprop="datePublished">2018-08-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/面试题/">面试题</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>最近有点忙，很久没更新文章了，后面会慢慢恢复…回顾正题</p>
+<p>最近看到一篇文章，关于一道面试题，先看一下题目，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Integer a = <span class="number">1</span>;</span><br><span class="line">		Integer b = <span class="number">2</span>;</span><br><span class="line">		System.out.printf(<span class="string">"a = %s, b = %s\n"</span>, a, b);</span><br><span class="line">		swap(a, b);</span><br><span class="line">		System.out.printf(<span class="string">"a = %s, b = %s\n"</span>, a, b);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO 实现</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有人可能在没经过仔细考虑的情况下，给出以下的答案</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 特别提醒，这是错误的方式</span></span><br><span class="line"><span class="comment">// 特别提醒，这是错误的方式</span></span><br><span class="line"><span class="comment">// 特别提醒，这是错误的方式</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO 实现</span></span><br><span class="line">    Integer temp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很遗憾，这是错误的。重要的事注释三遍</p>
+<p>那么为什么错误，原因是什么？</p>
+<p>想要搞清楚具体的原因，在这里你需要搞清楚以下几个概念，如果这个概念搞清楚了，你也不会把上面的实现方法写错</p>
+<ul>
+<li>形参和实参</li>
+<li>参数值传递</li>
+<li>自动装箱</li>
+</ul>
+<p>所以，上面的问题先放一边，先看一下这几个概念</p>
+<h3 id="形参和实参"><a href="#形参和实参" class="headerlink" title="形参和实参"></a>形参和实参</h3><p>什么是形参？什么是实参？概念上的东西，参考教科书或者google去吧，下面直接代码说明更加明显</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> shi_can = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    testA(shi_can);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testA</span><span class="params">(<span class="keyword">int</span> xing_can)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>注：为了清楚的表达意思，我命名的时候并没有按照java的驼峰规则命名，这里只是为了演示
+</code></pre><p>通过上面的代码很清楚的表达形参和实参的概念，在调用testA时，传递的就是实参，而在testA方法签名中的参数为形参</p>
+<p>从作用域上看，形参只会在方法内部生效，方法结束后，形参也会被释放掉，所以形参是不会影响方法外的</p>
+<h3 id="值传递和引用传递"><a href="#值传递和引用传递" class="headerlink" title="值传递和引用传递"></a>值传递和引用传递</h3><p>值传递：传递的是实际值，像基本数据类型<br>引用传递：将对象的引用作为实参进行传递</p>
+<p>java基本类型数据作为参数是值传递，对象类型是引用传递</p>
+<p>实参是可以传递给形参的，但是形参却不能影响实参，所以，当进行值传递的情况下，改变的是形参的值，并没有改变实参，所以无论是引用传递还是值传递，只要更改的是形参本身，那么都无法影响到实参的。对于引用传递而言，不同的引用可以指向相同的地址，通过形参的引用地址，找到了实际对象分配的空间，然后进行更改就会对实参指向的对象产生影响</p>
+<p>额，上面表述，可能有点绕，看代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 仅仅是一个java对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntType</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> value;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> value;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.value = value;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntTypeSwap</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	    <span class="comment">// CODE_1</span></span><br><span class="line">		IntType type1 = <span class="keyword">new</span> IntType();</span><br><span class="line">		type1.setValue(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">		IntType type2 = <span class="keyword">new</span> IntType();</span><br><span class="line">		type2.setValue(<span class="number">2</span>);</span><br><span class="line">      <span class="comment">// CODE_1</span></span><br><span class="line">      </span><br><span class="line">		swap1(type1, type2);</span><br><span class="line">		System.out.printf(<span class="string">"type1.value = %s, type2.value = %s"</span>, type1.getValue(), type2.getValue());</span><br><span class="line">		swap2(type1, type2);</span><br><span class="line">		System.out.println();</span><br><span class="line">		System.out.printf(<span class="string">"type1.value = %s, type2.value = %s"</span>, type1.getValue(), type2.getValue());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap2</span><span class="params">(IntType type1, IntType type2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = type1.getValue();</span><br><span class="line">		type1.setValue(type2.getValue());</span><br><span class="line">		type2.setValue(temp);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap1</span><span class="params">(IntType type1, IntType type2)</span> </span>&#123;</span><br><span class="line">		IntType type = type1;</span><br><span class="line">		type1 = type2;</span><br><span class="line">		type2 = type;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在main方法中，CODE_1中间的代码为声明了两个对象，分别设置value为1和2，而swap1和swap2两个方法的目的是为了交互这两个对象的value值</p>
+<p>先思考一下，应该输出的结果是什么<br>…<br>…</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type1.value = <span class="number">1</span>, type2.value = <span class="number">2</span></span><br><span class="line">type1.value = <span class="number">2</span>, type2.value = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>从输出结果来看swap1并没有达到目的，回头看一下swap1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap1</span><span class="params">(IntType type1, IntType type2)</span> </span>&#123;</span><br><span class="line">		IntType type = type1;</span><br><span class="line">		type1 = type2;</span><br><span class="line">		type2 = type;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>从值传递的角度来看，对象参数传递采用的是引用传递，那么type1和type2传递过来的是指向对象的引用，在方法内部，直接操作形参，交换了形参的内容，这样形参改变，都是并没有对实参产生任何影响，也没有改变对象实际的值，所以，结果是无法交换</p>
+<p>而对于swap2，对象引用作为形参传递过来后，并没有对形参做任何的改变，而是直接操作了形参所指向的对象实际地址，那这样，无论是实参还是其他地方，只要是指向该对象的所有的引用地址对应的值都会改变</p>
+<h3 id="自动装箱"><a href="#自动装箱" class="headerlink" title="自动装箱"></a>自动装箱</h3><p>看我上面的那个例子的swap1，是不是顿时觉得与上面的面试题的错误做法非常相似了，是的，错误的原因是一模一样的，就是稍微有一点区别，就是Integer不是new出来的，而是自动装箱的一个对象，那么什么是自动装箱呢？jdk到底做了什么事？</p>
+<p>如果你不想知道为什么，只想知道结果，那么我就直说，自动装箱就是jdk调用了Integer的valueOf(int)的方法，很简单，看源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">            <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>上面那些如果不想深究可以忽略，就看最后一句，是不是明白了什么呢。没错，也是new出来一个对象，如果想知道上面的代码做了什么处理，可以参考 <a href="http://www.smxknife.com/2018/03/22/Long-Long%E6%9C%89%E8%B6%A3%E7%9A%84%E7%8E%B0%E8%B1%A1/">Long==Long有趣的现象</a> 这篇文章，里面有介绍类似的</p>
+<p>好了，有人可能会问，为什么会知道自动装箱调用的是valueOf方法，这里其他人怎么知道的我不清楚，我是通过查看反编译的字节码指令知道的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Integer a = <span class="number">1</span>;</span><br><span class="line">		Integer b = <span class="number">2</span>;</span><br><span class="line">		System.out.printf(<span class="string">"a = %s, b = %s\n"</span>, a, b);</span><br><span class="line">		swap(a, b);</span><br><span class="line">		System.out.printf(<span class="string">"a = %s, b = %s\n"</span>, a, b);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">		Integer temp = a;</span><br><span class="line">		a = b;</span><br><span class="line">		b = temp;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>反编译出来的结果为</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/08/27/5b84082ddedfb.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>对比一下可以很清楚的看到valueOf(int)方法被调用</p>
+<h3 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h3><p>好，现在回归正题了，直接操作形参无法改变实际值，而Integer又没有提供set方法，那是不是无解了呢？我很好奇如果有人以下这样写，面试官会有什么反应</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO 实现</span></span><br><span class="line">		<span class="comment">// 无解，😆</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>既然出了肯定是有解的，可以实现，回头看看，在上面swap2的那个例子中是通过set方法来改变值的，那么Integer有没有提供呢？答案没有（我没找到）</p>
+<p>那就先看看源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> value;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Integer</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这是Integer的构造函数，可以看到Integer对象实际值是用value属性来存储的，但是这个value是被final修饰的，没办法继续找，value没有提供任何的set方法。既然在万法皆不通的情况下，那就只能动用反射来解决问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = a.intValue();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Field value = Integer.class.getDeclaredField(<span class="string">"value"</span>);</span><br><span class="line">			value.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">			value.set(a, b);</span><br><span class="line">			value.set(b, temp);</span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>现在感觉很开心，终于找到解决方案，可是当你执行的时候，从输出结果你会发现，jdk在跟我开玩笑吗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = 1, b = 2</span><br><span class="line">a = 2, b = 2</span><br></pre></td></tr></table></figure>
+<p>为什么会出现这种情况，无奈，调试会发现是在value.set的时候将Integer的缓存值改变了，因为value.set(Object v1, Object v2)两个参数都是对象类型，所以temp会进行自动装箱操作，会调用valueOf方法，这样会获取到错误的缓存值，所以，为了避免这种情况，就只能不需要调用缓存值，直接new Integer就可以跳过缓存，所以代码改成如下即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Integer a, Integer b)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp = a.intValue();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Field value = Integer.class.getDeclaredField(<span class="string">"value"</span>);</span><br><span class="line">			value.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">			value.set(a, b);</span><br><span class="line">			value.set(b, <span class="keyword">new</span> Integer(temp));</span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">catch</span> (NoSuchFieldException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，这道题完美结束</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-27T16:03:39.431Z" itemprop="dateUpdated">2018-08-28 00:03:39</time>
+</span><br>
+
+
+        
+        <a href="/2018/08/28/一道面试题考验了你对java的理解程度/" target="_blank" rel="external">http://www.smxknife.com/2018/08/28/一道面试题考验了你对java的理解程度/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/28/Java之JMX/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java之JMX</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
