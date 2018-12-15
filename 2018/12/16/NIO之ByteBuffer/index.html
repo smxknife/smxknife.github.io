@@ -17,25 +17,27 @@
     <meta charset="utf-8">
     
     
-    <link rel="canonical" href="http://www.smxknife.com/tags/动态代理/">
+    <link rel="canonical" href="http://www.smxknife.com/2018/12/16/NIO之ByteBuffer/">
     
     
-    <title>标签: 动态代理 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <title>NIO之ByteBuffer | smxknife&#39;s Blog | 小人物，大梦想</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#009587">
     
     
-    <meta name="keywords" content="">
+    <meta name="keywords" content="java,nio,io">
     <meta name="description" content="程序员成长笔记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="smxknife&#39;s Blog">
-<meta property="og:url" content="http://www.smxknife.com/tags/动态代理/index.html">
+<meta name="keywords" content="java,nio,io">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NIO之ByteBuffer">
+<meta property="og:url" content="http://www.smxknife.com/2018/12/16/NIO之ByteBuffer/index.html">
 <meta property="og:site_name" content="smxknife&#39;s Blog">
 <meta property="og:description" content="程序员成长笔记">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-15T16:14:57.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="smxknife&#39;s Blog">
+<meta name="twitter:title" content="NIO之ByteBuffer">
 <meta name="twitter:description" content="程序员成长笔记">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -50,7 +52,7 @@
 <body>
     <div id="loading" class="active"></div>
 
-    <aside id="menu"  >
+    <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -83,7 +85,7 @@
               </a>
             </li>
         
-            <li class="waves-block waves-effect active">
+            <li class="waves-block waves-effect">
               <a href="/tags"  >
                 <i class="icon icon-lg icon-tags"></i>
                 标签
@@ -122,7 +124,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">标签: 动态代理</div>
+        <div class="flex-col header-title ellipsis">NIO之ByteBuffer</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -137,127 +139,158 @@
         
     </div>
 </header>
-<header class="content-header tags-header">
+<header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">标签: 动态代理</h1>
+        <h1 class="title">NIO之ByteBuffer</h1>
         <h5 class="subtitle">
+            
+                <time datetime="2018-12-15T16:14:16.000Z" itemprop="datePublished" class="page-time">
+  2018-12-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/nio/">nio</a></li></ul></li></ul>
+
             
         </h5>
     </div>
 
     
-<div class="tabs-bar container">
-    <nav class="tags-list">
-        <a href="/tags" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
-            ">全部</a>
-        
-
-            <a href="/tags/cassandra/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">cassandra</a>
-
-        
-
-            <a href="/tags/git/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">git</a>
-
-        
-
-            <a href="/tags/java/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">java</a>
-
-        
-
-            <a href="/tags/内部类/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">内部类</a>
-
-        
-
-            <a href="/tags/jmx/" style="-webkit-order:6;order:6" class="tags-list-item waves-effect waves-button waves-light">jmx</a>
-
-        
-
-            <a href="/tags/序列化/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">序列化</a>
-
-        
-
-            <a href="/tags/自动拆箱/" style="-webkit-order:8;order:8" class="tags-list-item waves-effect waves-button waves-light">自动拆箱</a>
-
-        
-
-            <a href="/tags/nio/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">nio</a>
-
-        
-
-            <a href="/tags/io/" style="-webkit-order:10;order:10" class="tags-list-item waves-effect waves-button waves-light">io</a>
-
-        
-
-            <a href="/tags/spring/" style="-webkit-order:11;order:11" class="tags-list-item waves-effect waves-button waves-light">spring</a>
-
-        
-
-            <a href="/tags/事务/" style="-webkit-order:12;order:12" class="tags-list-item waves-effect waves-button waves-light">事务</a>
-
-        
-
-            <a href="/tags/springboot/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">springboot</a>
-
-        
-
-            <a href="/tags/动态代理/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">动态代理</a>
-
-        
-    </nav>
-    <!-- PC show more-->
-    <div class="tags-list-more">
-        <a href="javascript:;" onclick="BLOG.tabBar(this)" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
-    </div>
-</div>
-
 
 
 </header>
 
-<div class="container body-wrap fade">
+
+<div class="container body-wrap">
     
-            <div class="waterfall">
-          
 
-            <div class="waterfall-item">
-  <article class="article-card archive-article">
-    <div class="post-meta">
-      <time class="post-time" title="2018-03-22 04:05:46" datetime="2018-03-21T20:05:46.000Z"  itemprop="datePublished">2018-03-22</time>
+<article id="post-NIO之ByteBuffer"
+  class="post-article article-type-post fade" itemprop="blogPost">
 
-      
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+    <div class="post-card">
+        <h1 class="post-card-title">NIO之ByteBuffer</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-16 00:14:16" datetime="2018-12-15T16:14:16.000Z"  itemprop="datePublished">2018-12-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/nio/">nio</a></li></ul></li></ul>
 
 
 
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-15T16:14:57.136Z" itemprop="dateUpdated">2018-12-16 00:14:57</time>
+</span><br>
+
+
+        
+        <a href="/2018/12/16/NIO之ByteBuffer/" target="_blank" rel="external">http://www.smxknife.com/2018/12/16/NIO之ByteBuffer/</a>
+        
     </div>
     
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
 
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/io/">io</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nio/">nio</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
 
   
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/03/22/java动态代理，不一样的理解方式/">java动态代理，不一样的理解方式</a>
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/06/Java序列化2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java序列化2</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
     </h3>
-  
-
-
-
-    
-    <div class="post-footer">
+    <div class="reward-content">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动态代理/">动态代理</a></li></ul>
-
-    </div>
-    
-  </article>
-</div>
-
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
         
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
             </div>
+        </label>
         
-    
+    </div>
 </div>
 
+
+
+</div>
 
         <footer class="footer">
     <div class="top">
@@ -294,7 +327,7 @@
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
 
 
 lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
