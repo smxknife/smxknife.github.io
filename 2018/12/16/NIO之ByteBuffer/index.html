@@ -27,18 +27,25 @@
     
     
     <meta name="keywords" content="java,nio,io">
-    <meta name="description" content="程序员成长笔记">
+    <meta name="description" content="前言对于刚接触ByteBuffer人来说，想要完全理解会稍微有点困难，正巧前几天有人问我，想到好久没写文章，就整理一下。 概念理解对于ByteBuffer的一些概念不理解的情况下，如果直接打开源码，硬啃，是一种方法，但是对于有些耐心不足的同学，恐怕坚持不下去。 第一点，ByteBuffer底层的存储结构就是数组，所有的操作都是基于数组的操作。数组有哪几个重要的属性呢？元素索引和数组长度。">
 <meta name="keywords" content="java,nio,io">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NIO之ByteBuffer">
 <meta property="og:url" content="http://www.smxknife.com/2018/12/16/NIO之ByteBuffer/index.html">
 <meta property="og:site_name" content="smxknife&#39;s Blog">
-<meta property="og:description" content="程序员成长笔记">
+<meta property="og:description" content="前言对于刚接触ByteBuffer人来说，想要完全理解会稍微有点困难，正巧前几天有人问我，想到好久没写文章，就整理一下。 概念理解对于ByteBuffer的一些概念不理解的情况下，如果直接打开源码，硬啃，是一种方法，但是对于有些耐心不足的同学，恐怕坚持不下去。 第一点，ByteBuffer底层的存储结构就是数组，所有的操作都是基于数组的操作。数组有哪几个重要的属性呢？元素索引和数组长度。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-15T16:14:57.136Z">
+<meta property="og:image" content="https://i.loli.net/2018/12/14/5c13a5f1762d1.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/12/14/5c13a939cb0ea.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/12/14/5c13bafa50d53.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/12/14/5c13bbe8c0186.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/12/14/5c13bd91ad729.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/12/14/5c13c033105fb.jpg">
+<meta property="og:updated_time" content="2018-12-15T16:15:45.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NIO之ByteBuffer">
-<meta name="twitter:description" content="程序员成长笔记">
+<meta name="twitter:description" content="前言对于刚接触ByteBuffer人来说，想要完全理解会稍微有点困难，正巧前几天有人问我，想到好久没写文章，就整理一下。 概念理解对于ByteBuffer的一些概念不理解的情况下，如果直接打开源码，硬啃，是一种方法，但是对于有些耐心不足的同学，恐怕坚持不下去。 第一点，ByteBuffer底层的存储结构就是数组，所有的操作都是基于数组的操作。数组有哪几个重要的属性呢？元素索引和数组长度。">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/14/5c13a5f1762d1.jpg">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/css/style.css?v=1.7.2">
@@ -164,6 +171,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念理解"><span class="post-toc-number">2.</span> <span class="post-toc-text">概念理解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本读写状态"><span class="post-toc-number">3.</span> <span class="post-toc-text">基本读写状态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化状态"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">初始化状态</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#写状态"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">写状态</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#写转读状态"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">写转读状态</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#读状态"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">读状态</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作状态"><span class="post-toc-number">4.</span> <span class="post-toc-text">操作状态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#读操作"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">读操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#写操作"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">写操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#标记操作"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">标记操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#重置到标记操作"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">重置到标记操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#重置到初始操作"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">重置到初始操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#清除操作"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">清除操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#写转读操作"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">写转读操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#限制操作"><span class="post-toc-number">4.8.</span> <span class="post-toc-text">限制操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#获取未读容量操作"><span class="post-toc-number">4.9.</span> <span class="post-toc-text">获取未读容量操作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#压缩整理操作"><span class="post-toc-number">4.10.</span> <span class="post-toc-text">压缩整理操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实例化"><span class="post-toc-number">5.</span> <span class="post-toc-text">实例化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他"><span class="post-toc-number">6.</span> <span class="post-toc-text">其他</span></a></li></ol>
+        </nav>
+    </aside>
+
 
 <article id="post-NIO之ByteBuffer"
   class="post-article article-type-post fade" itemprop="blogPost">
@@ -186,7 +200,188 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>对于刚接触ByteBuffer人来说，想要完全理解会稍微有点困难，正巧前几天有人问我，想到好久没写文章，就整理一下。</p>
+<h3 id="概念理解"><a href="#概念理解" class="headerlink" title="概念理解"></a>概念理解</h3><p>对于ByteBuffer的一些概念不理解的情况下，如果直接打开源码，硬啃，是一种方法，但是对于有些耐心不足的同学，恐怕坚持不下去。</p>
+<p>第一点，ByteBuffer底层的存储结构就是数组，所有的操作都是基于数组的操作。数组有哪几个重要的属性呢？元素索引和数组长度。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/12/14/5c13a5f1762d1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>上面的图就简单的理解为一个数组。</p>
+<p>既然ByteBuffer的存储结构为一个数组，那么就离不开索引位置和数组长度的概念。</p>
+<blockquote>
+<p>mark（标记位）<br>position（当前位置）<br>limit（限定位置）<br>capacity（容量）</p>
+</blockquote>
+<p>这四个概念是ByteBuffer数据操作的核心概念，只要把这四个的关系理清楚，那么在使用ByteBuffer的时候基本不会出现问题</p>
+<h3 id="基本读写状态"><a href="#基本读写状态" class="headerlink" title="基本读写状态"></a>基本读写状态</h3><h4 id="初始化状态"><a href="#初始化状态" class="headerlink" title="初始化状态"></a>初始化状态</h4><p>在初始的时候，这四个的相对位置，如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/12/14/5c13a939cb0ea.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>mark：默认为-1，即没有做任何的标记</li>
+<li>position：当前位置为0</li>
+<li>limit和capacity：默认这两个相同</li>
+</ul>
+<h4 id="写状态"><a href="#写状态" class="headerlink" title="写状态"></a>写状态</h4><p>在向ByteBuffer写入一个字节(put操作)的时候，相对位置如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/12/14/5c13bafa50d53.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>mark：没有任何移动</li>
+<li>position：写入一个字节，position++</li>
+<li>limit和capacity：依然指向最后</li>
+</ul>
+<h4 id="写转读状态"><a href="#写转读状态" class="headerlink" title="写转读状态"></a>写转读状态</h4><p>在写入n个字节之后，位置如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/12/14/5c13bbe8c0186.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>此时调用flip操作，由写模式转为读模式，位置变化过程如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/12/14/5c13bd91ad729.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>写转读的时候，会先把limit指向position的位置，即在读模式下，limit表示可以读取多少个字节，其余（limit到capacity之间的）的是不可读的</li>
+<li>position强制赋值为0，意味着可以从0索引处开始读取</li>
+<li><strong>【NOTE】</strong> mark操作在上图没有体现，但是即使mark位置不在-1处，这里也会强制将mark设置为-1</li>
+</ul>
+<h4 id="读状态"><a href="#读状态" class="headerlink" title="读状态"></a>读状态</h4><p>通过get操作进行读取时，位置如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2018/12/14/5c13c033105fb.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>读取一个字节时，位置变化</p>
+<ul>
+<li>mark：位置不变</li>
+<li>position：向前移动一个位置</li>
+<li>limit：位置不变，为读取上限，limit之后的内容不可读</li>
+<li>capacity：位置不变，依然指向最后</li>
+</ul>
+<h3 id="操作状态"><a href="#操作状态" class="headerlink" title="操作状态"></a>操作状态</h3><p>通过上面的基本读写操作，四个的相对位置变化规律已经可以基本理解ByteBuffer的读写操作是如何实现的了，下面再说一下具体的一些操作</p>
+<h4 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h4><p>读操作提供了三个方法</p>
+<blockquote>
+<ul>
+<li>get() 相对读取，即读取当前position位置字节，读完之后position++</li>
+<li>get(int index) 绝对读取，即读取index位置的字节，此时会对index进行检查，看index是否超过limit的限制，如果超过抛出<code>IndexOutOfBoundsException</code>；注意这时没有任何的位置移动</li>
+<li>get(byte[] dst, int offset, int length) <ul>
+<li>dst 数据读入的地方，就是将字节从ByteBuffer中读到dst</li>
+<li>offset 这个offset为dst的偏移量，不是ByteBuffer里面的offset（ByteBuffer里面也有一个offset，这里先忽略），即数据读到dst的时候，从offset的位置开始存储</li>
+<li>length 是要从ByteBuffer中读取多长的字节，即从position（当前）位置开始，读取length个字节到dst</li>
+<li>这时，position的位置会加上length的长度；如果mark的位置比position大，那么将mark设置为-1</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="写操作"><a href="#写操作" class="headerlink" title="写操作"></a>写操作</h4><p>写操作提供了四个方法</p>
+<blockquote>
+<ul>
+<li>put(byte b) 相对写入，向position的位置写入一个字节，position++</li>
+<li>put(int index, byte b) 绝对写入，向索引为index的位置写入数据b，没有任何的位置移动</li>
+<li>put(ByteBuffer src) 相对写<ul>
+<li>这个首先要知道，这个操作是将src中的内容写入到调用的这个ByteBuffer中去，可能有人容易混淆</li>
+<li>这里并不是将src所有的数据写入，而是讲src中可读的部分（即src中position到limit的部分）写入</li>
+<li>这个src不是是调用者自身，否则会报错</li>
+<li>如果src可读部分的长度大于了该ByteBuffer的剩余的长度，抛出<code>BufferOverflowException</code></li>
+<li>将src读出来的同时，也会变好src的position</li>
+<li>将此ByteBuffer的position加上src可读部分的长度</li>
+<li>这时，position的位置会加上length的长度；如果mark的位置比position大，那么将mark设置为-1</li>
+</ul>
+</li>
+<li>put(byte[] src, int offset, int length) <ul>
+<li>src 要写入的字节数组</li>
+<li>offset 这个offset也是src的offset，即从src的offset的位置开始</li>
+<li>length 这个length是要读取src的长度，即从src的offset的位置开始读取，读取length长度的字节到ByteBuffer中，此时position会加length</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="标记操作"><a href="#标记操作" class="headerlink" title="标记操作"></a>标记操作</h4><p>标记操作，就一个公共方法mark()</p>
+<blockquote>
+<ul>
+<li>mark() 将mark的位置设置为position的位置，如果position比mark小，mark会被设置为-1</li>
+</ul>
+</blockquote>
+<h4 id="重置到标记操作"><a href="#重置到标记操作" class="headerlink" title="重置到标记操作"></a>重置到标记操作</h4><blockquote>
+<ul>
+<li>reset() 把position设置为mark的位置，回到之前做标记的地方，如果mark小于0，抛异常InvalidMarkException</li>
+</ul>
+</blockquote>
+<h4 id="重置到初始操作"><a href="#重置到初始操作" class="headerlink" title="重置到初始操作"></a>重置到初始操作</h4><blockquote>
+<ul>
+<li>rewind() 与reset类似，是将状态重置，但是reset只能重置到mark标记过的位置，而rewind是将mark=-1，position设置为0</li>
+</ul>
+</blockquote>
+<h4 id="清除操作"><a href="#清除操作" class="headerlink" title="清除操作"></a>清除操作</h4><blockquote>
+<ul>
+<li>clear() 不知道叫清除操作是否合适，这里clear的并不是数组里面的数据，而是将这四个的位置恢复初始化的状态。position=0，mark=-1，limit=capacity。此时ByteBuffer数组中的内容依然存在，但是数据的准确性并无法保证。所以在调用clear方法的时候，一定要清楚的知道自己的操作是否合理</li>
+</ul>
+</blockquote>
+<h4 id="写转读操作"><a href="#写转读操作" class="headerlink" title="写转读操作"></a>写转读操作</h4><blockquote>
+<ul>
+<li>flip() 该操作在上面已经介绍过了</li>
+</ul>
+</blockquote>
+<h4 id="限制操作"><a href="#限制操作" class="headerlink" title="限制操作"></a>限制操作</h4><p>提供了两个方法，limit()和limit(int newLimit)</p>
+<blockquote>
+<ul>
+<li>limit() 该操作其实没有实际操作，就是获取当前limit的位置</li>
+<li>limit(newLimit) 该操作是重新设置一个limit的操作，如果比capacity大，那么异常，如果newLimit比position小，那么position会设置为newLimit的位置</li>
+</ul>
+</blockquote>
+<h4 id="获取未读容量操作"><a href="#获取未读容量操作" class="headerlink" title="获取未读容量操作"></a>获取未读容量操作</h4><blockquote>
+<ul>
+<li>remaining() 获取剩余可读容量，即limit - position</li>
+<li>hasRemaining() 返回是否有未读内容</li>
+</ul>
+</blockquote>
+<h4 id="压缩整理操作"><a href="#压缩整理操作" class="headerlink" title="压缩整理操作"></a>压缩整理操作</h4><blockquote>
+<ul>
+<li>compact() 将还没有读取的内容移动到开头的位置，即把position到limit的内容移动到从0开始，然后把position设置为未读内容长度的位置，limit设置为capacity的位置</li>
+</ul>
+</blockquote>
+<h3 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h3><p>ByteBuffer的基本操作基本已经介绍完了，那么ByteBuffer如何初始化呢？</p>
+<p>从源码可以看出来ByteBuffer是一个抽象类，所以，不能被实例化。但是提供了四个静态方法</p>
+<blockquote>
+<p>allocate(int capacity)</p>
+</blockquote>
+<p>在堆上分配一个容量为capacity的数组作为存储容器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer byteBuffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>allocateDirect(int capacity)</p>
+</blockquote>
+<p>不是在虚拟机堆上创建，而是分配的操作系统的直接内存，这样能更进一步提升io的性能，但是，分配直接内存的开销很大，所以只有在缓冲区需要长时间存在的情况下，使用这种初始化方式会更加优秀</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer byteBuffer = ByteBuffer.allocateDirect(<span class="number">1024</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>wrap(byte[] array)</p>
+</blockquote>
+<p>相当于allocate操作，只不过，allocate是在ByteBuffer内容创建了一个字节数组用于存储数据，而wrap(byte[] array) 是在ByteBuffer外面创建了一个字节数组，用于存储存储数据，无论是直接操作array亦或是操作ByteBuffer都会更改存储值</p>
+<blockquote>
+<p>wrap(byte[] array, int offset, int length)</p>
+</blockquote>
+<p>在wrap(byte[] array) 的基础上指定offset和length。offset就是position，length读取的长度</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>除了ByteBuffer之外，还提供了除Boolean之外的其他缓存类，使用方法基本相同</p>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -194,7 +389,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-12-15T16:14:57.136Z" itemprop="dateUpdated">2018-12-16 00:14:57</time>
+    最后更新时间：<time datetime="2018-12-15T16:15:45.423Z" itemprop="dateUpdated">2018-12-16 00:15:45</time>
 </span><br>
 
 
