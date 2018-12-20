@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?418a0df5238add2e40359fab38e07589"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="canonical" href="http://www.smxknife.com/2018/12/20/日志框架简单的单线程性能测试/">
+    
+    
+    <title>日志框架简单的单线程性能测试 | smxknife&#39;s Blog | 小人物，大梦想</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#009587">
+    
+    
+    <meta name="keywords" content="日志,性能">
+    <meta name="description" content="简介最近项目中需要对计算任务进行性能优化，从各个方面入手，当考虑到日志性能的时候，从网上了解到的目前常用的日志框架有Logging、Logback、Log4j、Log4j2等等。 据反映Logback和Log4j2的性能明显优于其他两个，而Log4j2性能更可能优于Logback。 纸上得来终觉浅，绝知此事要躬行！！！ 下面就对这四个日志，做一下简单的单线程性能测试  测试工具：jmh测量模型：平">
+<meta name="keywords" content="日志,性能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日志框架简单的单线程性能测试">
+<meta property="og:url" content="http://www.smxknife.com/2018/12/20/日志框架简单的单线程性能测试/index.html">
+<meta property="og:site_name" content="smxknife&#39;s Blog">
+<meta property="og:description" content="简介最近项目中需要对计算任务进行性能优化，从各个方面入手，当考虑到日志性能的时候，从网上了解到的目前常用的日志框架有Logging、Logback、Log4j、Log4j2等等。 据反映Logback和Log4j2的性能明显优于其他两个，而Log4j2性能更可能优于Logback。 纸上得来终觉浅，绝知此事要躬行！！！ 下面就对这四个日志，做一下简单的单线程性能测试  测试工具：jmh测量模型：平">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-20T06:28:20.200Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="日志框架简单的单线程性能测试">
+<meta name="twitter:description" content="简介最近项目中需要对计算任务进行性能优化，从各个方面入手，当考虑到日志性能的时候，从网上了解到的目前常用的日志框架有Logging、Logback、Log4j、Log4j2等等。 据反映Logback和Log4j2的性能明显优于其他两个，而Log4j2性能更可能优于Logback。 纸上得来终觉浅，绝知此事要躬行！！！ 下面就对这四个日志，做一下简单的单线程性能测试  测试工具：jmh测量模型：平">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">smxknife</h5>
+          <a href="mailto:smxknife@qq.com" title="smxknife@qq.com" class="mail">smxknife@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                目录
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/smxknife" target="_blank" >
+                <i class="icon icon-lg icon-github-alt"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://www.imooc.com/u/6398548/articles" target="_blank" >
+                <i class="icon icon-lg icon-link"></i>
+                慕课
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">日志框架简单的单线程性能测试</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">日志框架简单的单线程性能测试</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-20T06:26:58.000Z" itemprop="datePublished" class="page-time">
+  2018-12-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/">logging</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/">logback</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/log4j/">log4j</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/log4j/log4j2/">log4j2</a></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Logging"><span class="post-toc-number">2.</span> <span class="post-toc-text">Logging</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Logback"><span class="post-toc-number">3.</span> <span class="post-toc-text">Logback</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Log4j"><span class="post-toc-number">4.</span> <span class="post-toc-text">Log4j</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Log4j2"><span class="post-toc-number">5.</span> <span class="post-toc-text">Log4j2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">6.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-日志框架简单的单线程性能测试"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">日志框架简单的单线程性能测试</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-20 14:26:58" datetime="2018-12-20T06:26:58.000Z"  itemprop="datePublished">2018-12-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/">logging</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/">logback</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/log4j/">log4j</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/log4j/log4j2/">log4j2</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>最近项目中需要对计算任务进行性能优化，从各个方面入手，当考虑到日志性能的时候，从网上了解到的目前常用的日志框架有Logging、Logback、Log4j、Log4j2等等。</p>
+<p>据反映Logback和Log4j2的性能明显优于其他两个，而Log4j2性能更可能优于Logback。</p>
+<p>纸上得来终觉浅，绝知此事要躬行！！！</p>
+<p>下面就对这四个日志，做一下简单的单线程性能测试</p>
+<blockquote>
+<p>测试工具：jmh<br>测量模型：平均时间<br>测量策略：每个框架分别在单线程运行100次、1000次、10000次，打印日志到日志文件，最后对比消耗时间的平均值</p>
+</blockquote>
+<h3 id="Logging"><a href="#Logging" class="headerlink" title="Logging"></a>Logging</h3><p>java.util.logging，该包是jdk自带的日志框架。上代码</p>
+<blockquote>
+<p>性能测试类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.smxknife.log.java.demo03;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.openjdk.jmh.annotations.*;</span><br><span class="line"><span class="keyword">import</span> org.openjdk.jmh.infra.Blackhole;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.Level;</span><br><span class="line"><span class="keyword">import</span> java.util.logging.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> smxknife</span></span><br><span class="line"><span class="comment"> * 2018-12-19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@BenchmarkMode</span>(Mode.AverageTime)</span><br><span class="line"><span class="meta">@OutputTimeUnit</span>(TimeUnit.MILLISECONDS)</span><br><span class="line"><span class="meta">@State</span>(Scope.Thread)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PerformLogTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = Logger.getLogger(PerformLogTest.class.getName());</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Param</span>(&#123;<span class="string">"100"</span>, <span class="string">"1000"</span>, <span class="string">"10000"</span>&#125;)</span><br><span class="line">	<span class="keyword">int</span> loopNum;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>[] loopIdx;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Setup</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		loopIdx = <span class="keyword">new</span> <span class="keyword">int</span>[loopNum];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopNum; i++) &#123;</span><br><span class="line">			loopIdx[i] = i;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			logger.setLevel(java.util.logging.Level.FINEST);</span><br><span class="line">			FileHandler fileHandler = <span class="keyword">new</span> FileHandler(<span class="string">"./target/perform.log"</span>);</span><br><span class="line">			fileHandler.setLevel(Level.ALL);</span><br><span class="line">			fileHandler.setFormatter(<span class="keyword">new</span> Formatter() &#123;</span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">(LogRecord record)</span> </span>&#123;</span><br><span class="line">					<span class="keyword">return</span> record.getLevel().getName()</span><br><span class="line">							+ <span class="string">" : "</span> + record.getThreadID()</span><br><span class="line">							+ <span class="string">" "</span> + record.getSourceClassName()</span><br><span class="line">							+ <span class="string">"."</span> + record.getSourceMethodName()</span><br><span class="line">							+ <span class="string">" "</span> + record.getMessage()</span><br><span class="line">							+ <span class="string">"\r\n"</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">			logger.addHandler(fileHandler);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Benchmark</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Blackhole blackhole)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopIdx.length; i++) &#123;</span><br><span class="line">			logger.finer(<span class="string">"test "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>jmh部分直接这里不是重点，先忽略，看日志部分，test方法，就是测试类，分别循环100、1000、10000次，将日志输出到日志文件中。因为这里没有采用spring等应用框架，而Logging默认是输出到控制台，这里加了一个FileHandler用于将日志输出到日志文件</p>
+<blockquote>
+<p>调用类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> RunnerException </span>&#123;</span><br><span class="line">		Options options = <span class="keyword">new</span> OptionsBuilder()</span><br><span class="line">				.include(PerformLogTest.class.getName())</span><br><span class="line">				.warmupIterations(<span class="number">5</span>)</span><br><span class="line">				.measurementIterations(<span class="number">5</span>)</span><br><span class="line">				.forks(<span class="number">1</span>)</span><br><span class="line">				.build();</span><br><span class="line">		<span class="keyword">new</span> Runner(options).run();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从这里看，预热5次，执行5次，单线程，执行的结果如下（忽略其他输出，只看最后总结）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Benchmark            (loopNum)  Mode  Cnt    Score    Error  Units</span><br><span class="line">PerformLogTest.test        100  avgt    5    2.383 ±  0.818  ms/op  </span><br><span class="line">PerformLogTest.test       1000  avgt    5   23.277 ±  5.684  ms/op  </span><br><span class="line">PerformLogTest.test      10000  avgt    5  228.775 ± 29.695  ms/op</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>循环100时，执行一次所需时间为2.383 毫秒</li>
+<li>循环1000时，执行一次所需时间为23.277 毫秒</li>
+<li>循环10000时，执行一次所需时间为228.775 毫秒</li>
+</ul>
+</blockquote>
+<h3 id="Logback"><a href="#Logback" class="headerlink" title="Logback"></a>Logback</h3><p>logback是一个小巧灵活的日志框架，在很多项目中都有用到，spring中也集成了starter。这个框架的优点………..，网上一堆，不说了，上代码。</p>
+<blockquote>
+<p>性能测试类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BenchmarkMode</span>(Mode.AverageTime)</span><br><span class="line"><span class="meta">@OutputTimeUnit</span>(TimeUnit.MILLISECONDS)</span><br><span class="line"><span class="meta">@State</span>(Scope.Thread)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PerformLogTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Logger logger;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Param</span>(&#123;<span class="string">"100"</span>, <span class="string">"1000"</span>, <span class="string">"10000"</span>&#125;)</span><br><span class="line">	<span class="keyword">int</span> loopNum;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>[] loopIdx;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Setup</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		loopIdx = <span class="keyword">new</span> <span class="keyword">int</span>[loopNum];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopNum; i++) &#123;</span><br><span class="line">			loopIdx[i] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		LoadXmlConfig.loadConfig(<span class="string">"logback.demo02.xml"</span>);</span><br><span class="line">		logger = LoggerFactory.getLogger(PerformLogTest.class);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Benchmark</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Blackhole blackhole)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopIdx.length; i++) &#123;</span><br><span class="line">			logger.error(<span class="string">"test "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试方法同样是test方法，循环长度和次数同上。调用类也同上，就不贴出来了。<br>因为这里采用了xml文件做logback的配置文件，而我有不同的配置文件，我不想频繁的改动，就写了一个加载自定义的xml的配置类<code>LoadXmlConfig</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadXmlConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 自定义logback的xml配置文件并加载</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> fileName</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loadConfig</span><span class="params">(String fileName)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (fileName == <span class="keyword">null</span> || <span class="string">""</span>.equals(fileName)) <span class="keyword">return</span>;</span><br><span class="line">		String resPath = System.getProperty(<span class="string">"user.dir"</span>) + File.separator</span><br><span class="line">				+ <span class="string">"src"</span> + File.separator</span><br><span class="line">				+ <span class="string">"main"</span> + File.separator</span><br><span class="line">				+ <span class="string">"resources"</span> + File.separator;</span><br><span class="line">		File file = <span class="keyword">new</span> File(resPath + fileName);</span><br><span class="line">		LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();</span><br><span class="line">		JoranConfigurator joranConfigurator = <span class="keyword">new</span> JoranConfigurator();</span><br><span class="line">		joranConfigurator.setContext(loggerContext);</span><br><span class="line">		loggerContext.reset();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			joranConfigurator.doConfigure(file);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (JoranException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		StatusPrinter.printInCaseOfErrorsOrWarnings(loggerContext);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里做的比较简化，就是去resource下面寻找名字相同的配置文件，下面看看配置文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">debug</span>=<span class="string">"false"</span> <span class="attr">scan</span>=<span class="string">"true"</span> <span class="attr">scanPeriod</span>=<span class="string">"30 second"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"ROOT"</span> <span class="attr">value</span>=<span class="string">"target/logs/"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"FILE_SIZE"</span> <span class="attr">value</span>=<span class="string">"500MB"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"MAX_HISTORY"</span> <span class="attr">value</span>=<span class="string">"100"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">timestamp</span> <span class="attr">key</span>=<span class="string">"DATETIME"</span> <span class="attr">datePattern</span>=<span class="string">"yyyy-MM-dd HH:mm:ss"</span> /&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 控制台打印 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"STDOUT"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%-5level] %d&#123;$&#123;DATETIME&#125;&#125; [%thread] %logger&#123;36&#125; - %m%n</span><br><span class="line">			<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ERROR 输入到文件，按日期和文件大小 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"ERROR"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%-5level] %d&#123;$&#123;DATETIME&#125;&#125; [%thread] %logger&#123;36&#125; - %m%n</span><br><span class="line">			<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;ROOT&#125;%d/error.%i.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>$&#123;MAX_HISTORY&#125;<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">timeBasedFileNamingAndTriggeringPolicy</span></span></span><br><span class="line"><span class="tag">					<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">maxFileSize</span>&gt;</span>$&#123;FILE_SIZE&#125;<span class="tag">&lt;/<span class="name">maxFileSize</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- WARN 输入到文件，按日期和文件大小 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"WARN"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%-5level] %d&#123;$&#123;DATETIME&#125;&#125; [%thread] %logger&#123;36&#125; - %m%n</span><br><span class="line">			<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>WARN<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;ROOT&#125;%d/warn.%i.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>$&#123;MAX_HISTORY&#125;<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">timeBasedFileNamingAndTriggeringPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">maxFileSize</span>&gt;</span>$&#123;FILE_SIZE&#125;<span class="tag">&lt;/<span class="name">maxFileSize</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- INFO 输入到文件，按日期和文件大小 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"INFO"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%-5level] %d&#123;$&#123;DATETIME&#125;&#125; [%thread] %logger&#123;36&#125; - %m%n</span><br><span class="line">			<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>INFO<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;ROOT&#125;%d/info.%i.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>$&#123;MAX_HISTORY&#125;<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">timeBasedFileNamingAndTriggeringPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">maxFileSize</span>&gt;</span>$&#123;FILE_SIZE&#125;<span class="tag">&lt;/<span class="name">maxFileSize</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- DEBUG 输入到文件，按日期和文件大小 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"DEBUG"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%-5level] %d&#123;$&#123;DATETIME&#125;&#125; [%thread] %logger&#123;36&#125; - %m%n</span><br><span class="line">			<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>DEBUG<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;ROOT&#125;%d/debug.%i.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>$&#123;MAX_HISTORY&#125;<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">timeBasedFileNamingAndTriggeringPolicy</span></span></span><br><span class="line"><span class="tag">					<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">maxFileSize</span>&gt;</span>$&#123;FILE_SIZE&#125;<span class="tag">&lt;/<span class="name">maxFileSize</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- TRACE 输入到文件，按日期和文件大小 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"TRACE"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">encoder</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%-5level] %d&#123;$&#123;DATETIME&#125;&#125; [%thread] %logger&#123;36&#125; - %m%n</span><br><span class="line">			<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>TRACE<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span></span></span><br><span class="line"><span class="tag">				<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">fileNamePattern</span>&gt;</span>$&#123;ROOT&#125;%d/trace.%i.log<span class="tag">&lt;/<span class="name">fileNamePattern</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">maxHistory</span>&gt;</span>$&#123;MAX_HISTORY&#125;<span class="tag">&lt;/<span class="name">maxHistory</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">timeBasedFileNamingAndTriggeringPolicy</span></span></span><br><span class="line"><span class="tag">					<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">maxFileSize</span>&gt;</span>$&#123;FILE_SIZE&#125;<span class="tag">&lt;/<span class="name">maxFileSize</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- SQL相关日志输出--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"com.smxknife.log.logback"</span> <span class="attr">level</span>=<span class="string">"INFO"</span> <span class="attr">additivity</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">logger</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- Logger 根目录 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"ERROR"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"ERROR"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Benchmark            (loopNum)  Mode  Cnt   Score    Error  Units</span><br><span class="line">PerformLogTest.test        100  avgt    5   0.991 ±  0.420  ms/op</span><br><span class="line">PerformLogTest.test       1000  avgt    5   9.655 ±  2.735  ms/op</span><br><span class="line">PerformLogTest.test      10000  avgt    5  94.608 ± 17.062  ms/op</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>循环100时，执行一次所需时间为0.991 毫秒</li>
+<li>循环1000时，执行一次所需时间为9.655 毫秒</li>
+<li>循环10000时，执行一次所需时间为94.608 毫秒</li>
+</ul>
+</blockquote>
+<p>看结果貌似确实比Logging优秀很多</p>
+<h3 id="Log4j"><a href="#Log4j" class="headerlink" title="Log4j"></a>Log4j</h3><p>上代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.smxknife.log.log4j.demo02;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.openjdk.jmh.annotations.*;</span><br><span class="line"><span class="keyword">import</span> org.openjdk.jmh.infra.Blackhole;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> smxknife</span></span><br><span class="line"><span class="comment"> * 2018-12-19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@BenchmarkMode</span>(Mode.AverageTime)</span><br><span class="line"><span class="meta">@OutputTimeUnit</span>(TimeUnit.MILLISECONDS)</span><br><span class="line"><span class="meta">@State</span>(Scope.Thread)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PerformLogTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Logger logger;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Param</span>(&#123;<span class="string">"100"</span>, <span class="string">"1000"</span>, <span class="string">"10000"</span>&#125;)</span><br><span class="line">	<span class="keyword">int</span> loopNum;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>[] loopIdx;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Setup</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		loopIdx = <span class="keyword">new</span> <span class="keyword">int</span>[loopNum];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopNum; i++) &#123;</span><br><span class="line">			loopIdx[i] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		logger = Logger.getLogger(<span class="keyword">this</span>.getClass().getSimpleName());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Benchmark</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Blackhole blackhole)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopIdx.length; i++) &#123;</span><br><span class="line">			logger.error(<span class="string">"test "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">### set log levels ###</span><br><span class="line">log4j.rootLogger = ERROR,File</span><br><span class="line"></span><br><span class="line">###  输出到控制台  ###</span><br><span class="line">log4j.appender.Console=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.Console.Target=System.out</span><br><span class="line">log4j.appender.Console.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.Console.layout.ConversionPattern= %d&#123;ABSOLUTE&#125; %5p %c&#123;1&#125;:%L - %m%n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 输出到日志文件 ###</span><br><span class="line">log4j.appender.File=org.apache.log4j.RollingFileAppender </span><br><span class="line">log4j.appender.File.File=$&#123;user.dir&#125;/target/logs/app.log</span><br><span class="line">log4j.appender.File.DatePattern=_yyyyMMdd&apos;.log&apos;</span><br><span class="line">log4j.appender.File.MaxFileSize=500MB</span><br><span class="line">log4j.appender.File.Threshold=ALL</span><br><span class="line">log4j.appender.File.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.File.layout.ConversionPattern=[%p][%d&#123;yyyy-MM-dd HH\:mm\:ss,SSS&#125;][%c]%m%n</span><br></pre></td></tr></table></figure>
+<p>测试结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Benchmark            (loopNum)  Mode  Cnt   Score    Error  Units</span><br><span class="line">PerformLogTest.test        100  avgt    5   1.069 ±  0.350  ms/op</span><br><span class="line">PerformLogTest.test       1000  avgt    5  10.558 ±  5.448  ms/op</span><br><span class="line">PerformLogTest.test      10000  avgt    5  93.073 ± 19.872  ms/op</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>循环100时，执行一次所需时间为1.069 毫秒</li>
+<li>循环1000时，执行一次所需时间为10.558 毫秒</li>
+<li>循环10000时，执行一次所需时间为93.073 毫秒</li>
+</ul>
+</blockquote>
+<p>从这三次测试结果来看log4j与logback性能基本差不多，这与我想象中的貌似不一样，我以为logback会明显优秀于log4j，然而在这几种情况下并没有</p>
+<h3 id="Log4j2"><a href="#Log4j2" class="headerlink" title="Log4j2"></a>Log4j2</h3><p>这个结果是我没有想到的，不知道是不是哪里出了什么问题，先上代码吧</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.smxknife.log.log4j2.demo02;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.LogManager;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.openjdk.jmh.annotations.*;</span><br><span class="line"><span class="keyword">import</span> org.openjdk.jmh.infra.Blackhole;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> smxknife</span></span><br><span class="line"><span class="comment"> * 2018-12-19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@BenchmarkMode</span>(Mode.AverageTime)</span><br><span class="line"><span class="meta">@OutputTimeUnit</span>(TimeUnit.MILLISECONDS)</span><br><span class="line"><span class="meta">@State</span>(Scope.Thread)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PerformLogTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Logger logger;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Param</span>(&#123;<span class="string">"100"</span>, <span class="string">"1000"</span>, <span class="string">"10000"</span>&#125;)</span><br><span class="line">	<span class="keyword">int</span> loopNum;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>[] loopIdx;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Setup</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		loopIdx = <span class="keyword">new</span> <span class="keyword">int</span>[loopNum];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopNum; i++) &#123;</span><br><span class="line">			loopIdx[i] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		logger = LogManager.getLogger(<span class="keyword">this</span>.getClass().getSimpleName());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Benchmark</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Blackhole blackhole)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; loopIdx.length; i++) &#123;</span><br><span class="line">			logger.error(<span class="string">"test "</span> + i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>log4j2.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">Configuration</span> <span class="attr">monitorInterval</span>=<span class="string">"1"</span> <span class="attr">status</span>=<span class="string">"ERROR"</span> <span class="attr">strict</span>=<span class="string">"true"</span> <span class="attr">name</span>=<span class="string">"LogConfig"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">Properties</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">"logbasedir"</span>&gt;</span>target/logs<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">"log.layout"</span>&gt;</span>%d %-5p %t (%c:%L) - %m%n<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"APP_NAME"</span>&gt;</span>app<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!--&lt;&amp;#45;&amp;#45;此处使用了两种类型的appender,RollingFile为滚动类型,满足策略条件后会新建文件夹记录 &amp;ndash;&amp;gt;--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Appender</span> <span class="attr">type</span>=<span class="string">"Console"</span> <span class="attr">name</span>=<span class="string">"STDOUT"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Target</span>&gt;</span>SYSTEM_OUT<span class="tag">&lt;/<span class="name">Target</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Layout</span> <span class="attr">type</span>=<span class="string">"PatternLayout"</span> <span class="attr">pattern</span>=<span class="string">"$&#123;log.layout&#125;"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Appender</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Appender</span> <span class="attr">type</span>=<span class="string">"RollingFile"</span> <span class="attr">name</span>=<span class="string">"FILE"</span> <span class="attr">fileName</span>=<span class="string">"$&#123;logbasedir&#125;/jutap-$&#123;sys:APP_NAME&#125;.log"</span></span></span><br><span class="line"><span class="tag">				  <span class="attr">filePattern</span> = <span class="string">"$&#123;logbasedir&#125;/jutap-$&#123;sys:APP_NAME&#125;-%d&#123;yyyy-MM-dd&#125;.%i.log"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">TimeBasedTriggeringPolicy</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">"1000 MB"</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Layout</span> <span class="attr">type</span>=<span class="string">"PatternLayout"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">Charset</span>&gt;</span>GBK<span class="tag">&lt;/<span class="name">Charset</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">Pattern</span>&gt;</span>$&#123;log.layout&#125;<span class="tag">&lt;/<span class="name">Pattern</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">Layout</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Appender</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--&lt;Appender type="RollingFile" name="ExceptionLog" fileName="$&#123;logbasedir&#125;/exception-$&#123;sys:APP_NAME&#125;.log"--&gt;</span></span><br><span class="line">				  <span class="comment">&lt;!--filePattern = "$&#123;logbasedir&#125;/exception-$&#123;sys:APP_NAME&#125;-%d&#123;yyyy-MM-dd&#125;.%i.log"&gt;--&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;Policies&gt;--&gt;</span></span><br><span class="line">				<span class="comment">&lt;!--&lt;TimeBasedTriggeringPolicy /&gt;--&gt;</span></span><br><span class="line">				<span class="comment">&lt;!--&lt;SizeBasedTriggeringPolicy size="100 MB"/&gt;--&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;/Policies&gt;--&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;Layout type="PatternLayout"&gt;--&gt;</span></span><br><span class="line">				<span class="comment">&lt;!--&lt;Charset&gt;GBK&lt;/Charset&gt;--&gt;</span></span><br><span class="line">				<span class="comment">&lt;!--&lt;Pattern&gt;$&#123;log.layout&#125;&lt;/Pattern&gt;--&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;/Layout&gt;--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--&lt;/Appender&gt;--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--&lt;Logger name="exception" level="error" additivity="false"&gt;--&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;AppenderRef ref="ExceptionLog"/&gt;--&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--&lt;/Logger&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!--&lt;AppenderRef ref="STDOUT"/&gt;--&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">"FILE"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Logger</span> <span class="attr">name</span>=<span class="string">"om.smxknife.log.log4j2"</span> <span class="attr">level</span>=<span class="string">"error"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>测试结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Benchmark            (loopNum)  Mode  Cnt    Score    Error  Units</span><br><span class="line">PerformLogTest.test        100  avgt    5    6.474 ±  2.481  ms/op</span><br><span class="line">PerformLogTest.test       1000  avgt    5   59.621 ±  5.881  ms/op</span><br><span class="line">PerformLogTest.test      10000  avgt    5  609.273 ± 69.103  ms/op</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>循环100时，执行一次所需时间为6.474 毫秒</li>
+<li>循环1000时，执行一次所需时间为59.621 毫秒</li>
+<li>循环10000时，执行一次所需时间为609.273 毫秒</li>
+</ul>
+</blockquote>
+<p>一个出人意料的结果，竟然执行的速度这么慢是logback和log4j的6倍左右</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>目前先做到这里，这里还存在很多疑问，留待继续试验。</p>
+<p>由于环境的限制，所有的测试都是在自己的笔记本上做的，难以做到高性能极限测试。<br>另外，由于预热功能需要预热多次，这里只有5次，有点不足。<br>还有一个变量，没有控制好，就是日志输出的格式，这里没有做到一致，或差不多的情况，后面需要把这点控制一下。<br>除此之外，上面的都是单独执行每一个测试，后面整合到一个测试例子中。<br>上面只有执行的平均时间测试，后面再加上所有的测试</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-20T06:28:20.200Z" itemprop="dateUpdated">2018-12-20 14:28:20</time>
+</span><br>
+
+
+        
+        <a href="/2018/12/20/日志框架简单的单线程性能测试/" target="_blank" rel="external">http://www.smxknife.com/2018/12/20/日志框架简单的单线程性能测试/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.smxknife.com">
+            <img src="/img/avatar.jpg" alt="smxknife">
+            smxknife
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能/">性能</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日志/">日志</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/16/NIO之ByteBuffer/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">NIO之ByteBuffer</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        喝杯咖啡~😊
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>smxknife &copy; 2016 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1261528319&web_id=1261528319')
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'smxknife's blog';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'smxknife's blog';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

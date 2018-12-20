@@ -158,6 +158,58 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-日志框架简单的单线程性能测试"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-20 14:26:58" datetime="2018-12-20T06:26:58.000Z"  itemprop="datePublished">2018-12-20</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/">logging</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/">logback</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/log4j/">log4j</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/logging/logback/log4j/log4j2/">log4j2</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/20/日志框架简单的单线程性能测试/">日志框架简单的单线程性能测试</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        简介最近项目中需要对计算任务进行性能优化，从各个方面入手，当考虑到日志性能的时候，从网上了解到的目前常用的日志框架有Logging、Logback、Log4j、Log4j2等等。
+据反映Logback和Log4j2的性能明显优于其他两个，而Log4j2性能更可能优于Logback。
+纸上得来终觉浅，绝知此事要躬行！！！
+下面就对这四个日志，做一下简单的单线程性能测试
+
+测试工具：jmh测量模...
+    
+
+        <a href="/2018/12/20/日志框架简单的单线程性能测试/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能/">性能</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日志/">日志</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-NIO之ByteBuffer"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -592,69 +644,6 @@ listen_on_broadcast_addres...
     
 
         <a href="/2018/04/18/Java基础内部类4-内部类进阶/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内部类/">内部类</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Java基础内部类3-内部类梳理"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-04-18 00:17:49" datetime="2018-04-17T16:17:49.000Z"  itemprop="datePublished">2018-04-18</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java内部类/">java内部类</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/04/18/Java基础内部类3-内部类梳理/">Java基础内部类3-内部类梳理</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        前言前面基本上对内部类有一个认识了，内部类可以分为四种：
-
-
-成员内部类
-静态内部类
-局部内部类
-匿名内部类
-
-
-成员内部类特征：
-
-
-声明在类内部，方法外部
-没有static修饰
-不能包含静态属性和静态方法（静态常量除外，final static int i = 0;）
-在拥有外部类对象之前是不能拥有内部类对象的
-在外部类对象创建内部类的同时，内部类自动拥有一个外部类的引用，可以访问外部类...
-    
-
-        <a href="/2018/04/18/Java基础内部类3-内部类梳理/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
